@@ -23,8 +23,9 @@
     // Paths
     "paths": {
       "@app": ["./src/App"],
-      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
       "@pages/*": ["./src/pages/*"],
+      "@components/*": ["./src/components/*"],
       "@themes/*": ["./src/themes/*"]
     }
   },
