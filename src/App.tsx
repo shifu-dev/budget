@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
 import { ThemeProvider } from '@themes/index'
-import { RootPage } from '@pages/Root'
 import { HomePage } from '@pages/Home'
 import { TransactionPage } from '@pages/Transaction'
 import { TransactionEditPage } from '@pages/TransactionEdit'
