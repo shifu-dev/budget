@@ -1,4 +1,8 @@
-import { invoke } from '@tauri-apps/api/core'
+import { BrowserRouter, Routes, Route } from 'react-router'
+import { RootPage } from '@pages/Root'
+import { HomePage } from '@pages/Home'
+import { TransactionPage } from '@pages/Transaction'
+import { TransactionEditPage } from '@pages/TransactionEdit'
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
@@ -6,11 +10,15 @@ import '@fontsource/roboto/700.css'
 import './App.css'
 
 function App() {
-
   return (
-    <main className='container'>
-      <h1>Welcome to Budget App</h1>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<RootPage />} />
+        <Route path='/home' element={<HomePage />} />
+        <Route path='/transaction' element={<TransactionPage />} />
+        <Route path='/transaction-edit' element={<TransactionEditPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
