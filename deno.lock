@@ -5,6 +5,7 @@
     "npm:@emotion/styled@^11.13.5": "11.13.5_@emotion+react@11.13.5__react@18.3.1_react@18.3.1",
     "npm:@fontsource/roboto@^5.1.0": "5.1.0",
     "npm:@mui/material@^6.1.9": "6.1.9_@emotion+react@11.13.5__react@18.3.1_@emotion+styled@11.13.5__@emotion+react@11.13.5___react@18.3.1__react@18.3.1_@types+react@18.3.12_react@18.3.1_react-dom@18.3.1__react@18.3.1",
+    "npm:@tabler/icons-react@^3.23.0": "3.23.0_react@18.3.1",
     "npm:@tauri-apps/api@2": "2.1.1",
     "npm:@tauri-apps/cli@2": "2.1.0",
     "npm:@tauri-apps/cli@2.1.0": "2.1.0",
@@ -499,6 +500,16 @@
     },
     "@rollup/rollup-win32-x64-msvc@4.27.4": {
       "integrity": "sha512-3j4jx1TppORdTAoBJRd+/wJRGCPC0ETWkXOecJ6PPZLj6SptXkrXcNqdj0oclbKML6FkQltdz7bBA3rUSirZug=="
+    },
+    "@tabler/icons-react@3.23.0_react@18.3.1": {
+      "integrity": "sha512-uSJfu1Tnhk6AAkerNCOBL3KL3aPpb/bnB4UjTbV3jItTJKitEgr4a98ted67qu5FHB3/tG1bxs32pqy5OL7NGw==",
+      "dependencies": [
+        "@tabler/icons",
+        "react"
+      ]
+    },
+    "@tabler/icons@3.23.0": {
+      "integrity": "sha512-Cz+X58jfRm0g/KcupXXuPw5knj671lNR054AnmLXvCjudiQBWI0wZulDDSsqDoGezvBzMTNPQtNcjLkZs82ZxQ=="
     },
     "@tauri-apps/api@2.1.1": {
       "integrity": "sha512-fzUfFFKo4lknXGJq8qrCidkUcKcH2UHhfaaCNt4GzgzGaW2iS26uFOg4tS3H4P8D6ZEeUxtiD5z0nwFF0UN30A=="
@@ -1023,6 +1034,7 @@
       "npm:@emotion/styled@^11.13.5",
       "npm:@fontsource/roboto@^5.1.0",
       "npm:@mui/material@^6.1.9",
+      "npm:@tabler/icons-react@^3.23.0",
       "npm:@tauri-apps/api@2",
       "npm:@tauri-apps/cli@2",
       "npm:@tauri-apps/plugin-shell@2",
