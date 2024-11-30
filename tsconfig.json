@@ -22,7 +22,7 @@
 
     // Paths
     "paths": {
-      "@app/*": ["./src/App"],
+      "@app": ["./src/App"],
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
       "@themes/*": ["./src/themes/*"]
