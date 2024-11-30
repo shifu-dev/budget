@@ -15,7 +15,7 @@ export default {
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@components': path.resolve(__dirname, 'src/components'),
       '@themes': path.resolve(__dirname, 'src/themes'),
-    }
+    },
   },
 
   // vite options for tauri
