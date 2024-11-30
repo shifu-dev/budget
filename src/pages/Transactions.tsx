@@ -15,10 +15,33 @@ export function TransactionsPage() {
 
   const renderTransaction = (transaction: Transaction) => {
     return (
-      <div id='transaction'>
-        <Text value={transaction.title} />
-        <Text value={transaction.amount} />
-        <Text value={transaction.time} />
+      <div
+        className='transaction'
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: 50,
+          height: '100%',
+          width: '100%',
+          padding: 10,
+          margin: 5,
+          border: 'solid',
+          borderWidth: 2,
+          borderRadius: 10,
+          borderColor: 'white',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flex: 1,
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text value={transaction.amount} category='h3' />
+          <Text value={transaction.title} category='h5' />
+        </div>
       </div>
     )
   }

@@ -30,9 +30,11 @@ export function List<T>(props: ListProps<T>) {
 
   return (
     <>
-      <MuiList>
+      <MuiList disablePadding>
         {items.map((item: T) => (
-          <MuiListItem>{itemRenderer(item)}</MuiListItem>
+          <MuiListItem key={getItemId(item)} disablePadding>
+            {itemRenderer(item)}
+          </MuiListItem>
         ))}
       </MuiList>
     </>
