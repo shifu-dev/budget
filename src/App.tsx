@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
+import { ThemeProvider } from '@themes/index'
 import { RootPage } from '@pages/Root'
 import { HomePage } from '@pages/Home'
 import { TransactionPage } from '@pages/Transaction'
@@ -12,15 +13,17 @@ import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<TransactionsPage />} />
-        <Route path='/home' element={<HomePage />} />
-        <Route path='/transaction' element={<TransactionPage />} />
-        <Route path='/transactions' element={<TransactionsPage />} />
-        <Route path='/transaction-edit' element={<TransactionEditPage />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<TransactionsPage />} />
+          <Route path='/home' element={<HomePage />} />
+          <Route path='/transaction' element={<TransactionPage />} />
+          <Route path='/transactions' element={<TransactionsPage />} />
+          <Route path='/transaction-edit' element={<TransactionEditPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 
