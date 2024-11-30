@@ -10,6 +10,10 @@
     "tauri": "tauri"
   },
   "imports": {
+    "@emotion/react": "npm:@emotion/react@^11.13.5",
+    "@emotion/styled": "npm:@emotion/styled@^11.13.5",
+    "@fontsource/roboto": "npm:@fontsource/roboto@^5.1.0",
+    "@mui/material": "npm:@mui/material@^6.1.9",
     "path": "npm:path@^0.12.7",
     "react": "npm:react@^18.2.0",
     "react-dom": "npm:react-dom@^18.2.0",
