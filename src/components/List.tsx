@@ -1,8 +1,6 @@
-import MuiList from '@mui/material/List'
-import MuiListItem from '@mui/material/ListItem'
-import React from 'react'
+import { JSX } from 'react'
 
-export type ItemRenderer<T> = (item: T) => React.JSX.Element
+export type ItemRenderer<T> = (item: T) => JSX.Element
 
 export type GetItemId<T> = (item: T) => string | number
 
@@ -30,13 +28,11 @@ export function List<T>(props: ListProps<T>) {
 
   return (
     <>
-      <MuiList disablePadding>
+      <div>
         {items.map((item: T) => (
-          <MuiListItem key={getItemId(item)} disablePadding>
-            {itemRenderer(item)}
-          </MuiListItem>
+          <div key={getItemId(item)}>{itemRenderer(item)}</div>
         ))}
-      </MuiList>
+      </div>
     </>
   )
 }

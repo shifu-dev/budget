@@ -1,5 +1,3 @@
-import MuiButton from '@mui/material/Button'
-import MuiIconButton from '@mui/material/IconButton'
 import { Icon, IconName } from '@components/Icon'
 
 export type ButtonCallback = () => void
@@ -13,17 +11,14 @@ export interface ButtonProps {
 export function Button(props: ButtonProps) {
   return (
     <>
-      {props.label ? (
-        <MuiButton
-          title={props.label}
-          startIcon={props.icon && <Icon name={props.icon} />}
-          style={{
-            borderRadius: 50,
-          }}
-        />
-      ) : (
-        <MuiIconButton children={<Icon name={props.icon} />} size='large' />
-      )}
+      <button
+        title={props.label}
+        style={{
+          borderRadius: 50,
+        }}
+      >
+        <Icon name={props.icon} />
+      </button>
     </>
   )
 }
