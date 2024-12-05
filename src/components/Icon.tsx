@@ -2,6 +2,7 @@ import * as TablerIcons from '@tabler/icons-react'
 import { useTheme } from '@themes/index'
 
 export type IconName =
+  | 'add'
   | 'plus'
   | 'cross'
   | 'cancel'
@@ -37,6 +38,7 @@ export const Icon = (props: IconProps) => {
 
 const _tablerIconMap = {
   none: undefined,
+  add: TablerIcons.IconPlus,
   plus: TablerIcons.IconPlus,
   cross: TablerIcons.IconX,
   cancel: TablerIcons.IconX,
