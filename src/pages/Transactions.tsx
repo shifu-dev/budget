@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { List } from '@components/List'
 import { Text } from '@components/Text'
+import { Button } from '@components/Button'
+import { useNavigate } from 'react-router'
 
 export interface Transaction {
   id: string
@@ -11,7 +13,13 @@ export interface Transaction {
 }
 
 export function TransactionsPage() {
+  const navigate = useNavigate()
   const [transactions] = useState<Transaction[]>(getDummyTransactions(100))
+
+  const onBack = () => {}
+  const onAdd = () => {
+    navigate('/transaction-edit')
+  }
 
   const renderTransaction = (transaction: Transaction) => {
     return (
@@ -48,6 +56,17 @@ export function TransactionsPage() {
 
   return (
     <>
+      <div
+        id='top-bar'
+        style={{
+          display: 'flex',
+          flex: 1,
+          justifyContent: 'space-between',
+        }}
+      >
+        <Button icon='back' onPress={onBack} />
+        <Button icon='add' onPress={onAdd} />
+      </div>
       <div
         id='title'
         style={{
