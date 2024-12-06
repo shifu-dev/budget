@@ -12,6 +12,7 @@
   "imports": {
     "@fontsource/roboto": "npm:@fontsource/roboto@^5.1.0",
     "@tabler/icons-react": "npm:@tabler/icons-react@^3.23.0",
+    "normalize.css": "npm:normalize.css@^8.0.1",
     "path": "npm:path@^0.12.7",
     "react": "npm:react@^18.2.0",
     "react-dom": "npm:react-dom@^18.2.0",
