@@ -1,3 +1,4 @@
+import { Text } from '@components/Text'
 import { Icon, IconName } from '@components/Icon'
 import { useTheme } from '@themes/index'
 
@@ -17,6 +18,12 @@ export function Button(props: ButtonProps) {
       <button
         title={props.label}
         style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          gap: 10,
           borderWidth: 0,
           borderRadius: 50,
           backgroundColor: theme.cardColor,
@@ -24,6 +31,7 @@ export function Button(props: ButtonProps) {
         }}
       >
         <Icon name={props.icon} />
+        <Text value={props.label} category='h5' />
       </button>
     </>
   )
