@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react'
 import { Theme } from '@themes/Theme'
 import { lightTheme } from '@themes/LightTheme'
+import { darkTheme } from './DarkTheme'
 
 export interface ThemeProviderProps {
   theme?: Theme
@@ -8,7 +9,7 @@ export interface ThemeProviderProps {
 }
 
 export const ThemeProvider = (props: ThemeProviderProps) => {
-  const theme = lightTheme
+  const theme = darkTheme
 
   return (
     <ThemeContext.Provider
