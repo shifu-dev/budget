@@ -11,7 +11,7 @@ function App() {
     <ThemeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<TransactionsPage />} />
+          <Route path='/' element={<TransactionEditPage />} />
           <Route path='/home' element={<HomePage />} />
           <Route path='/transaction' element={<TransactionPage />} />
           <Route path='/transactions' element={<TransactionsPage />} />
