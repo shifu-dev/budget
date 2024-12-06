@@ -24,11 +24,16 @@ export function Card(props: CardProps) {
     }
 
     return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          height: '100%',
+          width: '100%',
+        }}
+      >
         <span
           style={{
-            height: '100%',
-            width: '100%',
             marginInline: 30,
           }}
         >
