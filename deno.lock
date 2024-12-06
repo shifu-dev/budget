@@ -11,6 +11,7 @@
     "npm:@types/react-dom@^18.2.7": "18.3.1",
     "npm:@types/react@^18.2.15": "18.3.12",
     "npm:@vitejs/plugin-react@^4.2.1": "4.3.3_vite@5.4.11_@babel+core@7.26.0",
+    "npm:normalize.css@^8.0.1": "8.0.1",
     "npm:path@~0.12.7": "0.12.7",
     "npm:react-dom@^18.2.0": "18.3.1_react@18.3.1",
     "npm:react-router@^7.0.1": "7.0.1_react@18.3.1_react-dom@18.3.1__react@18.3.1",
@@ -546,6 +547,9 @@
     "node-releases@2.0.18": {
       "integrity": "sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g=="
     },
+    "normalize.css@8.0.1": {
+      "integrity": "sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg=="
+    },
     "path@0.12.7": {
       "integrity": "sha512-aXXC6s+1w7otVF9UletFkFcDsJeO7lSZBPUQhtb5O0xJe8LtYhj/GxldoL09bBj9+ZmE2hNoHqQSFMN5fikh4Q==",
       "dependencies": [
@@ -682,6 +686,7 @@
       "npm:@types/react-dom@^18.2.7",
       "npm:@types/react@^18.2.15",
       "npm:@vitejs/plugin-react@^4.2.1",
+      "npm:normalize.css@^8.0.1",
       "npm:path@~0.12.7",
       "npm:react-dom@^18.2.0",
       "npm:react-router@^7.0.1",
