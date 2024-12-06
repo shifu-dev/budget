@@ -24,19 +24,47 @@ export function Text(props: TextProps) {
 const getStyle = (theme: Theme, category: TextCategories): CSSProperties => {
   switch (category) {
     case 'text':
-      return { fontSize: theme.textSize, color: theme.textColor }
+      return {
+        fontFamily: theme.textFamily,
+        fontSize: theme.textSize,
+        color: theme.textColor,
+      }
     case 'h1':
-      return { fontSize: theme.h1Size, color: theme.h1Color }
+      return {
+        fontFamily: theme.h1Family,
+        fontSize: theme.h1Size,
+        color: theme.h1Color,
+      }
     case 'h2':
-      return { fontSize: theme.h2Size, color: theme.h2Color }
+      return {
+        fontFamily: theme.h2Family,
+        fontSize: theme.h2Size,
+        color: theme.h2Color,
+      }
     case 'h3':
-      return { fontSize: theme.h3Size, color: theme.h3Color }
+      return {
+        fontFamily: theme.h3Family,
+        fontSize: theme.h3Size,
+        color: theme.h3Color,
+      }
     case 'h4':
-      return { fontSize: theme.h4Size, color: theme.h4Color }
+      return {
+        fontFamily: theme.h4Family,
+        fontSize: theme.h4Size,
+        color: theme.h4Color,
+      }
     case 'h5':
-      return { fontSize: theme.h5Size, color: theme.h5Color }
+      return {
+        fontFamily: theme.h5Family,
+        fontSize: theme.h5Size,
+        color: theme.h5Color,
+      }
     case 'h6':
-      return { fontSize: theme.h6Size, color: theme.h6Color }
+      return {
+        fontFamily: theme.h6Family,
+        fontSize: theme.h6Size,
+        color: theme.h6Color,
+      }
     default:
       return {}
   }

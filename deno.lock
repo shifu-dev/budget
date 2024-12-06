@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "npm:@fontsource/poppins@^5.1.0": "5.1.0",
     "npm:@fontsource/roboto@^5.1.0": "5.1.0",
     "npm:@tabler/icons-react@^3.23.0": "3.23.0_react@18.3.1",
     "npm:@tauri-apps/api@2": "2.1.1",
@@ -230,6 +231,9 @@
     },
     "@esbuild/win32-x64@0.21.5": {
       "integrity": "sha512-tQd/1efJuzPC6rCFwEvLtci/xNFcTZknmXs98FYDfGE4wP9ClFV98nyKrzJKVPMhdDnjzLhdUyMX4PsQAPjwIw=="
+    },
+    "@fontsource/poppins@5.1.0": {
+      "integrity": "sha512-tpLXlnNi2fwQjiipvuj4uNFHCdoLA8izRsKdoexZuEzjx0r/g1aKLf4ta6lFgF7L+/+AFdmaXFlUwwvmDzYH+g=="
     },
     "@fontsource/roboto@5.1.0": {
       "integrity": "sha512-cFRRC1s6RqPygeZ8Uw/acwVHqih8Czjt6Q0MwoUoDe9U3m4dH1HmNDRBZyqlMSFwgNAUKgFImncKdmDHyKpwdg=="
@@ -677,6 +681,7 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@fontsource/poppins@^5.1.0",
       "npm:@fontsource/roboto@^5.1.0",
       "npm:@tabler/icons-react@^3.23.0",
       "npm:@tauri-apps/api@2",
