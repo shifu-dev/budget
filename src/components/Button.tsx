@@ -23,7 +23,6 @@ export function Button(props: ButtonProps) {
           alignItems: 'center',
           justifyContent: 'center',
           padding: 20,
-          gap: 10,
           borderWidth: 0,
           borderRadius: 50,
           backgroundColor: theme.cardColor,

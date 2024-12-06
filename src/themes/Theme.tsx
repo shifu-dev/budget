@@ -1,3 +1,7 @@
+import { CSSProperties } from 'react'
+
+type ColorValue = CSSProperties['color']
+
 export interface Theme {
   primaryColor: ColorValue
   backgroundColor: ColorValue
