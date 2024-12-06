@@ -8,6 +8,7 @@ export type IconName =
   | 'cancel'
   | 'wrong'
   | 'check'
+  | 'accept'
   | 'correct'
   | 'currency-rupee'
   | 'clock'
@@ -20,6 +21,7 @@ export type IconName =
   | 'back'
   | 'search'
   | 'trash'
+  | 'notes'
 
 export interface IconProps {
   name?: IconName
@@ -44,6 +46,7 @@ const _tablerIconMap = {
   cancel: TablerIcons.IconX,
   wrong: TablerIcons.IconX,
   check: TablerIcons.IconCheck,
+  accept: TablerIcons.IconCheck,
   correct: TablerIcons.IconCheck,
   'currency-rupee': TablerIcons.IconCurrencyRupee,
   clock: TablerIcons.IconClock,
@@ -56,6 +59,7 @@ const _tablerIconMap = {
   back: TablerIcons.IconArrowLeft,
   search: TablerIcons.IconSearch,
   trash: TablerIcons.IconTrashX,
+  notes: TablerIcons.IconNotes,
 }
 
 const getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
