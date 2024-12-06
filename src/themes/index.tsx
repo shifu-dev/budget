@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 import { Theme } from '@themes/Theme'
 import { lightTheme } from '@themes/LightTheme'
-import { darkTheme } from './DarkTheme'
+import { darkTheme } from '@themes/DarkTheme'
 
 export interface ThemeProviderProps {
   theme?: Theme
