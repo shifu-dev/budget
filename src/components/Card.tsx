@@ -1,6 +1,9 @@
+/** @jsxImportSource @emotion/react */
+
 import { CSSProperties, JSX } from 'react'
 import { useTheme } from '@themes/index'
 import { Icon, IconName } from '@components/Icon'
+import { css } from '@emotion/react'
 
 export type CardPressCallback = () => any
 
@@ -46,20 +49,24 @@ export function Card(props: CardProps) {
 
   return (
     <div
-      style={{
-        ...{
-          display: 'flex',
-          flexDirection: 'row',
-          border: 'solid',
-          borderRadius: 25,
-          borderWidth: 0,
-          backgroundColor: theme.cardColor,
-          padding: 10,
-          minHeight: 70,
-          alignItems: 'center',
-        },
-        ...props.style,
-      }}
+      css={css`
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        border: solid;
+        border-radius: 25px;
+        border-width: 0px;
+        background-color: ${theme.cardColor};
+        padding: 10px;
+        min-height: 70px;
+        transition: 0.15s;
+        &:hover {
+          background-color: white;
+        }
+        &:active {
+          background-color: red;
+        }
+      `}
       onClick={props.onPress}
     >
       {renderWithIcon({ content: props.children, icon: props.leftIcon })}
