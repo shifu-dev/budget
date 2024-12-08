@@ -10,6 +10,7 @@
     "tauri": "tauri"
   },
   "imports": {
+    "@emotion/react": "npm:@emotion/react@^11.13.5",
     "@fontsource/poppins": "npm:@fontsource/poppins@^5.1.0",
     "@fontsource/roboto": "npm:@fontsource/roboto@^5.1.0",
     "@tabler/icons-react": "npm:@tabler/icons-react@^3.23.0",
