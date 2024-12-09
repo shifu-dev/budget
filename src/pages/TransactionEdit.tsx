@@ -34,7 +34,6 @@ export function TransactionEditPage() {
     <div
       id='root'
       style={{
-        backgroundColor: theme.backgroundColor,
         padding: 10,
       }}
     >
