@@ -61,10 +61,10 @@ export function Card(props: CardProps) {
         min-height: 70px;
         transition: 0.15s;
         &:hover {
-          background-color: white;
+          background-color: grey;
         }
         &:active {
-          background-color: red;
+          background-color: ${theme.cardColor};
         }
       `}
       onClick={props.onPress}

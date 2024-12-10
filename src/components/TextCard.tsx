@@ -9,7 +9,7 @@ export function TextCard(props: TextCardProps) {
   const text = props.value
 
   return (
-    <Card leftIcon='notes'>
+    <Card leftIcon='notes' {...props}>
       {<Text value={text} category='h5' />}
     </Card>
   )
