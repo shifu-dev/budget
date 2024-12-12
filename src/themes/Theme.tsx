@@ -32,4 +32,7 @@ export interface Theme {
   textSize: number
   textColor: ColorValue
   placeholderColor: ColorValue
+  modalOverlayColor: ColorValue
+  modalOpenTransitionSpeed: number
+  modalCloseTransitionSpeed: number
 }
