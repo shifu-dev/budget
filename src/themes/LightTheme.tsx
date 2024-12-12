@@ -32,4 +32,7 @@ export const lightTheme: Theme = {
   textSize: 10,
   textColor: colors.black,
   placeholderColor: colors.matteBlack,
+  modalOverlayColor: 'rgba(0, 0, 0, .6)',
+  modalOpenTransitionSpeed: 0.5,
+  modalCloseTransitionSpeed: 0.5,
 }

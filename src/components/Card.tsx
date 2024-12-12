@@ -10,7 +10,7 @@ export type CardPressCallback = () => any
 export type CardVariant = 'long-medium' | 'long-flex'
 
 export interface CardProps {
-  children?: JSX.Element
+  children?: JSX.Element | JSX.Element[]
   onPress?: CardPressCallback
   leftIcon?: IconName
   rightIcon?: IconName
@@ -20,10 +20,11 @@ export interface CardProps {
 
 export function Card(props: CardProps) {
   const theme = useTheme()
+  const isPressable = props.onPress !== undefined
 
   const renderWithIcon = (props: { content: any; icon?: IconName }) => {
     if (!props.icon) {
-      return <>{props.content}</>
+      return <div>{props.content}</div>
     }
 
     return (
@@ -42,7 +43,7 @@ export function Card(props: CardProps) {
         >
           <Icon name={props.icon} />
         </span>
-        {props.content}
+        <div>{props.content}</div>
       </div>
     )
   }
@@ -61,12 +62,13 @@ export function Card(props: CardProps) {
         min-height: 70px;
         transition: 0.15s;
         &:hover {
-          background-color: grey;
+          background-color: ${isPressable && 'grey'};
         }
         &:active {
           background-color: ${theme.cardColor};
         }
       `}
+      style={props.style}
       onClick={props.onPress}
     >
       {renderWithIcon({ content: props.children, icon: props.leftIcon })}
