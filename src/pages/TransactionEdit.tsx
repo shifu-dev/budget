@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Transaction } from './Transactions'
+import { Transaction } from '@pages/Transactions'
 import { Button } from '@components/Button'
 import { Text } from '@components/Text'
 import { TimeCard } from '@components/TimeCard'
 import { CostCard } from '@components/CostCard'
 import { TextCard } from '@components/TextCard'
-import { useTheme } from '@themes/index'
+import { useTextInputModal } from '@components/TextInputModal'
 
 export function TransactionEditPage() {
   const transaction: Transaction = {
@@ -16,19 +16,25 @@ export function TransactionEditPage() {
     notes: 'Hi there, how is it going?',
   }
 
-  const theme = useTheme()
-
   const [title, setTitle] = useState(transaction.title)
   const [amount, setAmount] = useState(transaction.amount)
   const [time, setTime] = useState(transaction.time)
   const [notes, setNotes] = useState(transaction.notes)
+
+  const textInputModal = useTextInputModal()
 
   const onCancel = () => {}
   const onAccept = () => {}
 
   const onCostPress = () => {}
   const onTimePress = () => {}
-  const onNotesPress = () => {}
+
+  const onNotesPress = () => {
+    textInputModal?.open({
+      value: notes,
+      onAccept: value => setNotes(value),
+    })
+  }
 
   return (
     <div

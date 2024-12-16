@@ -24,7 +24,16 @@ export function Card(props: CardProps) {
 
   const renderWithIcon = (props: { content: any; icon?: IconName }) => {
     if (!props.icon) {
-      return <div>{props.content}</div>
+      return (
+        <div
+          style={{
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          {props.content}
+        </div>
+      )
     }
 
     return (
@@ -43,7 +52,14 @@ export function Card(props: CardProps) {
         >
           <Icon name={props.icon} />
         </span>
-        <div>{props.content}</div>
+        <div
+          style={{
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          {props.content}
+        </div>
       </div>
     )
   }
