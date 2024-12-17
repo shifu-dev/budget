@@ -9,7 +9,7 @@ export function CostCard(props: CostCardProps) {
   const costString = props.value.toString()
 
   return (
-    <Card leftIcon='currency-rupee'>
+    <Card leftIcon='currency-rupee' {...props}>
       {<Text value={costString} category='h4' />}
     </Card>
   )

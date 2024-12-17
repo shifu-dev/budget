@@ -9,6 +9,8 @@ export function TimeCard(props: TimeCardProps) {
   const timeString = props.value.toLocaleDateString()
 
   return (
-    <Card leftIcon='clock'>{<Text value={timeString} category='h4' />}</Card>
+    <Card leftIcon='clock' {...props}>
+      {<Text value={timeString} category='h4' />}
+    </Card>
   )
 }
