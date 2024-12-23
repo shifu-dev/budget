@@ -1,5 +1,8 @@
 import * as TablerIcons from '@tabler/icons-react'
 import { useTheme } from '@themes/index'
+import { CSSProperties } from 'react'
+
+export type IconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export type IconName =
   | 'add'
@@ -25,17 +28,36 @@ export type IconName =
 
 export interface IconProps {
   name?: IconName
+  size?: IconSize
+  style?: CSSProperties
 }
 
 export const Icon = (props: IconProps) => {
   const theme = useTheme()
-  const TablerIcon = getTablerIcon(props.name)
+  const TablerIcon = _getTablerIcon(props.name)
 
   if (!TablerIcon) {
     return <></>
   }
 
-  return <span {...props}>{<TablerIcon color={theme.iconColor} />}</span>
+  const size = _getSize(props.size)
+
+  return (
+    <span
+      style={{
+        ...{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          aspectRatio: 1,
+          height: size,
+        },
+        ...props.style,
+      }}
+    >
+      {<TablerIcon color={theme.iconColor} />}
+    </span>
+  )
 }
 
 const _tablerIconMap = {
@@ -62,6 +84,18 @@ const _tablerIconMap = {
   notes: TablerIcons.IconNotes,
 }
 
-const getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
+const _getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
   return _tablerIconMap[name ?? 'none']
+}
+
+const _sizeMap: Record<IconSize, number> = {
+  sm: 40,
+  md: 60,
+  lg: 80,
+  xl: 100,
+  xxl: 120,
+}
+
+const _getSize = (size?: IconSize): number | undefined => {
+  return _sizeMap[size ?? 'md']
 }

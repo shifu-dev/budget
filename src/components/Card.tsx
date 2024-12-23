@@ -22,48 +22,6 @@ export function Card(props: CardProps) {
   const theme = useTheme()
   const isPressable = props.onPress !== undefined
 
-  const renderWithIcon = (props: { content: any; icon?: IconName }) => {
-    if (!props.icon) {
-      return (
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-          }}
-        >
-          {props.content}
-        </div>
-      )
-    }
-
-    return (
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          height: '100%',
-          width: '100%',
-        }}
-      >
-        <span
-          style={{
-            marginInline: 30,
-          }}
-        >
-          <Icon name={props.icon} />
-        </span>
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-          }}
-        >
-          {props.content}
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div
       css={css`
@@ -87,7 +45,25 @@ export function Card(props: CardProps) {
       style={props.style}
       onClick={props.onPress}
     >
-      {renderWithIcon({ content: props.children, icon: props.leftIcon })}
+      {props.leftIcon && (
+        <span
+          style={{
+            marginInline: 30,
+          }}
+        >
+          <Icon name={props.leftIcon} size='md' />
+        </span>
+      )}
+      {props.children}
+      {props.rightIcon && (
+        <span
+          style={{
+            marginInline: 30,
+          }}
+        >
+          <Icon name={props.rightIcon} size='md' />
+        </span>
+      )}
     </div>
   )
 }
