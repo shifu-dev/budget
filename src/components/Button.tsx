@@ -1,4 +1,4 @@
-import { Text } from '@components/Text'
+import { Text, TextValue } from '@components/Text'
 import { Icon, IconName } from '@components/Icon'
 import { useTheme } from '@themes/index'
 import { CSSProperties } from 'react'
@@ -8,19 +8,26 @@ export type ButtonCallback = () => void
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 export interface ButtonProps {
-  label?: string
+  label?: TextValue
   icon?: IconName
   size?: ButtonSize
   onPress?: ButtonCallback
   style?: CSSProperties
+  enabled?: boolean
 }
 
 export function Button(props: ButtonProps) {
   const style = _getStyle(props)
 
+  function onPress() {
+    if (!props.enabled) return
+
+    props.onPress?.()
+  }
+
   return (
-    <div onClick={props.onPress} style={style}>
-      <Icon name={props.icon} size='md' />
+    <div onClick={onPress} style={style}>
+      <Icon name={props.icon} size='md' color={style.color} />
       <Text value={props.label} category='h5' />
     </div>
   )
@@ -45,6 +52,14 @@ const _getStyle = (props: ButtonProps): CSSProperties => {
     style.borderRadius = '50%'
   } else {
     style.minWidth = 200
+  }
+
+  if (props.enabled !== undefined && props.enabled === false) {
+    const disabledColor = 'grey'
+
+    style.color = disabledColor
+    style.backgroundColor = 'transparent'
+    style.borderColor = disabledColor
   }
 
   return { ...style, ...props.style }

@@ -1,5 +1,6 @@
 import * as TablerIcons from '@tabler/icons-react'
 import { useTheme } from '@themes/index'
+import { ColorValue } from '@themes/Theme'
 import { CSSProperties } from 'react'
 
 export type IconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
@@ -25,10 +26,15 @@ export type IconName =
   | 'search'
   | 'trash'
   | 'notes'
+  | 'chevron-left'
+  | 'chevron-right'
+  | 'prev'
+  | 'next'
 
 export interface IconProps {
   name?: IconName
   size?: IconSize
+  color?: ColorValue
   style?: CSSProperties
 }
 
@@ -55,7 +61,7 @@ export const Icon = (props: IconProps) => {
         ...props.style,
       }}
     >
-      {<TablerIcon color={theme.iconColor} />}
+      {<TablerIcon color={props.color ?? theme.iconColor} />}
     </span>
   )
 }
@@ -82,6 +88,10 @@ const _tablerIconMap = {
   search: TablerIcons.IconSearch,
   trash: TablerIcons.IconTrashX,
   notes: TablerIcons.IconNotes,
+  'chevron-left': TablerIcons.IconChevronLeft,
+  'chevron-right': TablerIcons.IconChevronRight,
+  prev: TablerIcons.IconChevronLeft,
+  next: TablerIcons.IconChevronRight,
 }
 
 const _getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {

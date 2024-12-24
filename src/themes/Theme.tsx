@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react'
 
-type ColorValue = CSSProperties['color']
+export type ColorValue = CSSProperties['color']
 
 export interface Theme {
   primaryColor: ColorValue
