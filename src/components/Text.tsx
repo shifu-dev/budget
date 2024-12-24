@@ -1,76 +1,133 @@
 import { useTheme } from '@themes/index'
-import { Theme } from '@themes/Theme'
 import { CSSProperties } from 'react'
 
 export type TextValue = string | number | Date
 
 export type TextCategories = 'text' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
+export type TextAlign =
+  | 'left-top'
+  | 'center-top'
+  | 'right-top'
+  | 'left-center'
+  | 'center'
+  | 'right-center'
+  | 'left-bottom'
+  | 'center-bottom'
+  | 'right-bottom'
+
 export interface TextProps {
   value?: TextValue
   category?: TextCategories
+  align?: TextAlign
+  style?: CSSProperties
 }
 
 export function Text(props: TextProps) {
-  const defaultCategory: TextCategories = 'text'
-
-  const theme = useTheme()
-  const text = toText(props.value)
-  const style = getStyle(theme, props.category ?? defaultCategory)
+  const text = _getText(props.value)
+  const style = _getStyle(props)
 
   return <span style={style}>{text}</span>
 }
 
-const getStyle = (theme: Theme, category: TextCategories): CSSProperties => {
+const _getStyle = (props: TextProps): CSSProperties => {
+  const theme = useTheme()
+  const defaultCategory: TextCategories = 'text'
+  const defaultAlign: TextAlign = 'left-top'
+  const category = props.category ?? defaultCategory
+  const align = props.align ?? defaultAlign
+  const style: CSSProperties = {}
+
   switch (category) {
     case 'text':
-      return {
-        fontFamily: theme.textFamily,
-        fontSize: theme.textSize,
-        color: theme.textColor,
-      }
+      style.fontFamily = theme.textFamily
+      style.fontSize = theme.textSize
+      style.color = theme.textColor
+      break
     case 'h1':
-      return {
-        fontFamily: theme.h1Family,
-        fontSize: theme.h1Size,
-        color: theme.h1Color,
-      }
+      style.fontFamily = theme.h1Family
+      style.fontSize = theme.h1Size
+      style.color = theme.h1Color
+      break
     case 'h2':
-      return {
-        fontFamily: theme.h2Family,
-        fontSize: theme.h2Size,
-        color: theme.h2Color,
-      }
+      style.fontFamily = theme.h2Family
+      style.fontSize = theme.h2Size
+      style.color = theme.h2Color
+      break
     case 'h3':
-      return {
-        fontFamily: theme.h3Family,
-        fontSize: theme.h3Size,
-        color: theme.h3Color,
-      }
+      style.fontFamily = theme.h3Family
+      style.fontSize = theme.h3Size
+      style.color = theme.h3Color
+      break
     case 'h4':
-      return {
-        fontFamily: theme.h4Family,
-        fontSize: theme.h4Size,
-        color: theme.h4Color,
-      }
+      style.fontFamily = theme.h4Family
+      style.fontSize = theme.h4Size
+      style.color = theme.h4Color
+      break
     case 'h5':
-      return {
-        fontFamily: theme.h5Family,
-        fontSize: theme.h5Size,
-        color: theme.h5Color,
-      }
+      style.fontFamily = theme.h5Family
+      style.fontSize = theme.h5Size
+      style.color = theme.h5Color
+      break
     case 'h6':
-      return {
-        fontFamily: theme.h6Family,
-        fontSize: theme.h6Size,
-        color: theme.h6Color,
-      }
-    default:
-      return {}
+      style.fontFamily = theme.h6Family
+      style.fontSize = theme.h6Size
+      style.color = theme.h6Color
+      break
   }
+
+  switch (align) {
+    case 'left-top':
+      style.display = 'flex'
+      style.justifyContent = 'left'
+      style.alignItems = 'start'
+      break
+    case 'center-top':
+      style.display = 'flex'
+      style.justifyContent = 'center'
+      style.alignItems = 'start'
+      break
+    case 'right-top':
+      style.display = 'flex'
+      style.justifyContent = 'right'
+      style.alignItems = 'start'
+      break
+    case 'left-center':
+      style.display = 'flex'
+      style.justifyContent = 'left'
+      style.alignItems = 'center'
+      break
+    case 'center':
+      style.display = 'flex'
+      style.justifyContent = 'center'
+      style.alignItems = 'center'
+      break
+    case 'right-center':
+      style.display = 'flex'
+      style.justifyContent = 'right'
+      style.alignItems = 'center'
+      break
+    case 'left-bottom':
+      style.display = 'flex'
+      style.justifyContent = 'left'
+      style.alignItems = 'end'
+      break
+    case 'center-bottom':
+      style.display = 'flex'
+      style.justifyContent = 'center'
+      style.alignItems = 'end'
+      break
+    case 'right-bottom':
+      style.display = 'flex'
+      style.justifyContent = 'right'
+      style.alignItems = 'end'
+      break
+  }
+
+  return { ...style, ...props.style }
 }
 
-const toText = (value?: TextValue): string => {
+const _getText = (value?: TextValue): string => {
   if (!value) return ''
 
   if (value instanceof Date) return value.toLocaleDateString()
