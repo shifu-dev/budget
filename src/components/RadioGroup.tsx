@@ -1,5 +1,6 @@
+import { CSSProperties } from 'react'
 import { Card } from '@components/Card'
-import { Button } from '@components/Button'
+import { Text } from '@components/Text'
 
 export type RadioGroupSelectCallback = (index: number) => void
 
@@ -7,6 +8,7 @@ export interface RadioGroupProps {
   selectedIndex?: number
   items?: string[]
   onSelect?: RadioGroupSelectCallback
+  style?: CSSProperties
 }
 
 export function RadioGroup(props: RadioGroupProps) {
@@ -17,18 +19,22 @@ export function RadioGroup(props: RadioGroupProps) {
   return (
     <Card
       style={{
-        padding: 5,
-        gap: 5,
+        ...{
+          padding: 5,
+          gap: 5,
+        },
+        ...props.style,
       }}
     >
       {props.items?.map((item, index: number) => (
-        <Button
-          label={item}
-          onPress={() => onPress(index)}
+        <div
+          onClick={() => onPress(index)}
           style={{
             width: '100%',
           }}
-        />
+        >
+          <Text value={item} />
+        </div>
       ))}
     </Card>
   )
