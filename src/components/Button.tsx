@@ -13,14 +13,14 @@ export interface ButtonProps {
   size?: ButtonSize
   onPress?: ButtonCallback
   style?: CSSProperties
-  enabled?: boolean
+  disabled?: boolean
 }
 
 export function Button(props: ButtonProps) {
   const style = _getStyle(props)
 
   function onPress() {
-    if (!props.enabled) return
+    if (props.disabled) return
 
     props.onPress?.()
   }
@@ -54,7 +54,7 @@ const _getStyle = (props: ButtonProps): CSSProperties => {
     style.minWidth = 200
   }
 
-  if (props.enabled !== undefined && props.enabled === false) {
+  if (props.disabled) {
     const disabledColor = 'grey'
 
     style.color = disabledColor
