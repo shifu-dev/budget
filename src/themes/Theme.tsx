@@ -31,6 +31,7 @@ export interface Theme {
   textFamily: string
   textSize: number
   textColor: ColorValue
+  disabledTextColor: ColorValue
   placeholderColor: ColorValue
   modalOverlayColor: ColorValue
   modalOpenTransitionSpeed: number
