@@ -1,214 +1,171 @@
-import { Button } from '@components/Button'
-import { useTheme } from '@themes/index'
-import { Text } from '@components/Text'
+import { useState, useEffect } from 'react'
+import {
+  CalendarLayout,
+  CalendarLayoutCell,
+  CalendarLayoutCellState,
+  CalendarLayoutSelectionMode,
+} from '@components/CalendarLayout'
 import { CalendarError } from '@components/CalendarError'
+import utils from '../utils'
+
+export interface CalendarYearProps {
+  state?: CalendarLayoutCellState
+  isInteractable?: boolean
+}
 
 export interface CalendarYearsProps {
-  year?: number
+  initialPageYear?: number
+  initialPageIndex?: number
   firstYear?: number
   lastYear?: number
+  states?: Record<number, CalendarYearProps>
   columnCount?: number
   rowCount?: number
-  onSelect?: (year: number) => void
+  onPress?: (year: number) => void
+  onChange?: (args: { year: number; state: CalendarLayoutCellState }) => void
+  isInteractable?: boolean
+  selectionMode?: CalendarLayoutSelectionMode
 }
 
 export function CalendarYears(props: CalendarYearsProps) {
-  // default first year of the map
-  const defaultFirstSelectableYear = 1800
+  // Default first year of the map.
+  const defaultFirstSelectableYear = utils.getMinYear()
 
-  // default last year of the map
-  const defaultLastSelectableYear = 3000
+  // Default last year of the map.
+  const defaultLastSelectableYear = utils.getMaxYear()
 
-  // default count of columns in one page for year grid
+  // Default count of columns in one page for year grid.
   const defaultPageColumnCount = 6
 
-  // default count of rows in one page for year grid
+  // Default count of rows in one page for year grid.
   const defaultPageRowCount = 5
 
-  // first selectable year of the map
+  // First selectable year of the map.
   const selectableFirstYear = props.firstYear ?? defaultFirstSelectableYear
 
-  // last selectable year of the map
+  // Last selectable year of the map.
   const selectableLastYear = props.lastYear ?? defaultLastSelectableYear
 
-  // currently selected year
-  const year =
-    props.year ?? _getInitialYear(selectableFirstYear, selectableLastYear)
+  // Count of selectable years.
+  const selectableYearCount = selectableLastYear - selectableFirstYear
 
-  // if invalid input, show error
-  if (year < selectableFirstYear)
+  // Year to calculate the initial page.
+  const initialPageYear =
+    props.initialPageYear ??
+    _getInitialYear(selectableFirstYear, selectableLastYear)
+
+  // If initial page year is out of bounds.
+  if (
+    initialPageYear < selectableFirstYear ||
+    initialPageYear > selectableLastYear
+  )
     return (
       <CalendarError
-        msg={`current year '${year}' cannot be less than firstYear '${selectableFirstYear}'`}
+        msg={`initialPageYear '${initialPageYear}' must be in bounds [${selectableFirstYear}, '${selectableLastYear}']`}
       />
     )
 
-  // if invalid input, show error
-  if (year > selectableLastYear)
-    return (
-      <CalendarError
-        msg={`current year '${year}' cannot be greater than lastYear '${selectableLastYear}'`}
-      />
-    )
-
-  // count of columns in one page for year grid
+  // Count of columns in one page for year grid.
   const pageColumnCount = props.columnCount ?? defaultPageColumnCount
 
-  // count of rows in one page for year grid
+  // Count of rows in one page for year grid.
   const pageRowCount = props.rowCount ?? defaultPageRowCount
 
-  // count of cells in one page for year grid
-  const pageYearCount = pageColumnCount * pageRowCount
+  // Count of cells in one page for year grid.
+  const pageCellCount = pageColumnCount * pageRowCount
 
-  // if there is not layout to display, show error
-  if (pageYearCount === 0)
-    return (
-      <CalendarError
-        msg={`'pageColumnCount * pageRowCount' cannot result in '0'`}
-      />
+  // Index of the initial page.
+  const initialPageIndex = Math.floor(
+    (initialPageYear - selectableFirstYear) / pageCellCount,
+  )
+
+  const pageCount = selectableYearCount / pageCellCount
+
+  const [selectionStates, setSelectionStates] = useState<
+    Record<number, CalendarLayoutCellState>
+  >([])
+
+  const [thisPageIndex, setThisPageIndex] = useState(initialPageIndex)
+  const [pageFirstYear, setPageFirstYear] = useState(0)
+  const [pageSelectableYearRangeString, setPageSelectableYearRangeString] =
+    useState('')
+  const [hasPrevPage, setHasPrevPage] = useState(false)
+  const [hasNextPage, setHasNextPage] = useState(false)
+  const [prevPageCell, setPrevPageCell] = useState<CalendarLayoutCell>()
+  const [nextPageCell, setNextPageCell] = useState<CalendarLayoutCell>()
+
+  useEffect(() => {
+    const pageFirstYear = selectableFirstYear + thisPageIndex * pageCellCount
+    setPageFirstYear(pageFirstYear)
+
+    const pageLastYear = pageFirstYear + pageCellCount
+    const pageSelectableFirstYear = Math.max(selectableFirstYear, pageFirstYear)
+    const pageSelectableLastYear = Math.min(selectableLastYear, pageLastYear)
+    setPageSelectableYearRangeString(
+      `${pageSelectableFirstYear} - ${pageSelectableLastYear - 1}`,
     )
 
-  // first year from which to start calculating year positions on the grid
-  const layoutFirstYear = 0
+    setHasPrevPage(thisPageIndex > 0)
+    setHasNextPage(thisPageIndex + 1 < pageCount)
+    setPrevPageCell({
+      value: pageFirstYear - 1,
+      state: selectionStates[pageFirstYear - 1],
+    })
+    setNextPageCell({
+      value: pageLastYear + 1,
+      state: selectionStates[pageLastYear + 1],
+    })
+  }, [thisPageIndex])
 
-  // first year on current the page
-  const pageFirstYear = year - ((year - layoutFirstYear) % pageYearCount)
-
-  // last year on the current page
-  const pageLastYear = pageFirstYear + pageYearCount
-
-  // first selectable year on the current page
-  const pageSelectableFirstYear = Math.max(selectableFirstYear, pageFirstYear)
-
-  // first selectable year on the current page
-  const pageSelectableLastYear = Math.min(selectableLastYear, pageLastYear)
-
-  // count of selectable years on the current page
-  const pageSelectableYearCount =
-    pageSelectableLastYear - pageSelectableFirstYear
-
-  // count of unselectable years before the first selectable year on the current page
-  const pageYearCountBeforeSelectableFirstYear =
-    pageSelectableFirstYear - pageFirstYear
-
-  // count of unselectable years after the last selectable year on the current page
-  const pageYearCountAfterSelectableLastYear =
-    pageLastYear - pageSelectableLastYear
-
-  // curreny range of years on the page in string format
-  const pageSelectableYearRangeString = `${selectableFirstYear} - ${selectableLastYear}`
-
-  const isPrevButtonEnabled = selectableFirstYear < pageFirstYear
-  const isNextButtonEnabled = selectableLastYear > pageLastYear
-
-  const theme = useTheme()
-
-  function onPrevPress() {}
-  function onNextPress() {}
-  function onYearPress(year: number) {
-    props.onSelect?.(year)
+  function onPrevPagePress() {
+    setThisPageIndex(thisPageIndex - 1)
   }
 
-  function YearList({ first, count, selected, faded, onPress }: any) {
-    return Array.from({ length: count }, (_, index: number) => {
-      const year = first + index
+  function onNextPagePress() {
+    setThisPageIndex(thisPageIndex + 1)
+  }
 
-      return (
-        <div
-          key={index}
-          onClick={() => onPress(year)}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            margin: 4,
-            borderRadius: 25,
-            backgroundColor:
-              year === selected
-                ? theme.selectedListItemColor
-                : theme.backgroundColor,
-            padding: 10,
-            height: 20,
-          }}
-        >
-          <Text
-            value={year}
-            category='h6'
-            style={{
-              color: faded ? 'grey' : theme.h6Color,
-            }}
-          />
-        </div>
-      )
-    })
+  const cells: CalendarLayoutCell[] = Array.from(
+    { length: pageCellCount },
+    (_, index: number) => {
+      const year = pageFirstYear + index
+      const state = selectionStates[year]
+
+      return {
+        value: year,
+        state: state,
+        isInteractable:
+          props.states?.[year]?.isInteractable ??
+          (year >= selectableFirstYear && year <= selectableLastYear),
+      }
+    },
+  )
+
+  function onChange(args: { index: number; state: CalendarLayoutCellState }) {
+    const { index, state } = args
+    props.onChange?.({ year: pageFirstYear + index, state: state })
+  }
+
+  function onCellPress(index: number) {
+    props.onPress?.(pageFirstYear + index)
   }
 
   return (
-    <div>
-      <div
-        key='top-bar'
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          backgroundColor: theme.cardColor,
-          padding: 10,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-        }}
-      >
-        <Button
-          icon='prev'
-          size='sm'
-          onPress={onPrevPress}
-          enabled={isPrevButtonEnabled}
-        />
-        <Text
-          value={pageSelectableYearRangeString}
-          category='h4'
-          align='center'
-        />
-        <Button
-          icon='next'
-          size='sm'
-          onPress={onNextPress}
-          enabled={isNextButtonEnabled}
-        />
-      </div>
-      <div
-        key='map'
-        style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${pageColumnCount}, 1fr)`,
-          gridTemplateRows: `repeat(${pageRowCount}, auto)`,
-        }}
-      >
-        <YearList
-          first={pageFirstYear}
-          count={pageYearCountBeforeSelectableFirstYear}
-          onPress={onPrevPress}
-          faded
-        />
-        <YearList
-          first={pageSelectableFirstYear}
-          count={pageSelectableYearCount}
-          selected={year}
-          onPress={onYearPress}
-        />
-        <YearList
-          first={pageSelectableLastYear}
-          count={pageYearCountAfterSelectableLastYear}
-          onPress={onNextPress}
-          faded
-        />
-      </div>
-    </div>
+    <CalendarLayout
+      cells={cells}
+      columnCount={pageColumnCount}
+      rowCount={pageRowCount}
+      title={pageSelectableYearRangeString}
+      onPrevPagePress={hasPrevPage ? onPrevPagePress : undefined}
+      onNextPagePress={hasNextPage ? onNextPagePress : undefined}
+      prevPageCell={prevPageCell}
+      nextPageCell={nextPageCell}
+      onChange={onChange}
+      onCellPress={onCellPress}
+    />
   )
 }
 
 function _getInitialYear(firstYear: number, lastYear: number): number {
-  return Math.min(Math.max(_getCurrentYear(), firstYear), lastYear)
-}
-
-function _getCurrentYear(): number {
-  return new Date().getFullYear()
+  return utils.clamp(utils.getCurrentYear(), firstYear, lastYear)
 }
