@@ -31,6 +31,7 @@ export const lightTheme: Theme = {
   textFamily: fonts.regular,
   textSize: 10,
   textColor: colors.black,
+  disabledTextColor: colors.onyx,
   placeholderColor: colors.matteBlack,
   modalOverlayColor: 'rgba(0, 0, 0, .6)',
   modalOpenTransitionSpeed: 0.5,

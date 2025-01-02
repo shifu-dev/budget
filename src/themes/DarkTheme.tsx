@@ -19,5 +19,6 @@ export const darkTheme: Theme = {
   h5Color: colors.white,
   h6Color: colors.white,
   textColor: colors.white,
+  disabledTextColor: 'grey',
   placeholderColor: 'grey',
 }
