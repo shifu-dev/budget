@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 import { List } from '@components/List'
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
-import { useNavigate } from 'react-router'
+import { Card } from '@components/Card'
 
 export interface Transaction {
   id: string
@@ -24,32 +25,20 @@ export function TransactionsPage() {
   const renderTransaction = (transaction: Transaction) => {
     return (
       <div
-        className='transaction'
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: 50,
-          height: '100%',
-          width: '100%',
-          padding: 10,
-          margin: 5,
-          border: 'solid',
-          borderWidth: 2,
-          borderRadius: 10,
-          borderColor: 'white',
+          paddingInline: 10,
+          paddingBlock: 4,
         }}
       >
-        <div
+        <Card
           style={{
-            display: 'flex',
-            flex: 1,
             justifyContent: 'space-between',
+            paddingInline: 30,
           }}
         >
           <Text value={transaction.amount} category='h3' />
           <Text value={transaction.title} category='h5' />
-        </div>
+        </Card>
       </div>
     )
   }
@@ -60,8 +49,8 @@ export function TransactionsPage() {
         id='top-bar'
         style={{
           display: 'flex',
-          flex: 1,
           justifyContent: 'space-between',
+          padding: 10,
         }}
       >
         <Button icon='back' onPress={onBack} />
@@ -73,16 +62,12 @@ export function TransactionsPage() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          height: 200,
+          height: 400,
         }}
       >
-        <span>
-          <Text value='Transactions' category='h1' />
-        </span>
+        <Text value='Transactions' category='h1' />
       </div>
-      <div id='content'>
-        <List items={transactions} itemRenderer={renderTransaction} />
-      </div>
+      <List items={transactions} itemRenderer={renderTransaction} />
     </>
   )
 }
