@@ -11,6 +11,8 @@ export function Background(props: BackgroundProps) {
   return (
     <div
       style={{
+        display: 'flex',
+        flexDirection: 'column',
         backgroundColor: theme.backgroundColor,
         height: '100vh',
       }}

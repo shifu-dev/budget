@@ -1,4 +1,6 @@
-import { JSX } from 'react'
+import { CSSProperties, JSX } from 'react'
+import { Virtuoso } from 'react-virtuoso'
+import { Text } from '@components/Text'
 
 export type ItemRenderer<T> = (item: T) => JSX.Element
 
@@ -7,36 +9,27 @@ export type GetItemId<T> = (item: T) => string | number
 export interface ListProps<T> {
   items: T[]
   itemRenderer?: ItemRenderer<T>
-  getItemId?: GetItemId<T>
+  style?: CSSProperties
 }
 
 export function List<T>(props: ListProps<T>) {
   const items = props.items ?? []
+  const itemCount = items.length
 
-  const getItemRenderer = () => {
-    if (props.itemRenderer) return props.itemRenderer
+  function Row(index: number) {
+    if (props.itemRenderer) return props.itemRenderer(items[index])
 
-    return fallbackItemRenderer
+    return <Text value='I donno how to render this item' />
   }
-
-  const defaultGetItemId: GetItemId<T> = (item: T) => {
-    return (item as any).id
-  }
-
-  const itemRenderer = getItemRenderer()
-  const getItemId = props.getItemId ?? defaultGetItemId
 
   return (
-    <>
-      <div>
-        {items.map((item: T) => (
-          <div key={getItemId(item)}>{itemRenderer(item)}</div>
-        ))}
-      </div>
-    </>
+    <Virtuoso
+      totalCount={itemCount}
+      itemContent={Row}
+      style={{
+        scrollbarWidth: 'none',
+        ...props.style,
+      }}
+    />
   )
-}
-
-const fallbackItemRenderer = () => {
-  return <>I donno how to render this item</>
 }
