@@ -10,27 +10,28 @@
     "tauri": "tauri"
   },
   "imports": {
-    "@emotion/react": "npm:@emotion/react@^11.13.5",
-    "@fontsource/poppins": "npm:@fontsource/poppins@^5.1.0",
-    "@fontsource/roboto": "npm:@fontsource/roboto@^5.1.0",
-    "@tabler/icons-react": "npm:@tabler/icons-react@^3.23.0",
+    "@emotion/react": "npm:@emotion/react@^11.14.0",
+    "@fontsource/poppins": "npm:@fontsource/poppins@^5.1.1",
+    "@fontsource/roboto": "npm:@fontsource/roboto@^5.1.1",
+    "@tabler/icons-react": "npm:@tabler/icons-react@^3.27.1",
+    "@types/react-router": "npm:@types/react-router@^5.1.20",
     "normalize.css": "npm:normalize.css@^8.0.1",
     "path": "npm:path@^0.12.7",
-    "react": "npm:react@^18.2.0",
-    "react-dom": "npm:react-dom@^18.2.0",
-    "@tauri-apps/api": "npm:@tauri-apps/api@^2",
-    "@tauri-apps/plugin-shell": "npm:@tauri-apps/plugin-shell@^2",
+    "react": "npm:react@^19.0.0",
+    "react-dom": "npm:react-dom@^19.0.0",
+    "@tauri-apps/api": "npm:@tauri-apps/api@^2.2.0",
+    "@tauri-apps/plugin-shell": "npm:@tauri-apps/plugin-shell@^2.2.0",
 
     // dev dependencies
-    "@types/node": "npm:@types/node@^22.10.1",
-    "@types/react": "npm:@types/react@^18.2.15",
-    "@types/react-dom": "npm:@types/react-dom@^18.2.7",
-    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.2.1",
-    "react-router": "npm:react-router@^7.0.1",
+    "@types/node": "npm:@types/node@^22.10.5",
+    "@types/react": "npm:@types/react@^19.0.3",
+    "@types/react-dom": "npm:@types/react-dom@^19.0.2",
+    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.3.4",
+    "react-router": "npm:react-router@^7.1.1",
     "react-virtuoso": "npm:react-virtuoso@^4.12.3",
     "typescript": "npm:typescript@^5.2.2",
     "vite": "npm:vite@^5.3.1",
-    "@tauri-apps/cli": "npm:@tauri-apps/cli@^2"
+    "@tauri-apps/cli": "npm:@tauri-apps/cli@^2.2.2"
   },
   "lint": {
     "include": ["src/"]
