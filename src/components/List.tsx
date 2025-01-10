@@ -9,7 +9,6 @@ export interface ListProps {
   items: any[]
   itemRenderer?: (item: any, index: number) => JSX.Element
   direction?: 'horizontal' | 'vertical'
-  itemHeight?: number
   initSnapIndex?: number
   snapItems?: boolean
   snapNext?: boolean
@@ -100,7 +99,6 @@ export function List(props: ListProps) {
           onClick={() => onItemClick(index)}
           style={{
             scrollSnapAlign: scrollSnapAlign,
-            height: props.itemHeight,
           }}
         >
           <Item index={index} />
