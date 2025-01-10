@@ -30,6 +30,14 @@ export function Text(props: TextProps) {
   return <span style={style}>{text}</span>
 }
 
+export function isTextValue(value: unknown): value is TextValue {
+  return (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  )
+}
+
 const _getStyle = (props: TextProps): CSSProperties => {
   const theme = useTheme()
   const defaultCategory: TextCategories = 'text'
