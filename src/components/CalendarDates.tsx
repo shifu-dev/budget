@@ -4,7 +4,7 @@ import {
   CalendarLayoutCellState,
   CalendarLayoutSelectionMode,
 } from '@components/CalendarLayout'
-import utils from '../utils'
+import utils from '@utils'
 
 export interface CalendarDateProps {
   /// The state of this date.

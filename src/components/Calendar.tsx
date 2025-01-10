@@ -1,4 +1,5 @@
 import { CSSProperties, useEffect, useState } from 'react'
+import { CalendarError } from '@components/CalendarError'
 import { CalendarYears, CalendarYearProps } from '@components/CalendarYears'
 import { CalendarMonths, CalendarMonthProps } from '@components/CalendarMonths'
 import { CalendarDates, CalendarDateProps } from '@components/CalendarDates'
@@ -6,8 +7,7 @@ import {
   CalendarLayoutCellState,
   CalendarLayoutSelectionMode,
 } from '@components/CalendarLayout'
-import utils from '../utils'
-import { CalendarError } from './CalendarError'
+import utils from '@utils'
 
 export type CalendarLayer = 'years' | 'months' | 'dates'
 

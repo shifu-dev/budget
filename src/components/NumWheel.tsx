@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react'
 import { Wheel } from '@components/Wheel'
-import utils from '../utils'
+import utils from '@utils'
 
 export interface NumWheelProps {
   to: number
