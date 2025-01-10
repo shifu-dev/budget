@@ -6,7 +6,7 @@ import {
   CalendarLayoutSelectionMode,
 } from '@components/CalendarLayout'
 import { CalendarError } from '@components/CalendarError'
-import utils from '../utils'
+import utils from '@utils'
 
 export interface CalendarYearProps {
   state?: CalendarLayoutCellState
