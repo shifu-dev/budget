@@ -69,6 +69,12 @@ export function getDay(date: Date, firstDay: 'm' | 's' = 's'): number {
   return firstDay === 's' ? day : day === 0 ? 6 : day - 1
 }
 
+export function generateNumList(from: number, to: number): string[] {
+  return Array(to - from + 1)
+    .fill(undefined)
+    .map((_, index) => `${from + index}`)
+}
+
 export default {
   monthNames,
   getMinDate,
@@ -83,4 +89,5 @@ export default {
   getDayCountForMonth,
   getFirstDayOfWeek,
   getDay,
+  generateNumList,
 }
