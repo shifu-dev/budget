@@ -10,7 +10,7 @@ export function TimeCard(props: TimeCardProps) {
 
   return (
     <Card leftIcon='clock' {...props}>
-      {<Text value={timeString} category='h4' />}
+      <Text value={timeString} category='h4' />
     </Card>
   )
 }
