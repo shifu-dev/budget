@@ -46,23 +46,25 @@ export function Card(props: CardProps) {
       onClick={props.onPress}
     >
       {props.leftIcon && (
-        <span
+        <div
+          id='left-icon'
           style={{
-            marginInline: 30,
+            marginInline: 15,
           }}
         >
           <Icon name={props.leftIcon} size='md' />
-        </span>
+        </div>
       )}
       {props.children}
       {props.rightIcon && (
-        <span
+        <div
+          id='right-icon'
           style={{
-            marginInline: 30,
+            alignContent: 'end',
           }}
         >
-          <Icon name={props.rightIcon} size='md' />
-        </span>
+          <Icon name={props.rightIcon} size='sm' />
+        </div>
       )}
     </div>
   )
