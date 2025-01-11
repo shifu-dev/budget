@@ -79,11 +79,17 @@ export function List(props: ListProps) {
     <div
       ref={containerRef}
       style={{
+        display: 'flex',
+        flexDirection:
+          (props.direction ?? defaultDirection) === 'vertical'
+            ? 'column'
+            : 'row',
         height: '100%',
         overflow: 'scroll',
         scrollbarWidth: 'none',
         scrollSnapType: `${scrollSnapAxis} mandatory`,
         scrollSnapStop: scrollSnapStop,
+        gap: 10,
         ...props.style,
       }}
     >
