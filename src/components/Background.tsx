@@ -15,6 +15,8 @@ export function Background(props: BackgroundProps) {
         flexDirection: 'column',
         backgroundColor: theme.backgroundColor,
         height: '100vh',
+        overflow: 'scroll',
+        scrollbarWidth: 'none',
       }}
     >
       {props.children}
