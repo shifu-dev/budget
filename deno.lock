@@ -17,7 +17,6 @@
     "npm:path@~0.12.7": "0.12.7",
     "npm:react-dom@19": "19.0.0_react@19.0.0",
     "npm:react-router@^7.1.1": "7.1.1_react@19.0.0_react-dom@19.0.0__react@19.0.0",
-    "npm:react-virtuoso@^4.12.3": "4.12.3_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:react@19": "19.0.0",
     "npm:typescript@^5.2.2": "5.7.2",
     "npm:vite@*": "5.4.11",
@@ -778,13 +777,6 @@
         "turbo-stream"
       ]
     },
-    "react-virtuoso@4.12.3_react@19.0.0_react-dom@19.0.0__react@19.0.0": {
-      "integrity": "sha512-6X1p/sU7hecmjDZMAwN+r3go9EVjofKhwkUbVlL8lXhBZecPv9XVCkZ/kBPYOr0Mv0Vl5+Ziwgexg9Kh7+NNXQ==",
-      "dependencies": [
-        "react",
-        "react-dom"
-      ]
-    },
     "react@19.0.0": {
       "integrity": "sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ=="
     },
@@ -915,7 +907,6 @@
       "npm:path@~0.12.7",
       "npm:react-dom@19",
       "npm:react-router@^7.1.1",
-      "npm:react-virtuoso@^4.12.3",
       "npm:react@19",
       "npm:typescript@^5.2.2",
       "npm:vite@^5.3.1"
