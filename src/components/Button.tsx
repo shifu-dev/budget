@@ -44,12 +44,14 @@ const _getStyle = (props: ButtonProps): CSSProperties => {
     borderWidth: 0,
     borderRadius: 50,
     backgroundColor: theme.selectedListItemColor,
+    cursor: 'pointer',
   }
 
   if (props.size == 'sm') {
     style.minHeight = 30
     style.minWidth = 70
-    style.borderRadius = '50%'
+    style.paddingInline = 15
+    style.paddingBlock = 5
   } else {
     style.minHeight = 50
     style.minWidth = 150

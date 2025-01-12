@@ -87,6 +87,7 @@ export function List<T>(props: ListProps<T>) {
             ? 'column'
             : 'row',
         height: '100%',
+        width: '100%',
         overflow: 'scroll',
         scrollbarWidth: 'none',
         scrollSnapType: `${scrollSnapAxis} mandatory`,
