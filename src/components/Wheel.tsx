@@ -2,12 +2,16 @@ import { CSSProperties } from 'react'
 import { List } from '@components/List'
 import { Text, TextValue } from '@components/Text'
 
+export type WheelDirection = 'vertical' | 'horizontal'
+
 export interface WheelProps {
   // index of the selected item
   selected?: number
 
   // list of items
   items: TextValue[]
+
+  direction?: WheelDirection
 
   style?: CSSProperties
   coverStyle?: CSSProperties
@@ -93,6 +97,7 @@ export function Wheel(props: WheelProps) {
       <List
         items={props.items}
         itemRenderer={itemRenderer}
+        direction={props.direction}
         snapItems
         initSnapIndex={props.selected}
         snapPosition='center'
