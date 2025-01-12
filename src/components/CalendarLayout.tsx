@@ -4,6 +4,7 @@ import { Button } from '@components/Button'
 import { Text, TextValue } from '@components/Text'
 import { CalendarError } from '@components/CalendarError'
 import { Conditional } from '@components/Conditional'
+import { Iterate } from '@components/Iterate'
 
 /// The mode in which user can select cells on the layout.
 export type CalendarLayoutSelectionMode = 'single' | 'range' | 'hybrid'
@@ -271,21 +272,13 @@ export function CalendarLayout(props: CalendarLayoutProps) {
           borderTopRightRadius: 20,
         }}
       >
-        <div
-          style={{
-            width: 70,
-          }}
-        >
+        <div style={{ width: 70 }}>
           <Conditional value={props.onPrevPagePress}>
             <Button icon='prev' size='sm' onPress={props.onPrevPagePress} />
           </Conditional>
         </div>
         <Button label={props.title} onPress={props.onTitlePress} />
-        <div
-          style={{
-            width: 70,
-          }}
-        >
+        <div style={{ width: 70 }}>
           <Conditional value={props.onPrevPagePress}>
             <Button icon='next' size='sm' onPress={props.onNextPagePress} />
           </Conditional>
@@ -309,18 +302,21 @@ export function CalendarLayout(props: CalendarLayoutProps) {
           backgroundColor: theme.cardColor,
         }}
       >
-        {props.columnHeaders.map(name => (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '100%',
-            }}
-          >
-            <Text value={name} category='h6' />
-          </div>
-        ))}
+        <Iterate
+          range={props.columnHeaders}
+          element={name => (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+              }}
+            >
+              <Text value={name} category='h6' />
+            </div>
+          )}
+        />
       </div>
     )
   }
@@ -342,9 +338,10 @@ export function CalendarLayout(props: CalendarLayoutProps) {
           borderColor: 'white',
         }}
       >
-        {props.cells?.map((cell: CalendarLayoutCell, index: number) => (
-          <Cell cell={cell} index={index} />
-        ))}
+        <Iterate
+          range={props.cells}
+          element={(cell, index) => <Cell cell={cell} index={index} />}
+        />
       </div>
     )
   }
