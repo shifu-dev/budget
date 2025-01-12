@@ -5,9 +5,9 @@ export type ListScrollPosition = 'nearest' | 'start' | 'center' | 'end'
 
 export type ListScrollBehavior = 'auto' | 'instant' | 'smooth'
 
-export interface ListProps {
-  items: any[]
-  itemRenderer?: (item: any, index: number) => JSX.Element
+export interface ListProps<T> {
+  items?: T[]
+  itemRenderer?: (item: T, index: number) => JSX.Element
   direction?: 'horizontal' | 'vertical'
   initSnapIndex?: number
   snapItems?: boolean
@@ -21,7 +21,7 @@ export interface ListProps {
   style?: CSSProperties
 }
 
-export function List(props: ListProps) {
+export function List<T>(props: ListProps<T>) {
   const defaultDirection = 'vertical'
   const defaultSnapNext = false
   const defaultSnapPosition: ListScrollPosition = 'start'
@@ -38,14 +38,16 @@ export function List(props: ListProps) {
   const scrollSnapAlign = props.snapPosition ?? defaultSnapPosition
   const scrollSnapOnPress = props.snapOnPress ?? defaultSnapOnPress
   const scrollBehavior = props.scrollBehavior ?? defaultScrollBehavior
-  const items = props.items ?? []
   const startPadding = 0
   const endPadding = 0
 
   function Item(args: { index: number }) {
     const { index } = args
-    const item = items[index]
+    const item = props.items?.[index]
+    if (!item) return
+
     if (props.itemRenderer) return props.itemRenderer(item, index)
+
     if (isTextValue(item))
       return (
         <Text
