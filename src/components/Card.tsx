@@ -1,17 +1,16 @@
 /** @jsxImportSource @emotion/react */
 
 import { CSSProperties, JSX } from 'react'
+import { css } from '@emotion/react'
 import { useTheme } from '@themes/index'
 import { Icon, IconName } from '@components/Icon'
-import { css } from '@emotion/react'
-
-export type CardPressCallback = () => any
+import { Conditional } from '@components/Conditional'
 
 export type CardVariant = 'long-medium' | 'long-flex'
 
 export interface CardProps {
   children?: JSX.Element | JSX.Element[]
-  onPress?: CardPressCallback
+  onPress?: () => void
   leftIcon?: IconName
   rightIcon?: IconName
   variant?: CardVariant
@@ -48,7 +47,7 @@ export function Card(props: CardProps) {
       }}
       onClick={props.onPress}
     >
-      {props.leftIcon && (
+      <Conditional value={props.leftIcon}>
         <div
           id='left-icon'
           style={{
@@ -57,9 +56,9 @@ export function Card(props: CardProps) {
         >
           <Icon name={props.leftIcon} size='md' />
         </div>
-      )}
+      </Conditional>
       {props.children}
-      {props.rightIcon && (
+      <Conditional value={props.rightIcon}>
         <div
           id='right-icon'
           style={{
@@ -68,7 +67,7 @@ export function Card(props: CardProps) {
         >
           <Icon name={props.rightIcon} size='sm' />
         </div>
-      )}
+      </Conditional>
     </div>
   )
 }

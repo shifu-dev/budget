@@ -1,6 +1,7 @@
-import { useTheme } from '@themes/index'
 import { ChangeEvent, CSSProperties } from 'react'
-import { Button } from './Button'
+import { useTheme } from '@themes/index'
+import { Button } from '@components/Button'
+import { Conditional } from '@components/Conditional'
 
 export type TextInputChangeCallback = (value: string) => void
 
@@ -47,7 +48,9 @@ export function TextInput(props: TextInputProps) {
           ...props.style,
         }}
       />
-      {showClear && <Button icon='trash' onPress={onClear} />}
+      <Conditional value={showClear}>
+        <Button icon='trash' onPress={onClear} />
+      </Conditional>
     </div>
   )
 }
