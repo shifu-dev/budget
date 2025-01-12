@@ -1,8 +1,9 @@
+import { CSSProperties } from 'react'
+import { useTheme } from '@themes/index'
 import { Button } from '@components/Button'
 import { Text, TextValue } from '@components/Text'
 import { CalendarError } from '@components/CalendarError'
-import { useTheme } from '@themes/index'
-import { CSSProperties } from 'react'
+import { Conditional } from '@components/Conditional'
 
 /// The mode in which user can select cells on the layout.
 export type CalendarLayoutSelectionMode = 'single' | 'range' | 'hybrid'
@@ -275,9 +276,9 @@ export function CalendarLayout(props: CalendarLayoutProps) {
             width: 70,
           }}
         >
-          {props.onPrevPagePress && (
+          <Conditional value={props.onPrevPagePress}>
             <Button icon='prev' size='sm' onPress={props.onPrevPagePress} />
-          )}
+          </Conditional>
         </div>
         <Button label={props.title} onPress={props.onTitlePress} />
         <div
@@ -285,9 +286,9 @@ export function CalendarLayout(props: CalendarLayoutProps) {
             width: 70,
           }}
         >
-          {props.onPrevPagePress && (
+          <Conditional value={props.onPrevPagePress}>
             <Button icon='next' size='sm' onPress={props.onNextPagePress} />
-          )}
+          </Conditional>
         </div>
       </div>
     )
