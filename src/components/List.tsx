@@ -1,5 +1,6 @@
 import { CSSProperties, JSX, useRef } from 'react'
 import { Text, isTextValue } from '@components/Text'
+import { Iterate } from '@components/Iterate'
 
 export type ListScrollPosition = 'nearest' | 'start' | 'center' | 'end'
 
@@ -103,16 +104,19 @@ export function List<T>(props: ListProps<T>) {
           backgroundColor: 'red',
         }}
       />
-      {props.items?.map((_, index: number) => (
-        <div
-          onClick={() => onItemClick(index)}
-          style={{
-            scrollSnapAlign: scrollSnapAlign,
-          }}
-        >
-          <Item index={index} />
-        </div>
-      ))}
+      <Iterate
+        range={props.items}
+        element={(_, index) => (
+          <div
+            onClick={() => onItemClick(index)}
+            style={{
+              scrollSnapAlign: scrollSnapAlign,
+            }}
+          >
+            <Item index={index} />
+          </div>
+        )}
+      />
       <div
         style={{
           height: endPadding,
