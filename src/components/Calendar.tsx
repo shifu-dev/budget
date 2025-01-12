@@ -11,11 +11,13 @@ import utils from '@utils'
 
 export type CalendarLayer = 'years' | 'months' | 'dates'
 
+export type CalendarCellState = CalendarLayoutCellState
+
 export interface CalendarProps {
   initPageDate?: Date
   firstDate?: Date
   lastDate?: Date
-  states?: Record<number, CalendarLayoutCellState>
+  states?: Record<number, CalendarCellState>
   useYear?: number
   useMonth?: number
   useDate?: number
@@ -23,7 +25,7 @@ export interface CalendarProps {
   selectionMode?: CalendarLayoutSelectionMode
   interactable?: boolean
   onPress?: (date: Date) => void
-  onChange?: (args: { date: Date; state: CalendarLayoutCellState }) => void
+  onChange?: (args: { date: Date; state: CalendarCellState }) => void
   style?: CSSProperties
 }
 

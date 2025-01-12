@@ -42,7 +42,10 @@ export function Card(props: CardProps) {
           background-color: ${theme.cardColor};
         }
       `}
-      style={props.style}
+      style={{
+        cursor: isPressable ? 'pointer' : undefined,
+        ...props.style,
+      }}
       onClick={props.onPress}
     >
       {props.leftIcon && (

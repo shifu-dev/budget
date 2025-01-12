@@ -337,7 +337,6 @@ export function CalendarLayout(props: CalendarLayoutProps) {
           gridTemplateColumns: `repeat(${pageColumnCount}, 1fr)`,
           gridTemplateRows: `repeat(${pageRowCount}, auto)`,
           borderWidth: 0,
-          borderBottomWidth: 2,
           borderStyle: 'solid',
           borderColor: 'white',
         }}
