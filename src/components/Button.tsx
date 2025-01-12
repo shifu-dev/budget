@@ -28,7 +28,7 @@ export function Button(props: ButtonProps) {
   return (
     <div onClick={onPress} style={style}>
       <Icon name={props.icon} size='md' color={style.color} />
-      <Text value={props.label} category='h5' />
+      <Text value={props.label} category='h6' />
     </div>
   )
 }
@@ -37,21 +37,22 @@ const _getStyle = (props: ButtonProps): CSSProperties => {
   const theme = useTheme()
 
   let style: CSSProperties = {
-    minHeight: 70,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 0,
-    borderRadius: 25,
-    backgroundColor: theme.cardColor,
+    borderRadius: 50,
+    backgroundColor: theme.selectedListItemColor,
   }
 
   if (props.size == 'sm') {
+    style.minHeight = 30
     style.minWidth = 70
     style.borderRadius = '50%'
   } else {
-    style.minWidth = 200
+    style.minHeight = 50
+    style.minWidth = 150
   }
 
   if (props.disabled) {
