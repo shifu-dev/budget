@@ -1,18 +1,30 @@
+import { CSSProperties } from 'react'
 import { Text, TextValue } from '@components/Text'
 import { Icon, IconName } from '@components/Icon'
 import { useTheme } from '@themes/index'
-import { CSSProperties } from 'react'
 
-export type ButtonCallback = () => void
+export type ButtonSize = 'sm' | 'md' | 'lg'
 
-export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type ButtonRadius = 'none' | 'sm' | 'md' | 'lg' | 'full'
+
+export type ButtonColor =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+
+export type ButtonVariant = 'solid' | 'light' | 'ghost'
 
 export interface ButtonProps {
   label?: TextValue
-  icon?: IconName
+  startIcon?: IconName
+  endIcon?: IconName
   size?: ButtonSize
-  onPress?: ButtonCallback
-  style?: CSSProperties
+  radius?: ButtonRadius
+  variant?: ButtonVariant
+  color?: ButtonColor
+  onPress?: () => void
   disabled?: boolean
 }
 
@@ -27,43 +39,88 @@ export function Button(props: ButtonProps) {
 
   return (
     <div onClick={onPress} style={style}>
-      <Icon name={props.icon} size='md' color={style.color} />
+      <Icon name={props.startIcon} size={props.size} color={style.color} />
       <Text value={props.label} category='h6' />
+      <Icon name={props.endIcon} size={props.size} color={style.color} />
     </div>
   )
 }
 
-const _getStyle = (props: ButtonProps): CSSProperties => {
+function _getStyle(props: ButtonProps): CSSProperties {
   const theme = useTheme()
+  const color = props.disabled ? 'grey' : theme.textColor
 
   let style: CSSProperties = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 0,
-    borderRadius: 50,
-    backgroundColor: theme.selectedListItemColor,
     cursor: 'pointer',
+    overflow: 'hidden',
+    borderStyle: 'solid',
+    borderWidth: 2,
   }
 
-  if (props.size == 'sm') {
-    style.minHeight = 30
-    style.minWidth = 70
-    style.paddingInline = 15
-    style.paddingBlock = 5
-  } else {
-    style.minHeight = 50
-    style.minWidth = 150
+  // Size
+  switch (props.size ?? 'md') {
+    case 'sm':
+      style.height = 30
+      style.width = 70
+      style.paddingInline = 5
+      style.paddingBlock = 5
+      break
+
+    case 'md':
+      style.height = 40
+      style.width = 150
+      style.paddingInline = 10
+      style.paddingBlock = 10
+      break
+
+    case 'lg':
+      style.height = 50
+      style.width = 200
+      style.paddingInline = 10
+      style.paddingBlock = 10
+      break
   }
 
-  if (props.disabled) {
-    const disabledColor = 'grey'
+  // Variant
+  switch (props.variant ?? 'solid') {
+    case 'light':
+      style.borderColor = 'transparent'
+      style.backgroundColor = 'transparent'
+      break
 
-    style.color = disabledColor
-    style.backgroundColor = 'transparent'
-    style.borderColor = disabledColor
+    case 'solid':
+      style.borderColor = theme.selectedListItemColor
+      style.backgroundColor = theme.selectedListItemColor
+      break
+
+    case 'ghost':
+      style.borderColor = color
+      style.backgroundColor = 'transparent'
+      break
   }
 
-  return { ...style, ...props.style }
+  // Radius
+  switch (props.radius ?? 'full') {
+    case 'none':
+      style.borderRadius = 0
+      break
+    case 'sm':
+      style.borderRadius = 10
+      break
+    case 'md':
+      style.borderRadius = 20
+      break
+    case 'lg':
+      style.borderRadius = 30
+      break
+    case 'full':
+      style.borderRadius = 100
+      break
+  }
+
+  return style
 }

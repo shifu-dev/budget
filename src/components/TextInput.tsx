@@ -49,7 +49,7 @@ export function TextInput(props: TextInputProps) {
         }}
       />
       <Conditional value={showClear}>
-        <Button icon='trash' onPress={onClear} />
+        <Button startIcon='trash' onPress={onClear} />
       </Conditional>
     </div>
   )

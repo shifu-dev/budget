@@ -51,8 +51,8 @@ export function TransactionEditPage() {
           height: 60,
         }}
       >
-        <Button icon='cancel' size='sm' onPress={onCancel} />
-        <Button icon='accept' size='sm' onPress={onAccept} />
+        <Button startIcon='cancel' size='sm' onPress={onCancel} />
+        <Button startIcon='accept' size='sm' onPress={onAccept} />
       </div>
       <div
         id='content'

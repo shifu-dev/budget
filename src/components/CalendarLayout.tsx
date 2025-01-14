@@ -266,23 +266,34 @@ export function CalendarLayout(props: CalendarLayoutProps) {
         style={{
           display: 'flex',
           justifyContent: 'space-between',
+          alignItems: 'center',
           backgroundColor: theme.cardColor,
           padding: 10,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
         }}
       >
-        <div style={{ width: 70 }}>
-          <Conditional value={props.onPrevPagePress}>
-            <Button icon='prev' size='sm' onPress={props.onPrevPagePress} />
-          </Conditional>
-        </div>
-        <Button label={props.title} onPress={props.onTitlePress} />
-        <div style={{ width: 70 }}>
-          <Conditional value={props.onPrevPagePress}>
-            <Button icon='next' size='sm' onPress={props.onNextPagePress} />
-          </Conditional>
-        </div>
+        <Button
+          label={props.title}
+          variant='light'
+          onPress={props.onTitlePress}
+        />
+        <Conditional value={props.onPrevPagePress}>
+          <Button
+            startIcon='prev'
+            size='sm'
+            variant='light'
+            onPress={props.onPrevPagePress}
+          />
+        </Conditional>
+        <Conditional value={props.onPrevPagePress}>
+          <Button
+            startIcon='next'
+            size='sm'
+            variant='light'
+            onPress={props.onNextPagePress}
+          />
+        </Conditional>
       </div>
     )
   }
@@ -427,7 +438,13 @@ export function CalendarLayout(props: CalendarLayoutProps) {
   }
 
   return (
-    <div id='calendar-layout'>
+    <div
+      id='calendar-layout'
+      style={{
+        height: 400,
+        width: 500,
+      }}
+    >
       <TopBar />
       <ColumnHeaders />
       <RowHeaders />

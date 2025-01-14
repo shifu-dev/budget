@@ -53,8 +53,8 @@ export function TransactionsPage() {
           padding: 10,
         }}
       >
-        <Button icon='back' onPress={onBack} />
-        <Button icon='add' onPress={onAdd} />
+        <Button startIcon='back' onPress={onBack} />
+        <Button startIcon='add' onPress={onAdd} />
       </div>
       <div
         id='title'
