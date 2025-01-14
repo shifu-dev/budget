@@ -1,7 +1,4 @@
-/** @jsxImportSource @emotion/react */
-
 import { CSSProperties, JSX } from 'react'
-import { css } from '@emotion/react'
 import { useTheme } from '@themes/index'
 import { Icon, IconName } from '@components/Icon'
 import { Conditional } from '@components/Conditional'
@@ -23,25 +20,17 @@ export function Card(props: CardProps) {
 
   return (
     <div
-      css={css`
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        border: solid;
-        border-radius: 25px;
-        border-width: 0px;
-        background-color: ${theme.cardColor};
-        padding: 10px;
-        min-height: 70px;
-        transition: 0.15s;
-        &:hover {
-          background-color: ${isPressable && 'grey'};
-        }
-        &:active {
-          background-color: ${theme.cardColor};
-        }
-      `}
       style={{
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        border: 'solid',
+        borderRadius: '25px',
+        borderWidth: '0px',
+        backgroundColor: theme.cardColor,
+        padding: '10px',
+        minHeight: '70px',
+        transition: '0.15s',
         cursor: isPressable ? 'pointer' : undefined,
         ...props.style,
       }}
