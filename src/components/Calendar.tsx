@@ -8,6 +8,7 @@ import {
   CalendarLayoutSelectionMode,
 } from '@components/CalendarLayout'
 import utils from '@utils'
+import assert from 'assert'
 
 export type CalendarLayer = 'years' | 'months' | 'dates'
 
@@ -49,6 +50,26 @@ export function Calendar(props: CalendarProps) {
 
   const dateSelectionMode: CalendarLayoutSelectionMode =
     props.selectionMode ?? defaultSelectionMode
+
+  const yearsNextLayer: CalendarLayer | undefined = props.useMonth
+    ? props.useDate
+      ? undefined
+      : 'dates'
+    : 'months'
+
+  const monthsPrevLayer: CalendarLayer | undefined = props.useYear
+    ? undefined
+    : 'years'
+
+  const monthsNextLayer: CalendarLayer | undefined = props.useDate
+    ? undefined
+    : 'dates'
+
+  const datesPrevLayer: CalendarLayer | undefined = props.useMonth
+    ? props.useYear
+      ? undefined
+      : 'years'
+    : 'months'
 
   const [layer, setLayer] = useState<CalendarLayer>(
     props.initLayer ?? defaultInitLayer,
@@ -126,14 +147,15 @@ export function Calendar(props: CalendarProps) {
 
     setCurrentYear(year)
 
-    // If there is no layer after years.
-    if (props.useMonth && props.useDate) {
+    if (yearsNextLayer) {
+      setLayer(yearsNextLayer)
+    } else {
+      assert(props.useMonth)
+
       props.onChange?.({
         date: new Date(year, props.useMonth, props.useDate),
         state: state,
       })
-
-      return
     }
   }
 
@@ -145,8 +167,9 @@ export function Calendar(props: CalendarProps) {
 
     setCurrentMonth(month)
 
-    // If there is no layer after months.
-    if (props.useDate) {
+    if (monthsNextLayer) {
+      setLayer(monthsNextLayer)
+    } else {
       props.onChange?.({
         date: new Date(currentYear, month, props.useDate),
         state: state,
