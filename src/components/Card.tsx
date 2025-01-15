@@ -2,6 +2,7 @@ import { CSSProperties, JSX } from 'react'
 import { useTheme } from '@themes/index'
 import { Icon, IconName } from '@components/Icon'
 import { Conditional } from '@components/Conditional'
+import { motion } from 'motion/react'
 
 export type CardVariant = 'long-medium' | 'long-flex'
 
@@ -19,7 +20,8 @@ export function Card(props: CardProps) {
   const isPressable = props.onPress !== undefined
 
   return (
-    <div
+    <motion.div
+      onClick={props.onPress}
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -30,11 +32,24 @@ export function Card(props: CardProps) {
         backgroundColor: theme.cardColor,
         padding: '10px',
         minHeight: '70px',
-        transition: '0.15s',
         cursor: isPressable ? 'pointer' : undefined,
         ...props.style,
       }}
-      onClick={props.onPress}
+      whileHover={{
+        backgroundColor: theme.selectedListItemColor,
+        borderColor: theme.selectedListItemColor,
+        transition: {
+          duration: 1,
+        },
+      }}
+      whileTap={{
+        backgroundColor: theme.selectedListItemColor,
+        borderColor: theme.selectedListItemColor,
+        scale: 0.98,
+        transition: {
+          duration: 0.02,
+        },
+      }}
     >
       <Conditional value={props.leftIcon}>
         <div
@@ -57,6 +72,6 @@ export function Card(props: CardProps) {
           <Icon name={props.rightIcon} size='sm' />
         </div>
       </Conditional>
-    </div>
+    </motion.div>
   )
 }
