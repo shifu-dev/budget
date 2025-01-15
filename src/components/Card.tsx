@@ -3,6 +3,7 @@ import { useTheme } from '@themes/index'
 import { Icon, IconName } from '@components/Icon'
 import { Conditional } from '@components/Conditional'
 import { motion } from 'motion/react'
+import { darken } from '@themes/Colors'
 
 export type CardVariant = 'long-medium' | 'long-flex'
 
@@ -18,6 +19,8 @@ export interface CardProps {
 export function Card(props: CardProps) {
   const theme = useTheme()
   const isPressable = props.onPress !== undefined
+  const color = theme.colors.card
+  const hoverColor = darken(color)
 
   return (
     <motion.div
@@ -29,22 +32,22 @@ export function Card(props: CardProps) {
         border: 'solid',
         borderRadius: '25px',
         borderWidth: '0px',
-        backgroundColor: theme.cardColor,
+        backgroundColor: color,
         padding: '10px',
         minHeight: '70px',
         cursor: isPressable ? 'pointer' : undefined,
         ...props.style,
       }}
       whileHover={{
-        backgroundColor: theme.selectedListItemColor,
-        borderColor: theme.selectedListItemColor,
+        backgroundColor: hoverColor,
+        borderColor: hoverColor,
         transition: {
-          duration: 1,
+          duration: 0.05,
         },
       }}
       whileTap={{
-        backgroundColor: theme.selectedListItemColor,
-        borderColor: theme.selectedListItemColor,
+        backgroundColor: hoverColor,
+        borderColor: hoverColor,
         scale: 0.98,
         transition: {
           duration: 0.02,

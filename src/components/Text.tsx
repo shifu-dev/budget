@@ -1,4 +1,5 @@
 import { useTheme } from '@themes/index'
+import { ColorValue } from '@themes/Colors'
 import { CSSProperties } from 'react'
 
 export type TextValue = string | number | Date
@@ -20,7 +21,7 @@ export interface TextProps {
   value?: TextValue
   category?: TextCategories
   align?: TextAlign
-  style?: CSSProperties
+  color?: ColorValue
 }
 
 export function Text(props: TextProps) {
@@ -44,43 +45,33 @@ const _getStyle = (props: TextProps): CSSProperties => {
   const defaultAlign: TextAlign = 'left-top'
   const category = props.category ?? defaultCategory
   const align = props.align ?? defaultAlign
-  const style: CSSProperties = {}
+
+  const style: CSSProperties = {
+    fontFamily: theme.fonts.regular.family,
+    color: props.color ?? theme.colors.text,
+  }
 
   switch (category) {
     case 'text':
-      style.fontFamily = theme.textFamily
-      style.fontSize = theme.textSize
-      style.color = theme.textColor
+      style.fontSize = 10
       break
     case 'h1':
-      style.fontFamily = theme.h1Family
-      style.fontSize = theme.h1Size
-      style.color = theme.h1Color
+      style.fontSize = 50
       break
     case 'h2':
-      style.fontFamily = theme.h2Family
-      style.fontSize = theme.h2Size
-      style.color = theme.h2Color
+      style.fontSize = 35
       break
     case 'h3':
-      style.fontFamily = theme.h3Family
-      style.fontSize = theme.h3Size
-      style.color = theme.h3Color
+      style.fontSize = 30
       break
     case 'h4':
-      style.fontFamily = theme.h4Family
-      style.fontSize = theme.h4Size
-      style.color = theme.h4Color
+      style.fontSize = 25
       break
     case 'h5':
-      style.fontFamily = theme.h5Family
-      style.fontSize = theme.h5Size
-      style.color = theme.h5Color
+      style.fontSize = 20
       break
     case 'h6':
-      style.fontFamily = theme.h6Family
-      style.fontSize = theme.h6Size
-      style.color = theme.h6Color
+      style.fontSize = 15
       break
   }
 
@@ -132,7 +123,7 @@ const _getStyle = (props: TextProps): CSSProperties => {
       break
   }
 
-  return { ...style, ...props.style }
+  return style
 }
 
 const _getText = (value?: TextValue): string => {

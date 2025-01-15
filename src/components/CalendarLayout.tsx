@@ -5,6 +5,7 @@ import { Text, TextValue } from '@components/Text'
 import { CalendarError } from '@components/CalendarError'
 import { Conditional } from '@components/Conditional'
 import { Iterate } from '@components/Iterate'
+import { darken } from '@themes/Colors'
 
 /// The mode in which user can select cells on the layout.
 export type CalendarLayoutSelectionMode = 'single' | 'range' | 'hybrid'
@@ -267,7 +268,7 @@ export function CalendarLayout(props: CalendarLayoutProps) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          backgroundColor: theme.cardColor,
+          backgroundColor: theme.colors.card,
           padding: 10,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
@@ -310,7 +311,7 @@ export function CalendarLayout(props: CalendarLayoutProps) {
           justifyContent: 'space-between',
           alignItems: 'center',
           flexDirection: 'row',
-          backgroundColor: theme.cardColor,
+          backgroundColor: theme.colors.card,
         }}
       >
         <Iterate
@@ -362,6 +363,8 @@ export function CalendarLayout(props: CalendarLayoutProps) {
     const { cell, index } = args
     const state = cell.state
     const isInteractable = cell.isInteractable ?? true
+    const textColor = theme.colors.text
+    const disabledTextColor = darken(textColor)
 
     const onPress = isInteractable ? () => onCellPress(index) : undefined
 
@@ -373,18 +376,18 @@ export function CalendarLayout(props: CalendarLayoutProps) {
       margin: 4,
       padding: 10,
       borderRadius: 25,
-      color: isInteractable ? theme.h6Color : theme.disabledTextColor,
+      color: isInteractable ? textColor : disabledTextColor,
       cursor: isInteractable ? 'pointer' : undefined,
     }
 
     const selectedStyle: CSSProperties = {
       ...baseStyle,
-      backgroundColor: theme.selectedListItemColor,
+      backgroundColor: theme.colors.primary,
     }
 
     const rangeStartStyle: CSSProperties = {
       ...baseStyle,
-      backgroundColor: theme.selectedListItemColor,
+      backgroundColor: theme.colors.primary,
       borderTopRightRadius: 0,
       borderBottomRightRadius: 0,
       marginRight: 0,
@@ -393,7 +396,7 @@ export function CalendarLayout(props: CalendarLayoutProps) {
 
     const rangeEndStyle: CSSProperties = {
       ...baseStyle,
-      backgroundColor: theme.selectedListItemColor,
+      backgroundColor: theme.colors.primary,
       borderTopLeftRadius: 0,
       borderBottomLeftRadius: 0,
       marginLeft: 0,
@@ -402,7 +405,7 @@ export function CalendarLayout(props: CalendarLayoutProps) {
 
     const rangeContinueStyle: CSSProperties = {
       ...baseStyle,
-      backgroundColor: theme.selectedListItemColor,
+      backgroundColor: theme.colors.primary,
       borderRadius: 0,
       marginInline: 0,
     }
@@ -426,13 +429,7 @@ export function CalendarLayout(props: CalendarLayoutProps) {
 
     return (
       <div key={index} onClick={onPress} style={style}>
-        <Text
-          value={cell.value}
-          category='h6'
-          style={{
-            color: 'inherit',
-          }}
-        />
+        <Text value={cell.value} category='h6' />
       </div>
     )
   }

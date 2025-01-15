@@ -55,7 +55,7 @@ export function TextInputModal(props: TextInputModalProps) {
           value={value}
           onChange={onChange}
           style={{
-            backgroundColor: theme.cardColor,
+            backgroundColor: theme.colors.card,
           }}
         />
         <div

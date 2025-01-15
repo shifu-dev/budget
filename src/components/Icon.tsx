@@ -1,6 +1,6 @@
 import * as TablerIcons from '@tabler/icons-react'
 import { useTheme } from '@themes/index'
-import { ColorValue } from '@themes/Theme'
+import { ColorValue } from '@themes/Colors'
 import { CSSProperties } from 'react'
 
 export type IconSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
@@ -61,7 +61,7 @@ export const Icon = (props: IconProps) => {
         ...props.style,
       }}
     >
-      {<TablerIcon color={props.color ?? theme.iconColor} />}
+      {<TablerIcon color={props.color ?? theme.colors.primary} />}
     </span>
   )
 }

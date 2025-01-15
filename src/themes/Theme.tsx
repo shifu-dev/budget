@@ -1,39 +1,36 @@
-import { CSSProperties } from 'react'
+import { ColorValue } from "@themes/Colors"
 
-export type ColorValue = CSSProperties['color']
+export interface FontValue {
+  family: string
+  weight:
+    | 'thin'
+    | 'regular'
+    | 'bold'
+    | 'heavy'
+    | 100
+    | 200
+    | 300
+    | 400
+    | 500
+    | 600
+    | 700
+    | 800
+    | 900
+}
 
 export interface Theme {
-  primaryColor: ColorValue
-  backgroundColor: ColorValue
-  separatorColor: ColorValue
-  iconColor: ColorValue
-  cardColor: ColorValue
-  listItemColor: ColorValue
-  selectedListItemColor: ColorValue
-  h1Family: string
-  h1Size: number
-  h1Color: ColorValue
-  h2Family: string
-  h2Size: number
-  h2Color: ColorValue
-  h3Family: string
-  h3Size: number
-  h3Color: ColorValue
-  h4Family: string
-  h4Size: number
-  h4Color: ColorValue
-  h5Family: string
-  h5Size: number
-  h5Color: ColorValue
-  h6Family: string
-  h6Size: number
-  h6Color: ColorValue
-  textFamily: string
-  textSize: number
-  textColor: ColorValue
-  disabledTextColor: ColorValue
-  placeholderColor: ColorValue
-  modalOverlayColor: ColorValue
-  modalOpenTransitionSpeed: number
-  modalCloseTransitionSpeed: number
+  colors: {
+    primary: ColorValue
+    background: ColorValue
+    card: ColorValue
+    text: ColorValue
+  }
+  fonts: {
+    thin: FontValue
+    regular: FontValue
+    bold: FontValue
+    heavy: FontValue
+  }
+
+  animSpeed: number
 }

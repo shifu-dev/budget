@@ -16,7 +16,7 @@ export function CalendarError(props: CalendarErrorProps) {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: theme.cardColor,
+          backgroundColor: theme.colors.card,
           padding: 20,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,

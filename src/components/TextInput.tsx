@@ -41,9 +41,9 @@ export function TextInput(props: TextInputProps) {
             width: '100%',
             borderWidth: 0,
             borderBottomWidth: 2,
-            color: theme.textColor,
-            fontFamily: theme.textFamily,
-            backgroundColor: theme.backgroundColor,
+            color: theme.colors.text,
+            fontFamily: theme.fonts.regular.family,
+            backgroundColor: theme.colors.background,
           },
           ...props.style,
         }}

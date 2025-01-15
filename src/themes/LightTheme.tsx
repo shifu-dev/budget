@@ -1,39 +1,20 @@
 import { Theme } from '@themes/Theme'
-import { colors } from '@themes/Colors'
 import { fonts } from '@themes/Fonts'
 
 export const lightTheme: Theme = {
-  primaryColor: 'rgb(0, 122, 255)',
-  backgroundColor: 'rgb(242, 242, 242)',
-  separatorColor: colors.black,
-  iconColor: colors.black,
-  cardColor: 'lightgrey',
-  listItemColor: 'lightgrey',
-  selectedListItemColor: 'grey',
-  h1Family: fonts.regular,
-  h1Size: 50,
-  h1Color: colors.black,
-  h2Family: fonts.regular,
-  h2Size: 35,
-  h2Color: colors.black,
-  h3Family: fonts.regular,
-  h3Size: 30,
-  h3Color: colors.black,
-  h4Family: fonts.regular,
-  h4Size: 25,
-  h4Color: colors.black,
-  h5Family: fonts.regular,
-  h5Size: 20,
-  h5Color: colors.black,
-  h6Family: fonts.regular,
-  h6Size: 15,
-  h6Color: colors.black,
-  textFamily: fonts.regular,
-  textSize: 10,
-  textColor: colors.black,
-  disabledTextColor: colors.onyx,
-  placeholderColor: colors.matteBlack,
-  modalOverlayColor: 'rgba(0, 0, 0, .6)',
-  modalOpenTransitionSpeed: 0.5,
-  modalCloseTransitionSpeed: 0.5,
+  colors: {
+    primary: 'rgb(0, 122, 255)',
+    background: 'rgb(242, 242, 242)',
+    card: 'lightgrey',
+    text: 'black',
+  },
+
+  fonts: {
+    thin: { family: fonts.thin, weight: 'thin' },
+    regular: { family: fonts.regular, weight: 'regular' },
+    bold: { family: fonts.bold, weight: 'bold' },
+    heavy: { family: fonts.heavy, weight: 'heavy' },
+  },
+
+  animSpeed: 1,
 }

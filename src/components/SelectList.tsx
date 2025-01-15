@@ -30,7 +30,7 @@ export function SelectList(props: SelectListProps) {
   function itemRenderer(item: TextValue, index: number) {
     const color =
       props.selected && props.selected.includes(index)
-        ? theme.selectedListItemColor
+        ? theme.colors.primary
         : undefined
 
     return (
