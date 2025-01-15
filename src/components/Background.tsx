@@ -13,7 +13,7 @@ export function Background(props: BackgroundProps) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: theme.colors.background,
         height: '100vh',
         overflow: 'scroll',
         scrollbarWidth: 'none',

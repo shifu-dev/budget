@@ -44,8 +44,8 @@ export function Modal(props: ModalProps) {
           position: 'fixed',
           height: '100%',
           width: '100%',
-          background: theme.modalOverlayColor,
-          transition: `${theme.modalOpenTransitionSpeed}`,
+          background: theme.colors.background,
+          transition: `0.4s`,
         },
         ...props.overlayStyle,
       }}

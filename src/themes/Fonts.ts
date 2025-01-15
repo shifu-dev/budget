@@ -4,5 +4,5 @@ export const fonts = {
   thin: 'Poppins',
   regular: 'Poppins',
   bold: 'Poppins',
-  extraBold: 'Poppins',
+  heavy: 'Poppins',
 }

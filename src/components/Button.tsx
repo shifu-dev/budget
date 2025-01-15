@@ -2,6 +2,9 @@ import { CSSProperties } from 'react'
 import { Text, TextValue } from '@components/Text'
 import { Icon, IconName } from '@components/Icon'
 import { useTheme } from '@themes/index'
+import { motion } from 'motion/react'
+import { darken } from '@themes/Colors'
+import assert from 'assert'
 
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
@@ -30,6 +33,7 @@ export interface ButtonProps {
 
 export function Button(props: ButtonProps) {
   const style = _getStyle(props)
+  const hoverColor = darken(style.borderColor ?? 'red')
 
   function onPress() {
     if (props.disabled) return
@@ -38,17 +42,29 @@ export function Button(props: ButtonProps) {
   }
 
   return (
-    <div onClick={onPress} style={style}>
+    <motion.div
+      onClick={onPress}
+      style={style}
+      whileHover={{
+        backgroundColor: hoverColor,
+        borderColor: hoverColor,
+      }}
+      whileTap={{
+        backgroundColor: hoverColor,
+        borderColor: hoverColor,
+        scale: 0.97,
+      }}
+    >
       <Icon name={props.startIcon} size={props.size} color={style.color} />
       <Text value={props.label} category='h6' />
       <Icon name={props.endIcon} size={props.size} color={style.color} />
-    </div>
+    </motion.div>
   )
 }
 
 function _getStyle(props: ButtonProps): CSSProperties {
   const theme = useTheme()
-  const color = props.disabled ? 'grey' : theme.textColor
+  const color = props.disabled ? 'grey' : theme.colors.text
 
   let style: CSSProperties = {
     display: 'flex',
@@ -93,8 +109,8 @@ function _getStyle(props: ButtonProps): CSSProperties {
       break
 
     case 'solid':
-      style.borderColor = theme.selectedListItemColor
-      style.backgroundColor = theme.selectedListItemColor
+      style.borderColor = theme.colors.card
+      style.backgroundColor = theme.colors.card
       break
 
     case 'ghost':

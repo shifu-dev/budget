@@ -6,11 +6,13 @@
     "npm:@tauri-apps/api@^2.2.0": "2.2.0",
     "npm:@tauri-apps/cli@^2.2.2": "2.2.2",
     "npm:@tauri-apps/plugin-shell@^2.2.0": "2.2.0",
+    "npm:@types/chroma-js@^3.1.0": "3.1.0",
     "npm:@types/node@^22.10.5": "22.10.5",
     "npm:@types/react-dom@^19.0.2": "19.0.2_@types+react@19.0.3",
     "npm:@types/react-router@^5.1.20": "5.1.20",
     "npm:@types/react@^19.0.3": "19.0.3",
     "npm:@vitejs/plugin-react@^4.3.4": "4.3.4_vite@5.4.11_@babel+core@7.26.0_@types+node@22.10.5",
+    "npm:chroma-js@^3.1.2": "3.1.2",
     "npm:motion@^11.18.0": "11.18.0_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:normalize.css@^8.0.1": "8.0.1",
     "npm:path@~0.12.7": "0.12.7",
@@ -406,6 +408,9 @@
         "@babel/types"
       ]
     },
+    "@types/chroma-js@3.1.0": {
+      "integrity": "sha512-Uwl3SOtUkbQ6Ye6ZYu4q4xdLGBzmY839sEHYtOT7i691neeyd+7fXWT5VIkcUSfNwIFrIjQutNYQn9h4q5HFvg=="
+    },
     "@types/cookie@0.6.0": {
       "integrity": "sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA=="
     },
@@ -462,6 +467,9 @@
     },
     "caniuse-lite@1.0.30001690": {
       "integrity": "sha512-5ExiE3qQN6oF8Clf8ifIDcMRCRE/dMGcETG/XGMD8/XiXm6HXQgQTh1yZYLXXpSOsEUlJm1Xr7kGULZTuGtP/w=="
+    },
+    "chroma-js@3.1.2": {
+      "integrity": "sha512-IJnETTalXbsLx1eKEgx19d5L6SRM7cH4vINw/99p/M11HCuXGRWL+6YmCm7FWFGIo6dtWuQoQi1dc5yQ7ESIHg=="
     },
     "convert-source-map@2.0.0": {
       "integrity": "sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg=="
@@ -717,11 +725,13 @@
       "npm:@tauri-apps/api@^2.2.0",
       "npm:@tauri-apps/cli@^2.2.2",
       "npm:@tauri-apps/plugin-shell@^2.2.0",
+      "npm:@types/chroma-js@^3.1.0",
       "npm:@types/node@^22.10.5",
       "npm:@types/react-dom@^19.0.2",
       "npm:@types/react-router@^5.1.20",
       "npm:@types/react@^19.0.3",
       "npm:@vitejs/plugin-react@^4.3.4",
+      "npm:chroma-js@^3.1.2",
       "npm:motion@^11.18.0",
       "npm:normalize.css@^8.0.1",
       "npm:path@~0.12.7",
