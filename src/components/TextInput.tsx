@@ -37,90 +37,87 @@ export interface TextInputProps {
 export function TextInput(props: TextInputProps) {
   const theme = useTheme()
   const defaultCategory: TextCategories = 'text'
-  const defaultAlign: TextAlign = 'left-top'
   const category = props.category ?? defaultCategory
+  const defaultAlign = 'left-top'
   const align = props.align ?? defaultAlign
 
-  const style: CSSProperties = {
+  const containerStyle: CSSProperties = {
+    display: 'flex',
+    height: '100%',
     width: '100%',
-    backgroundColor: 'transparent',
+  }
+
+  const inputStyle: CSSProperties = {
     border: 'none',
+    width: '100%',
     outlineStyle: 'none',
-    fontFamily: theme.fonts.regular.family,
+    backgroundColor: 'transparent',
     color: props.color ?? theme.colors.text,
+    fontFamily: theme.fonts.regular.family,
   }
 
   // Category
   switch (category) {
     case 'text':
-      style.fontSize = 15
+      inputStyle.fontSize = 15
       break
     case 'h1':
-      style.fontSize = 50
+      inputStyle.fontSize = 50
       break
     case 'h2':
-      style.fontSize = 35
+      inputStyle.fontSize = 35
       break
     case 'h3':
-      style.fontSize = 30
+      inputStyle.fontSize = 30
       break
     case 'h4':
-      style.fontSize = 25
+      inputStyle.fontSize = 25
       break
     case 'h5':
-      style.fontSize = 20
+      inputStyle.fontSize = 20
       break
     case 'h6':
-      style.fontSize = 17
+      inputStyle.fontSize = 17
       break
   }
 
   // Alignment
   switch (align) {
     case 'left-top':
-      style.display = 'flex'
-      style.justifyContent = 'left'
-      style.alignItems = 'start'
+      containerStyle.alignItems = 'start'
+      inputStyle.textAlign = 'left'
       break
     case 'center-top':
-      style.display = 'flex'
-      style.justifyContent = 'center'
-      style.alignItems = 'start'
+      containerStyle.alignItems = 'start'
+      inputStyle.textAlign = 'center'
       break
     case 'right-top':
-      style.display = 'flex'
-      style.justifyContent = 'right'
-      style.alignItems = 'start'
+      containerStyle.alignItems = 'start'
+      inputStyle.textAlign = 'right'
       break
     case 'left-center':
-      style.display = 'flex'
-      style.justifyContent = 'left'
-      style.alignItems = 'center'
+      containerStyle.alignItems = 'center'
+      inputStyle.textAlign = 'left'
       break
     case 'center':
-      style.display = 'flex'
-      style.justifyContent = 'center'
-      style.alignItems = 'center'
+      containerStyle.alignItems = 'center'
+      inputStyle.textAlign = 'center'
       break
     case 'right-center':
-      style.display = 'flex'
-      style.justifyContent = 'right'
-      style.alignItems = 'center'
+      containerStyle.alignItems = 'center'
+      inputStyle.textAlign = 'right'
       break
     case 'left-bottom':
-      style.display = 'flex'
-      style.justifyContent = 'left'
-      style.alignItems = 'end'
+      containerStyle.alignItems = 'end'
+      inputStyle.textAlign = 'left'
       break
     case 'center-bottom':
-      style.display = 'flex'
-      style.justifyContent = 'center'
-      style.alignItems = 'end'
+      containerStyle.alignItems = 'end'
+      inputStyle.textAlign = 'center'
       break
     case 'right-bottom':
-      style.display = 'flex'
-      style.justifyContent = 'right'
-      style.alignItems = 'end'
+      containerStyle.alignItems = 'end'
+      inputStyle.textAlign = 'right'
       break
   }
 
@@ -129,22 +126,25 @@ export function TextInput(props: TextInputProps) {
   }
 
   return (
-    <input
-      value={props.value}
-      onChange={onChange}
-      type={props.type}
-      required={props.required}
-      readOnly={props.readonly}
-      disabled={props.disabled}
-      autoCapitalize={props.autoCapitalize}
-      autoComplete={props.autoComplete}
-      min={props.minValue}
-      max={props.maxValue}
-      minLength={props.minLength}
-      maxLength={props.maxLength}
-      placeholder={props.placeholder}
-      pattern={props.pattern}
-      style={style}
-    />
+    <div style={containerStyle}>
+      <input
+        multiple
+        value={props.value}
+        onChange={onChange}
+        type={props.type}
+        required={props.required}
+        readOnly={props.readonly}
+        disabled={props.disabled}
+        autoCapitalize={props.autoCapitalize}
+        autoComplete={props.autoComplete}
+        min={props.minValue}
+        max={props.maxValue}
+        minLength={props.minLength}
+        maxLength={props.maxLength}
+        placeholder={props.placeholder}
+        pattern={props.pattern}
+        style={inputStyle}
+      />
+    </div>
   )
 }
