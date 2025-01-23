@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Transaction } from '@pages/Transactions'
 import { Button } from '@components/Button'
-import { Text } from '@components/Text'
 import { TimeCard } from '@components/TimeCard'
 import { CostCard } from '@components/CostCard'
 import { TextInputCard } from '@components/TextInputCard'
+import { TextInput } from '@components/TextInput'
 
 export function TransactionEditPage() {
   const transaction: Transaction = {
@@ -22,9 +22,6 @@ export function TransactionEditPage() {
 
   const onCancel = () => {}
   const onAccept = () => {}
-
-  const onCostPress = () => {}
-  const onTimePress = () => {}
 
   return (
     <div
@@ -63,21 +60,16 @@ export function TransactionEditPage() {
             height: 250,
           }}
         >
-          <Text value={title} category='h1' />
+          <TextInput
+            value={title}
+            onChange={setTitle}
+            category='h1'
+            align='center'
+          />
         </div>
 
-        <CostCard
-          key='amount'
-          variant='long-medium'
-          value={amount}
-          onPress={onCostPress}
-        />
-        <TimeCard
-          key='time'
-          variant='long-medium'
-          value={time}
-          onPress={onTimePress}
-        />
+        <CostCard key='amount' variant='long-medium' value={amount} />
+        <TimeCard key='time' variant='long-medium' value={time} />
         <TextInputCard
           key='notes'
           variant='long-flex'
