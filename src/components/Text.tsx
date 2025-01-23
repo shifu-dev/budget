@@ -53,7 +53,7 @@ const _getStyle = (props: TextProps): CSSProperties => {
 
   switch (category) {
     case 'text':
-      style.fontSize = 10
+      style.fontSize = 15
       break
     case 'h1':
       style.fontSize = 50
@@ -71,7 +71,7 @@ const _getStyle = (props: TextProps): CSSProperties => {
       style.fontSize = 20
       break
     case 'h6':
-      style.fontSize = 15
+      style.fontSize = 17
       break
   }
 

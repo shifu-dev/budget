@@ -4,8 +4,7 @@ import { Button } from '@components/Button'
 import { Text } from '@components/Text'
 import { TimeCard } from '@components/TimeCard'
 import { CostCard } from '@components/CostCard'
-import { TextCard } from '@components/TextCard'
-import { useTextInputModal } from '@components/TextInputModal'
+import { TextInputCard } from '@components/TextInputCard'
 
 export function TransactionEditPage() {
   const transaction: Transaction = {
@@ -21,20 +20,11 @@ export function TransactionEditPage() {
   const [time, setTime] = useState(transaction.time)
   const [notes, setNotes] = useState(transaction.notes)
 
-  const textInputModal = useTextInputModal()
-
   const onCancel = () => {}
   const onAccept = () => {}
 
   const onCostPress = () => {}
   const onTimePress = () => {}
-
-  const onNotesPress = () => {
-    textInputModal?.open({
-      value: notes,
-      onAccept: value => setNotes(value),
-    })
-  }
 
   return (
     <div
@@ -88,11 +78,15 @@ export function TransactionEditPage() {
           value={time}
           onPress={onTimePress}
         />
-        <TextCard
+        <TextInputCard
           key='notes'
           variant='long-flex'
-          value={notes}
-          onPress={onNotesPress}
+          onClear={() => setNotes('')}
+          inputProps={{
+            value: notes,
+            onChange: setNotes,
+            category: 'text',
+          }}
         />
       </div>
     </div>
