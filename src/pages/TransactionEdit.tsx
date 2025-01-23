@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Transaction } from '@pages/Transactions'
 import { Button } from '@components/Button'
-import { TimeCard } from '@components/TimeCard'
 import { CostCard } from '@components/CostCard'
 import { TextInputCard } from '@components/TextInputCard'
 import { TextInput } from '@components/TextInput'
+import { DateTimeInputCard } from '@components/DateTimeInputCard'
 
 export function TransactionEditPage() {
   const transaction: Transaction = {
@@ -17,7 +17,7 @@ export function TransactionEditPage() {
 
   const [title, setTitle] = useState(transaction.title)
   const [amount, setAmount] = useState(transaction.amount)
-  const [time, setTime] = useState(transaction.time)
+  const [datetime, setDatetime] = useState(transaction.time)
   const [notes, setNotes] = useState(transaction.notes)
 
   const onCancel = () => {}
@@ -68,8 +68,15 @@ export function TransactionEditPage() {
           />
         </div>
 
-        <CostCard key='amount' variant='long-medium' value={amount} />
-        <TimeCard key='time' variant='long-medium' value={time} />
+        <CostCard value={amount} key='amount' variant='long-medium' />
+        <DateTimeInputCard
+          key='datetime'
+          variant='long-medium'
+          inputProps={{
+            value: datetime,
+            onChange: setDatetime,
+          }}
+        />
         <TextInputCard
           key='notes'
           variant='long-flex'
