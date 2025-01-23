@@ -1,8 +1,9 @@
 import { Children, isValidElement, ReactNode } from 'react'
 
 export interface ConditionalSwitchItemProps {
-  value: string
+  value?: string
   children: ReactNode
+  default?: boolean
 }
 
 export function ConditionalSwitchItem(props: ConditionalSwitchItemProps) {
@@ -16,12 +17,18 @@ export interface ConditionalSwitchProps {
 
 export function ConditionalSwitch(props: ConditionalSwitchProps) {
   const { condition, children } = props
+  let defaultChild: ReactNode | undefined = undefined
 
-  const matchedChild = Children.toArray(children).find(
-    child =>
-      isValidElement(child) &&
-      (child.props as ConditionalSwitchItemProps).value === condition,
-  )
+  const matchedChild = Children.toArray(children).find(child => {
+    if (!isValidElement(child)) return false
 
-  return matchedChild
+    const item = child.props as ConditionalSwitchItemProps
+    if (item.value === condition) return true
+
+    if (defaultChild === undefined && item.default) defaultChild = child
+
+    return false
+  })
+
+  return matchedChild ?? defaultChild
 }
