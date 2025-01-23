@@ -10,6 +10,8 @@ export type CardVariant = 'long-medium' | 'long-flex'
 export interface CardProps {
   children?: JSX.Element | JSX.Element[]
   onPress?: () => void
+  onFocus?: () => void
+  onFocusLost?: () => void
   leftIcon?: IconName
   rightIcon?: IconName
   variant?: CardVariant
@@ -25,6 +27,8 @@ export function Card(props: CardProps) {
   return (
     <motion.div
       onClick={props.onPress}
+      onFocus={() => props.onFocus?.()}
+      onBlur={() => props.onFocusLost?.()}
       style={{
         display: 'flex',
         alignItems: 'center',
