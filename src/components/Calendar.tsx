@@ -9,6 +9,7 @@ import {
 } from '@components/CalendarLayout'
 import utils from '@utils'
 import assert from 'assert'
+import { ConditionalSwitch, ConditionalSwitchItem } from './ConditionalSwitch'
 
 export type CalendarLayer = 'years' | 'months' | 'dates'
 
@@ -389,10 +390,10 @@ export function Calendar(props: CalendarProps) {
     [currentYear, currentMonth],
   )
 
-  function ActiveLayer() {
-    switch (layer) {
-      case 'years':
-        return (
+  return (
+    <div style={props.style}>
+      <ConditionalSwitch condition={layer}>
+        <ConditionalSwitchItem value='years'>
           <CalendarYears
             firstYear={firstYear}
             lastYear={lastYear}
@@ -403,10 +404,8 @@ export function Calendar(props: CalendarProps) {
             onChange={onYearChange}
             onPress={onYearPress}
           />
-        )
-
-      case 'months':
-        return (
+        </ConditionalSwitchItem>
+        <ConditionalSwitchItem value='months'>
           <CalendarMonths
             year={currentYear}
             firstMonth={firstMonth}
@@ -420,10 +419,8 @@ export function Calendar(props: CalendarProps) {
             onChange={onMonthChange}
             onPress={onMonthPress}
           />
-        )
-
-      case 'dates':
-        return (
+        </ConditionalSwitchItem>
+        <ConditionalSwitchItem value='dates'>
           <CalendarDates
             month={new Date(currentYear, currentMonth)}
             firstDate={firstDate}
@@ -437,16 +434,11 @@ export function Calendar(props: CalendarProps) {
             onChange={onDateChange}
             onPress={onDatePress}
           />
-        )
-
-      default:
-        return <CalendarError msg='No layer to show.' />
-    }
-  }
-
-  return (
-    <div style={props.style}>
-      <ActiveLayer />
+        </ConditionalSwitchItem>
+        <ConditionalSwitchItem default>
+          <CalendarError msg='No layer to show.' />
+        </ConditionalSwitchItem>
+      </ConditionalSwitch>
     </div>
   )
 }

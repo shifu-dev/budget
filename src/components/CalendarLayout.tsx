@@ -439,7 +439,8 @@ export function CalendarLayout(props: CalendarLayoutProps) {
       id='calendar-layout'
       style={{
         height: 400,
-        width: 500,
+        minWidth: 400,
+        maxWidth: 600,
       }}
     >
       <TopBar />
