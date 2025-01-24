@@ -2,7 +2,7 @@ import { useTheme } from '@themes/index'
 import { ColorValue } from '@themes/Colors'
 import { CSSProperties } from 'react'
 
-export type TextValue = string | number | Date
+export type TextValue = string | number | Date | TextValue[]
 
 export type TextCategories = 'text' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
@@ -22,10 +22,23 @@ export interface TextProps {
   category?: TextCategories
   align?: TextAlign
   color?: ColorValue
+  listSeparator?: string
+  listStart?: string
+  listEnd?: string
 }
 
 export function Text(props: TextProps) {
-  const text = _getText(props.value)
+  const defaultListSeparator = ', '
+  const defaultListStart = '['
+  const defaultListEnd = ']'
+
+  const text = _getText(
+    props.value,
+    props.listSeparator ?? defaultListSeparator,
+    props.listStart ?? defaultListStart,
+    props.listEnd ?? defaultListEnd,
+  )
+
   const style = _getStyle(props)
 
   return <span style={style}>{text}</span>
@@ -126,12 +139,27 @@ const _getStyle = (props: TextProps): CSSProperties => {
   return style
 }
 
-const _getText = (value?: TextValue): string => {
+const _getText = (
+  value?: TextValue,
+  listSeparator?: string,
+  listStart?: string,
+  listEnd?: string,
+): string => {
   if (!value) return ''
 
   if (value instanceof Date) return value.toLocaleDateString()
   if (typeof value === 'number') return value.toString()
   if (typeof value === 'string') return value
+
+  if (Array.isArray(value)) {
+    if (value.length === 0) return ''
+
+    const listString = value
+      .map(value => _getText(value, listSeparator, listStart, listEnd))
+      .join(listSeparator)
+
+    return `${listStart}${listString}${listEnd}`
+  }
 
   return 'unknown text value type'
 }

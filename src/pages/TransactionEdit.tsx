@@ -20,7 +20,7 @@ export function TransactionEditPage() {
   const [amount, setAmount] = useState(transaction.amount)
   const [datetime, setDatetime] = useState(transaction.time)
   const [notes, setNotes] = useState(transaction.notes)
-  const [categoryIndex, setCategoryIndex] = useState<number>()
+  const [categoryIndex, setCategoryIndex] = useState<number>(0)
   const [selectedTagIndices, setSelectedTagIndices] = useState<number[]>([])
 
   const categories = ['Category 1', 'Category 2', 'Category 3']
@@ -31,7 +31,8 @@ export function TransactionEditPage() {
   }
 
   function onTagSelect(index: number) {
-    setSelectedTagIndices([...selectedTagIndices, index])
+    const newIndices = [...selectedTagIndices, index].sort()
+    setSelectedTagIndices(newIndices)
   }
 
   function onTagUnselect(index: number) {
@@ -104,7 +105,7 @@ export function TransactionEditPage() {
           leftIcon='category'
           listProps={{
             items: categories,
-            selected: categoryIndex ? [categoryIndex] : [],
+            selected: [categoryIndex],
             onSelect: onCategorySelect,
           }}
         />
