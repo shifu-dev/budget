@@ -26,9 +26,18 @@ export function Card(props: CardProps) {
 
   return (
     <motion.div
-      onClick={props.onPress}
-      onFocus={() => props.onFocus?.()}
-      onBlur={() => props.onFocusLost?.()}
+      onClick={event => {
+        event.stopPropagation()
+        props.onPress?.()
+      }}
+      onFocus={event => {
+        event.stopPropagation()
+        props.onFocus?.()
+      }}
+      onBlur={event => {
+        event.stopPropagation()
+        props.onFocusLost?.()
+      }}
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -42,21 +51,21 @@ export function Card(props: CardProps) {
         cursor: isPressable ? 'pointer' : undefined,
         ...props.style,
       }}
-      whileHover={{
-        backgroundColor: hoverColor,
-        borderColor: hoverColor,
-        transition: {
-          duration: 0.05,
-        },
-      }}
-      whileTap={{
-        backgroundColor: hoverColor,
-        borderColor: hoverColor,
-        scale: 0.98,
-        transition: {
-          duration: 0.02,
-        },
-      }}
+      // whileHover={{
+      //   backgroundColor: hoverColor,
+      //   borderColor: hoverColor,
+      //   transition: {
+      //     duration: 0.05,
+      //   },
+      // }}
+      // whileTap={{
+      //   backgroundColor: hoverColor,
+      //   borderColor: hoverColor,
+      //   scale: 0.98,
+      //   transition: {
+      //     duration: 0.02,
+      //   },
+      // }}
     >
       <Conditional value={props.leftIcon}>
         <div

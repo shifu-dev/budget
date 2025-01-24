@@ -9,7 +9,7 @@ export interface DateTimeInputCardProps extends CardProps {
 }
 
 export function DateTimeInputCard(props: DateTimeInputCardProps) {
-  const [isInputMode, setIsInputMode] = useState(true)
+  const [isInputMode, setIsInputMode] = useState(false)
   const [datetime, setDatetime] = useState(new Date())
   const timeString = datetime.toLocaleDateString()
   const userOnChange = props.inputProps.onChange
@@ -42,7 +42,7 @@ export function DateTimeInputCard(props: DateTimeInputCardProps) {
           width: '100%',
         }}
       >
-        <Text value={timeString} category='h4' />
+        <Text value={timeString} category='h5' />
       </Card>
       <Conditional value={isInputMode}>
         <DateTimeInput {...props.inputProps} onChange={onChange} />

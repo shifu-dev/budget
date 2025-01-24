@@ -35,7 +35,10 @@ export function SelectList(props: SelectListProps) {
 
     return (
       <div
-        onClick={() => onClick(index)}
+        onClick={event => {
+          event.stopPropagation()
+          onClick(index)
+        }}
         style={{
           display: 'flex',
           justifyContent: 'center',
