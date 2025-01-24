@@ -1,8 +1,8 @@
-import { Text } from '@components/Text'
+import { Text, TextValue } from '@components/Text'
 import { Card, CardProps } from '@components/Card'
 
 export interface TextCardProps extends CardProps {
-  value: string
+  value: TextValue
 }
 
 export function TextCard(props: TextCardProps) {

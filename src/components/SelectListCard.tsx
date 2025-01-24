@@ -31,7 +31,7 @@ export function SelectListCard(props: SelectListCardProps) {
           width: '100%',
         }}
       >
-        <Text value={selectedItems} category='h6' listStart='' listEnd='' />
+        <Text value={selectedItems} category='h6' />
       </Card>
       <Conditional value={isListOpen}>
         <SelectList {...props.listProps} />

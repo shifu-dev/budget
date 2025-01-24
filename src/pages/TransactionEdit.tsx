@@ -14,6 +14,8 @@ export function TransactionEditPage() {
     amount: 236,
     time: new Date(),
     notes: 'Hi there, how is it going?',
+    category: 'Category',
+    tags: ['tag1', 'tag2', 'tag3'],
   }
 
   const [title, setTitle] = useState(transaction.title)
