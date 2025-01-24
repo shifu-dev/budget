@@ -5,6 +5,8 @@ import { CostCard } from '@components/CostCard'
 import { TextInputCard } from '@components/TextInputCard'
 import { TextInput } from '@components/TextInput'
 import { DateTimeInputCard } from '@components/DateTimeInputCard'
+import { SelectListCard } from '@components/SelectListCard'
+import { Card } from '@components/Card'
 
 export function TransactionEditPage() {
   const transaction: Transaction = {
@@ -19,9 +21,16 @@ export function TransactionEditPage() {
   const [amount, setAmount] = useState(transaction.amount)
   const [datetime, setDatetime] = useState(transaction.time)
   const [notes, setNotes] = useState(transaction.notes)
+  const [categoryIndex, setCategoryIndex] = useState<number>()
 
-  const onCancel = () => {}
-  const onAccept = () => {}
+  const categories = ['Category 1', 'Category 2', 'Category 3']
+
+  function onCategorySelect(index: number) {
+    setCategoryIndex(index)
+  }
+
+  function onCancel() {}
+  function onAccept() {}
 
   return (
     <div
@@ -75,6 +84,16 @@ export function TransactionEditPage() {
           inputProps={{
             value: datetime,
             onChange: setDatetime,
+          }}
+        />
+        <SelectListCard
+          key='category'
+          variant='long-medium'
+          leftIcon='category'
+          listProps={{
+            items: categories,
+            selected: categoryIndex ? [categoryIndex] : [],
+            onSelect: onCategorySelect,
           }}
         />
         <TextInputCard

@@ -40,13 +40,11 @@ export function Modal(props: ModalProps) {
       id='modal-overlay'
       onClick={onOverlayPress}
       style={{
-        ...{
-          position: 'fixed',
-          height: '100%',
-          width: '100%',
-          background: theme.colors.background,
-          transition: `0.4s`,
-        },
+        position: 'fixed',
+        height: '100%',
+        width: '100%',
+        background: theme.colors.background,
+        transition: `0.4s`,
         ...props.overlayStyle,
       }}
     >
