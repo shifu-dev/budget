@@ -50,16 +50,7 @@ export function List<T>(props: ListProps<T>) {
     if (props.itemRenderer) return props.itemRenderer(item, index)
 
     if (isTextValue(item))
-      return (
-        <Text
-          value={item}
-          align='center'
-          category='h5'
-          style={{
-            height: 60,
-          }}
-        />
-      )
+      return <Text value={item} align='center' category='h5' />
 
     return <Text value='I donno how to render this item' />
   }

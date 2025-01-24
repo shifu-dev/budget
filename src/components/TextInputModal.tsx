@@ -3,7 +3,6 @@ import { Modal, ModalProps } from '@components/Modal'
 import { Button } from '@components/Button'
 import { Card } from '@components/Card'
 import { TextInput } from '@components/TextInput'
-import { useTheme } from '@themes/index'
 
 export type TextInputModalCancelCallback = () => void
 export type TextInputModalAcceptCallback = (value: string) => void
@@ -15,7 +14,6 @@ export interface TextInputModalProps extends ModalProps {
 }
 
 export function TextInputModal(props: TextInputModalProps) {
-  const theme = useTheme()
   const [value, setValue] = useState(props.value ?? '')
 
   useEffect(() => {
@@ -51,13 +49,7 @@ export function TextInputModal(props: TextInputModalProps) {
       {...props}
     >
       <Card>
-        <TextInput
-          value={value}
-          onChange={onChange}
-          style={{
-            backgroundColor: theme.colors.card,
-          }}
-        />
+        <TextInput value={value} onChange={onChange} />
         <div
           style={{
             display: 'flex',
