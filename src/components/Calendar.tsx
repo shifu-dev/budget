@@ -8,7 +8,6 @@ import {
   CalendarLayoutSelectionMode,
 } from '@components/CalendarLayout'
 import utils from '@utils'
-import assert from 'assert'
 import { ConditionalSwitch, ConditionalSwitchItem } from './ConditionalSwitch'
 
 export type CalendarLayer = 'years' | 'months' | 'dates'
@@ -58,19 +57,19 @@ export function Calendar(props: CalendarProps) {
       : 'dates'
     : 'months'
 
-  const monthsPrevLayer: CalendarLayer | undefined = props.useYear
-    ? undefined
-    : 'years'
+  // const monthsPrevLayer: CalendarLayer | undefined = props.useYear
+  //   ? undefined
+  //   : 'years'
 
   const monthsNextLayer: CalendarLayer | undefined = props.useDate
     ? undefined
     : 'dates'
 
-  const datesPrevLayer: CalendarLayer | undefined = props.useMonth
-    ? props.useYear
-      ? undefined
-      : 'years'
-    : 'months'
+  // const datesPrevLayer: CalendarLayer | undefined = props.useMonth
+  //   ? props.useYear
+  //     ? undefined
+  //     : 'years'
+  //   : 'months'
 
   const [layer, setLayer] = useState<CalendarLayer>(
     props.initLayer ?? defaultInitLayer,
@@ -94,7 +93,7 @@ export function Calendar(props: CalendarProps) {
   const [monthStates, setMonthStates] = useState<
     Record<number, CalendarMonthProps>
   >({})
-  const [dateStates, setDateStates] = useState<
+  const [dateStates] = useState<
     Record<number, CalendarDateProps>
   >({})
   const [areYearStatesUpdated, setAreYearStatesUpdated] = useState(false)
@@ -151,10 +150,8 @@ export function Calendar(props: CalendarProps) {
     if (yearsNextLayer) {
       setLayer(yearsNextLayer)
     } else {
-      assert(props.useMonth)
-
       props.onChange?.({
-        date: new Date(year, props.useMonth, props.useDate),
+        date: new Date(year, props.useMonth ?? 0, props.useDate),
         state: state,
       })
     }

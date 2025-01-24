@@ -81,7 +81,7 @@ export function CalendarYears(props: CalendarYearsProps) {
 
   const pageCount = selectableYearCount / pageCellCount
 
-  const [selectionStates, setSelectionStates] = useState<
+  const [selectionStates] = useState<
     Record<number, CalendarLayoutCellState>
   >([])
 

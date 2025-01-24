@@ -4,7 +4,6 @@ import { Icon, IconName } from '@components/Icon'
 import { useTheme } from '@themes/index'
 import { motion } from 'motion/react'
 import { darken } from '@themes/Colors'
-import assert from 'assert'
 
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
