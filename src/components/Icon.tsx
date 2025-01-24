@@ -32,6 +32,8 @@ export type IconName =
   | 'next'
   | 'category'
   | 'category-filled'
+  | 'tag'
+  | 'tag-filled'
 
 export interface IconProps {
   name?: IconName
@@ -96,6 +98,8 @@ const _tablerIconMap = {
   next: TablerIcons.IconChevronRight,
   category: TablerIcons.IconCategory,
   'category-filled': TablerIcons.IconCategoryFilled,
+  tag: TablerIcons.IconTag,
+  'tag-filled': TablerIcons.IconTagFilled,
 }
 
 const _getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {

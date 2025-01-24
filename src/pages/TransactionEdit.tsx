@@ -6,7 +6,6 @@ import { TextInputCard } from '@components/TextInputCard'
 import { TextInput } from '@components/TextInput'
 import { DateTimeInputCard } from '@components/DateTimeInputCard'
 import { SelectListCard } from '@components/SelectListCard'
-import { Card } from '@components/Card'
 
 export function TransactionEditPage() {
   const transaction: Transaction = {
@@ -22,11 +21,24 @@ export function TransactionEditPage() {
   const [datetime, setDatetime] = useState(transaction.time)
   const [notes, setNotes] = useState(transaction.notes)
   const [categoryIndex, setCategoryIndex] = useState<number>()
+  const [selectedTagIndices, setSelectedTagIndices] = useState<number[]>([])
 
   const categories = ['Category 1', 'Category 2', 'Category 3']
+  const tags = ['Tag 1', 'Tag 2', 'Tag 3']
 
   function onCategorySelect(index: number) {
     setCategoryIndex(index)
+  }
+
+  function onTagSelect(index: number) {
+    setSelectedTagIndices([...selectedTagIndices, index])
+  }
+
+  function onTagUnselect(index: number) {
+    const newIndices = selectedTagIndices.filter(
+      selectedTagIndex => selectedTagIndex !== index,
+    )
+    setSelectedTagIndices(newIndices)
   }
 
   function onCancel() {}
@@ -94,6 +106,17 @@ export function TransactionEditPage() {
             items: categories,
             selected: categoryIndex ? [categoryIndex] : [],
             onSelect: onCategorySelect,
+          }}
+        />
+        <SelectListCard
+          key='tags'
+          variant='long-medium'
+          leftIcon='tag'
+          listProps={{
+            items: tags,
+            selected: selectedTagIndices,
+            onSelect: onTagSelect,
+            onUnselect: onTagUnselect,
           }}
         />
         <TextInputCard
