@@ -29,8 +29,8 @@ export interface TextProps {
 
 export function Text(props: TextProps) {
   const defaultListSeparator = ', '
-  const defaultListStart = '['
-  const defaultListEnd = ']'
+  const defaultListStart = ''
+  const defaultListEnd = ''
 
   const text = _getText(
     props.value,

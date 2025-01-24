@@ -15,12 +15,12 @@ function App() {
         <TextInputModalProvider>
           <BrowserRouter>
             <Routes>
-              <Route path='/' element={<TransactionEditPage />} />
+              <Route path='/' element={<TransactionsPage />} />
               <Route path='/home' element={<HomePage />} />
-              <Route path='/transaction' element={<TransactionPage />} />
+              <Route path='/transaction/:id' element={<TransactionPage />} />
               <Route path='/transactions' element={<TransactionsPage />} />
               <Route
-                path='/transaction-edit'
+                path='/transaction-edit/:id'
                 element={<TransactionEditPage />}
               />
             </Routes>

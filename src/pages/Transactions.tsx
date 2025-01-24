@@ -11,18 +11,24 @@ export interface Transaction {
   amount: number
   time: Date
   notes: string
+  category: string
+  tags: string[]
 }
 
 export function TransactionsPage() {
   const navigate = useNavigate()
   const [transactions] = useState<Transaction[]>(getDummyTransactions(100))
 
-  const onBack = () => {}
-  const onAdd = () => {
+  function onBack() {}
+  function onAdd() {
     navigate('/transaction-edit')
   }
 
-  const renderTransaction = (transaction: Transaction) => {
+  function onTransactionPress(id: string) {
+    navigate(`/transaction/${id}`)
+  }
+
+  function renderTransaction(transaction: Transaction) {
     return (
       <div
         style={{
@@ -35,6 +41,7 @@ export function TransactionsPage() {
             justifyContent: 'space-between',
             paddingInline: 30,
           }}
+          onPress={() => onTransactionPress(transaction.id)}
         >
           <Text value={transaction.amount} category='h3' />
           <Text value={transaction.title} category='h5' />
@@ -79,6 +86,8 @@ function getDummyTransactions(count: number): Transaction[] {
     time: new Date(),
     amount: 100,
     notes: '',
+    category: 'income',
+    tags: [],
   }
 
   return Array(count)
