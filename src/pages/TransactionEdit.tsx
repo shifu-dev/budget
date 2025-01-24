@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Transaction } from '@pages/Transactions'
 import { Button } from '@components/Button'
-import { CostCard } from '@components/CostCard'
 import { TextInputCard } from '@components/TextInputCard'
 import { TextInput } from '@components/TextInput'
 import { DateTimeInputCard } from '@components/DateTimeInputCard'
 import { SelectListCard } from '@components/SelectListCard'
+import { CostInputCard } from '@components/CostInputCard'
 
 export function TransactionEditPage() {
   const transaction: Transaction = {
@@ -90,7 +90,14 @@ export function TransactionEditPage() {
           />
         </div>
 
-        <CostCard value={amount} key='amount' variant='long-medium' />
+        <CostInputCard
+          key='amount'
+          variant='long-medium'
+          inputProps={{
+            value: amount.toString(),
+            onChange: value => setAmount(parseInt(value)),
+          }}
+        />
         <DateTimeInputCard
           key='datetime'
           variant='long-medium'
