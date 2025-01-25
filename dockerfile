@@ -68,7 +68,5 @@ RUN cargo tauri android build
 
 # Copy outputs
 RUN mkdir /out && \
-    cp src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release-unsigned.apk \
-        /out/app-universal-release-unsigned.apk && \
-    cp src-tauri/gen/android/app/build/outputs/bundle/universalRelease/app-universal-release.aab \
-        /out/app-universal-release.aab
+    cp src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk /out/ && \
+    cp src-tauri/gen/android/app/build/outputs/bundle/universalRelease/app-universal-release.aab /out/
