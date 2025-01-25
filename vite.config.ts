@@ -16,6 +16,7 @@ export default {
       '@components': path.resolve(__dirname, 'src/components'),
       '@themes': path.resolve(__dirname, 'src/themes'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@client': path.resolve(__dirname, 'src/client'),
     },
   },
 

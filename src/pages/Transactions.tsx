@@ -4,20 +4,14 @@ import { List } from '@components/List'
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
 import { Card } from '@components/Card'
-
-export interface Transaction {
-  id: string
-  title: string
-  amount: number
-  time: Date
-  notes: string
-  category: string
-  tags: string[]
-}
+import { Transaction } from '@client/Transaction'
+import { useClient } from '@client/ClientProvider'
 
 export function TransactionsPage() {
   const navigate = useNavigate()
-  const [transactions] = useState<Transaction[]>(getDummyTransactions(100))
+  const client = useClient()
+
+  const [transactions] = useState<Transaction[]>(client.getTransactions())
 
   function onBack() {}
   function onAdd() {
@@ -77,25 +71,4 @@ export function TransactionsPage() {
       <List items={transactions} itemRenderer={renderTransaction} />
     </>
   )
-}
-
-function getDummyTransactions(count: number): Transaction[] {
-  const dummyTransaction: Transaction = {
-    id: '',
-    title: '',
-    time: new Date(),
-    amount: 100,
-    notes: '',
-    category: 'income',
-    tags: [],
-  }
-
-  return Array(count)
-    .fill(dummyTransaction)
-    .map((_, index) => ({
-      ...dummyTransaction,
-      id: `txn-${index + 1}`,
-      title: `Transaction ${index + 1}`,
-      time: new Date(Date.now() + index * 1000 * 60 * 60 * 24),
-    }))
 }
