@@ -9,29 +9,34 @@ import { Background } from '@components/Background'
 import { TextInputModalProvider } from '@components/TextInputModal'
 import { ClientProvider } from '@client/ClientProvider'
 
-function App() {
+function Providers({ children }: any) {
   return (
     <ClientProvider>
       <ThemeProvider>
-        <Background>
-          <TextInputModalProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path='/' element={<TransactionsPage />} />
-                <Route path='/home' element={<HomePage />} />
-                <Route path='/transaction/:id' element={<TransactionPage />} />
-                <Route path='/transactions' element={<TransactionsPage />} />
-                <Route
-                  path='/transaction-edit/:id'
-                  element={<TransactionEditPage />}
-                />
-              </Routes>
-            </BrowserRouter>
-          </TextInputModalProvider>
-        </Background>
+        <TextInputModalProvider>{children}</TextInputModalProvider>
       </ThemeProvider>
     </ClientProvider>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <Providers>
+      <BrowserRouter>
+        <Routes>
+          <Background>
+            <Route path='/' element={<TransactionsPage />} />
+            <Route path='/home' element={<HomePage />} />
+            <Route path='/transaction/:id' element={<TransactionPage />} />
+            <Route path='/transactions' element={<TransactionsPage />} />
+            <Route path='/transaction-edit' element={<TransactionEditPage />} />
+            <Route
+              path='/transaction-edit/:id'
+              element={<TransactionEditPage />}
+            />
+          </Background>
+        </Routes>
+      </BrowserRouter>
+    </Providers>
+  )
+}
