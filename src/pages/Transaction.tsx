@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router'
 import { useParams } from 'react-router'
-import { Transaction } from '@pages/Transactions'
+import { Transaction } from '@client/Transaction'
 import { Button } from '@components/Button'
 import { Text } from '@components/Text'
 import { CostCard } from '@components/CostCard'
