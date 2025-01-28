@@ -1,9 +1,10 @@
-FROM ubuntu:24.10 AS base
+FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-24.04 AS base
 
-RUN apt-get update
-
-# Install tauri dependencies
-RUN apt-get install -y \
+# ------------------------------------------------------------------------------------------------
+# Install tauri
+# ------------------------------------------------------------------------------------------------
+RUN apt-get update && \
+    apt-get install -y \
     libwebkit2gtk-4.1-dev \
     build-essential \
     curl \
@@ -14,12 +15,16 @@ RUN apt-get install -y \
     libayatana-appindicator3-dev \
     librsvg2-dev
 
+# ------------------------------------------------------------------------------------------------
 # Install rust
+# ------------------------------------------------------------------------------------------------
 RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="/root/.cargo/bin:$PATH"
 RUN cargo install tauri-cli
 
+# ------------------------------------------------------------------------------------------------
 # Install deno
+# ------------------------------------------------------------------------------------------------
 RUN apt-get install -y \
     unzip
 
@@ -28,16 +33,10 @@ RUN curl -fsSL https://deno.land/install.sh | sh
 ENV DENO_INSTALL=/root/.deno
 ENV PATH=$DENO_INSTALL/bin:$PATH
 
-# Development environment
-FROM base AS devenv
-
-RUN apt-get install -y \
-    git \
-    vim
-
-RUN git config --global core.editor vi
-
-FROM base AS android
+# ------------------------------------------------------------------------------------------------
+# Android build
+# ------------------------------------------------------------------------------------------------
+FROM base AS android-build
 
 # Install android dependencies
 RUN apt-get install -y \
@@ -70,3 +69,14 @@ RUN cargo tauri android build
 RUN mkdir /out && \
     cp src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk /out/ && \
     cp src-tauri/gen/android/app/build/outputs/bundle/universalRelease/app-universal-release.aab /out/
+
+# ------------------------------------------------------------------------------------------------
+# Development environment
+# ------------------------------------------------------------------------------------------------
+FROM base AS devenv
+
+RUN apt-get install -y \
+    git \
+    vim
+
+RUN git config --global core.editor vi
