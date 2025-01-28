@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Transaction } from '@pages/Transactions'
+import { Transaction } from '@client/Transaction'
 import { Button } from '@components/Button'
 import { TextInputCard } from '@components/TextInputCard'
 import { TextInput } from '@components/TextInput'
