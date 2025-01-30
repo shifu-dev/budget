@@ -1,6 +1,7 @@
 import { CSSProperties, JSX, useRef } from 'react'
 import { Text, isTextValue } from '@components/Text'
 import { Iterate } from '@components/Iterate'
+import { Pressable } from './Pressable'
 
 export type ListScrollPosition = 'nearest' | 'start' | 'center' | 'end'
 
@@ -98,14 +99,14 @@ export function List<T>(props: ListProps<T>) {
       <Iterate
         range={props.items}
         element={(_, index) => (
-          <div
-            onClick={() => onItemClick(index)}
+          <Pressable
+            onPress={() => onItemClick(index)}
             style={{
               scrollSnapAlign: scrollSnapAlign,
             }}
           >
             <Item index={index} />
-          </div>
+          </Pressable>
         )}
       />
       <div

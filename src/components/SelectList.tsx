@@ -2,6 +2,7 @@ import { CSSProperties } from 'react'
 import { List } from '@components/List'
 import { Text, TextValue } from '@components/Text'
 import { useTheme } from '@themes/index'
+import { Pressable } from './Pressable'
 
 export type SelectListDirection = 'vertical' | 'horizontal'
 
@@ -18,7 +19,7 @@ export interface SelectListProps {
 export function SelectList(props: SelectListProps) {
   const theme = useTheme()
 
-  function onClick(index: number) {
+  function onPress(index: number) {
     if (props.selected && props.selected.includes(index)) {
       props.onUnselect?.(index)
       return
@@ -34,11 +35,8 @@ export function SelectList(props: SelectListProps) {
         : undefined
 
     return (
-      <div
-        onClick={event => {
-          event.stopPropagation()
-          onClick(index)
-        }}
+      <Pressable
+        onPress={() => onPress(index)}
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -52,7 +50,7 @@ export function SelectList(props: SelectListProps) {
         }}
       >
         <Text value={item} category='h6' />
-      </div>
+      </Pressable>
     )
   }
 

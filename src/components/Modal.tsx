@@ -1,5 +1,6 @@
 import { CSSProperties, JSX, MouseEvent } from 'react'
 import { useTheme } from '@themes/index'
+import { Pressable } from './Pressable'
 
 export type ModalCloseRequestCallback = () => any
 
@@ -29,16 +30,12 @@ export function Modal(props: ModalProps) {
     }
   }
 
-  const onContainerPress = (event: MouseEvent) => {
-    event.stopPropagation()
-  }
-
   if (!isOpen) return
 
   return (
-    <div
-      id='modal-overlay'
-      onClick={onOverlayPress}
+    <Pressable
+      key='modal-overlay'
+      onPress={onOverlayPress}
       style={{
         position: 'fixed',
         height: '100%',
@@ -48,13 +45,9 @@ export function Modal(props: ModalProps) {
         ...props.overlayStyle,
       }}
     >
-      <div
-        id='modal-container'
-        onClick={onContainerPress}
-        style={props.containerStyle}
-      >
+      <Pressable key='modal-container' style={props.containerStyle}>
         {props.children}
-      </div>
-    </div>
+      </Pressable>
+    </Pressable>
   )
 }
