@@ -6,6 +6,7 @@ import { CalendarError } from '@components/CalendarError'
 import { Conditional } from '@components/Conditional'
 import { Iterate } from '@components/Iterate'
 import { darken } from '@themes/Colors'
+import { Pressable } from './Pressable'
 
 /// The mode in which user can select cells on the layout.
 export type CalendarLayoutSelectionMode = 'single' | 'range' | 'hybrid'
@@ -428,9 +429,9 @@ export function CalendarLayout(props: CalendarLayoutProps) {
     }
 
     return (
-      <div key={index} onClick={onPress} style={style}>
+      <Pressable key={index} onPress={onPress} style={style}>
         <Text value={cell.value} category='h6' />
-      </div>
+      </Pressable>
     )
   }
 

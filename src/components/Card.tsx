@@ -1,14 +1,13 @@
-import { CSSProperties, JSX } from 'react'
+import { CSSProperties } from 'react'
 import { useTheme } from '@themes/index'
 import { Icon, IconName } from '@components/Icon'
 import { Conditional } from '@components/Conditional'
-import { motion } from 'motion/react'
-import { darken } from '@themes/Colors'
+import { Pressable } from '@components/Pressable'
 
 export type CardVariant = 'long-medium' | 'long-flex'
 
 export interface CardProps {
-  children?: JSX.Element | JSX.Element[]
+  children?: any
   onPress?: () => void
   onFocus?: () => void
   onFocusLost?: () => void
@@ -20,24 +19,13 @@ export interface CardProps {
 
 export function Card(props: CardProps) {
   const theme = useTheme()
-  const isPressable = props.onPress !== undefined
   const color = theme.colors.card
-  const hoverColor = darken(color)
 
   return (
-    <motion.div
-      onClick={event => {
-        event.stopPropagation()
-        props.onPress?.()
-      }}
-      onFocus={event => {
-        event.stopPropagation()
-        props.onFocus?.()
-      }}
-      onBlur={event => {
-        event.stopPropagation()
-        props.onFocusLost?.()
-      }}
+    <Pressable
+      onPress={props.onPress}
+      onFocus={props.onFocus}
+      onFocusLost={props.onFocusLost}
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -48,23 +36,7 @@ export function Card(props: CardProps) {
         backgroundColor: color,
         padding: '10px',
         minHeight: '70px',
-        cursor: isPressable ? 'pointer' : undefined,
         ...props.style,
-      }}
-      whileHover={{
-        backgroundColor: hoverColor,
-        borderColor: hoverColor,
-        transition: {
-          duration: 0.05,
-        },
-      }}
-      whileTap={{
-        backgroundColor: hoverColor,
-        borderColor: hoverColor,
-        scale: 0.98,
-        transition: {
-          duration: 0.02,
-        },
       }}
     >
       <Conditional value={props.leftIcon}>
@@ -88,6 +60,6 @@ export function Card(props: CardProps) {
           <Icon name={props.rightIcon} size='sm' />
         </div>
       </Conditional>
-    </motion.div>
+    </Pressable>
   )
 }

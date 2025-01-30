@@ -2,8 +2,7 @@ import { CSSProperties } from 'react'
 import { Text, TextValue } from '@components/Text'
 import { Icon, IconName } from '@components/Icon'
 import { useTheme } from '@themes/index'
-import { motion } from 'motion/react'
-import { darken } from '@themes/Colors'
+import { Pressable } from './Pressable'
 
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
@@ -32,7 +31,6 @@ export interface ButtonProps {
 
 export function Button(props: ButtonProps) {
   const style = _getStyle(props)
-  const hoverColor = darken(style.borderColor ?? 'red')
 
   function onPress() {
     if (props.disabled) return
@@ -41,23 +39,14 @@ export function Button(props: ButtonProps) {
   }
 
   return (
-    <motion.div
-      onClick={onPress}
+    <Pressable
+      onPress={onPress}
       style={style}
-      whileHover={{
-        backgroundColor: hoverColor,
-        borderColor: hoverColor,
-      }}
-      whileTap={{
-        backgroundColor: hoverColor,
-        borderColor: hoverColor,
-        scale: 0.97,
-      }}
     >
       <Icon name={props.startIcon} size={props.size} color={style.color} />
       <Text value={props.label} category='h6' />
       <Icon name={props.endIcon} size={props.size} color={style.color} />
-    </motion.div>
+    </Pressable>
   )
 }
 
@@ -70,7 +59,6 @@ function _getStyle(props: ButtonProps): CSSProperties {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    cursor: 'pointer',
     overflow: 'hidden',
     borderStyle: 'solid',
     borderWidth: 2,
