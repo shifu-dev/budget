@@ -101,6 +101,9 @@ export function List<T>(props: ListProps<T>) {
         element={(_, index) => (
           <Pressable
             onPress={() => onItemClick(index)}
+            animateOnHover={false}
+            animateOnPress={false}
+            propagateEvents
             style={{
               scrollSnapAlign: scrollSnapAlign,
             }}
