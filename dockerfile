@@ -34,24 +34,41 @@ ENV DENO_INSTALL=/root/.deno
 ENV PATH=$DENO_INSTALL/bin:$PATH
 
 # ------------------------------------------------------------------------------------------------
-# Android build
+# Android builder
 # ------------------------------------------------------------------------------------------------
-FROM base AS android-build
+FROM base AS android-builder
 
-# Install android dependencies
+# ------------------------------------------------------------------------------------------------
+# Install android sdk
+# ------------------------------------------------------------------------------------------------
+
+# Install dependencies
 RUN apt-get install -y \
-    android-sdk \
-    google-android-ndk-r25c-installer \
-    sdkmanager
+    openjdk-11-jdk \
+    wget \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
 
-ENV ANDROID_HOME=/usr/lib/android-sdk
-ENV PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin:$PATH
+# Set environment variables
+ENV ANDROID_HOME=/opt/android-sdk
+ENV PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
 
-ENV NDK_HOME=/usr/lib/android-ndk
-ENV PATH=$NDK_HOME:$PATH
+# Download and install Android SDK Command-line tools
+RUN mkdir -p $ANDROID_HOME/cmdline-tools \
+    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O sdk-tools.zip \
+    && unzip sdk-tools.zip -d $ANDROID_HOME/cmdline-tools \
+    && mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest \
+    && rm sdk-tools.zip
 
-# Accept android licenses
+# Accept SDK licenses
 RUN yes | sdkmanager --licenses
+
+# Install necessary sdk packages
+RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+
+# ------------------------------------------------------------------------------------------------
+# Rust setup for android
+# ------------------------------------------------------------------------------------------------
 
 # Install rust android targets
 RUN rustup target add \
