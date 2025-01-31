@@ -1,4 +1,4 @@
-import { CSSProperties, JSX, MouseEvent } from 'react'
+import { CSSProperties, JSX } from 'react'
 import { useTheme } from '@themes/index'
 import { Pressable } from './Pressable'
 
