@@ -1,10 +1,18 @@
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-24.04 AS base
 
+RUN apt-get update
+
+# ------------------------------------------------------------------------------------------------
+# Install cargo
+# ------------------------------------------------------------------------------------------------
+RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+ENV PATH="/root/.cargo/bin:$PATH"
+
 # ------------------------------------------------------------------------------------------------
 # Install tauri
 # ------------------------------------------------------------------------------------------------
-RUN apt-get update && \
-    apt-get install -y \
+
+RUN apt-get install -y \
     libwebkit2gtk-4.1-dev \
     build-essential \
     curl \
@@ -15,11 +23,6 @@ RUN apt-get update && \
     libayatana-appindicator3-dev \
     librsvg2-dev
 
-# ------------------------------------------------------------------------------------------------
-# Install rust
-# ------------------------------------------------------------------------------------------------
-RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
-ENV PATH="/root/.cargo/bin:$PATH"
 RUN cargo install tauri-cli
 
 # ------------------------------------------------------------------------------------------------
@@ -44,14 +47,15 @@ FROM base AS android-builder
 
 # Install dependencies
 RUN apt-get install -y \
-    openjdk-11-jdk \
+    openjdk-17-jdk \
     wget \
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
+    unzip
 
 # Set environment variables
 ENV ANDROID_HOME=/opt/android-sdk
-ENV PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+ENV ANDROID_NDK_ROOT=$ANDROID_HOME/ndk
+ENV NDK_HOME=$ANDROID_NDK_ROOT/25.2.9519653
+ENV PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_NDK_ROOT:$PATH
 
 # Download and install Android SDK Command-line tools
 RUN mkdir -p $ANDROID_HOME/cmdline-tools \
@@ -63,8 +67,8 @@ RUN mkdir -p $ANDROID_HOME/cmdline-tools \
 # Accept SDK licenses
 RUN yes | sdkmanager --licenses
 
-# Install necessary sdk packages
-RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+# Install necessary SDK packages
+RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
 
 # ------------------------------------------------------------------------------------------------
 # Rust setup for android
@@ -84,8 +88,8 @@ RUN cargo tauri android build
 
 # Copy outputs
 RUN mkdir /out && \
-    cp src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk /out/ && \
-    cp src-tauri/gen/android/app/build/outputs/bundle/universalRelease/app-universal-release.aab /out/
+    cp src-tauri/gen/android/app/build/outputs/apk/universal/release/*.apk /out/ && \
+    cp src-tauri/gen/android/app/build/outputs/bundle/universalRelease/*.aab /out/
 
 # ------------------------------------------------------------------------------------------------
 # Development environment
