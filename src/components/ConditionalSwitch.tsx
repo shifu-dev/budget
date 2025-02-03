@@ -1,4 +1,4 @@
-import { Children, isValidElement, ReactNode } from 'react'
+import { ReactNode, ReactElement, Children, isValidElement } from 'react'
 
 export interface ConditionalSwitchItemProps {
   value?: string
@@ -12,7 +12,7 @@ export function ConditionalSwitchItem(props: ConditionalSwitchItemProps) {
 
 export interface ConditionalSwitchProps {
   condition: string
-  children: ReactNode
+  children: ReactElement<ConditionalSwitchItemProps>[]
 }
 
 export function ConditionalSwitch(props: ConditionalSwitchProps) {
