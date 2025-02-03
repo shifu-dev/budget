@@ -1,25 +1,20 @@
 import { useNavigate } from 'react-router'
 import { useParams } from 'react-router'
-import { Transaction } from '@client/Transaction'
 import { Button } from '@components/Button'
 import { Text } from '@components/Text'
 import { CostCard } from '@components/CostCard'
 import { TimeCard } from '@components/TimeCard'
 import { TextCard } from '@components/TextCard'
+import { useClient } from '@client/ClientProvider'
 
 export function TransactionPage() {
   const navigate = useNavigate()
-  const { id } = useParams()
+  const client = useClient()
+  const params = useParams()
+  const transactionResult = client.getTransaction({ id: params.id as string })
+  if (!transactionResult) throw 0
 
-  const transaction: Transaction = {
-    id: id as string,
-    title: 'Title',
-    amount: 236,
-    time: new Date(),
-    notes: 'Hi there, how is it going?',
-    category: 'Category',
-    tags: ['tag1', 'tag2', 'tag3'],
-  }
+  const transaction = transactionResult
 
   function onBack() {
     navigate('/transactions')

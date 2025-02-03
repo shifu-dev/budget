@@ -1,23 +1,21 @@
 import { useState } from 'react'
-import { Transaction } from '@client/Transaction'
 import { Button } from '@components/Button'
 import { TextInputCard } from '@components/TextInputCard'
 import { TextInput } from '@components/TextInput'
 import { DateTimeInputCard } from '@components/DateTimeInputCard'
 import { SelectListCard } from '@components/SelectListCard'
 import { CostInputCard } from '@components/CostInputCard'
+import { useClient } from '@client/ClientProvider'
+import { useParams } from 'react-router'
 
 export function TransactionEditPage() {
-  const transaction: Transaction = {
-    id: 'w7693284wioewgeoufgsu',
-    title: 'Title',
-    amount: 236,
-    time: new Date(),
-    notes: 'Hi there, how is it going?',
-    category: 'Category',
-    tags: ['tag1', 'tag2', 'tag3'],
-  }
+  const client = useClient()
+  const params = useParams()
 
+  const transactionResult = client.getTransaction({ id: params.id as string })
+  if (!transactionResult) throw 0
+
+  const transaction = transactionResult
   const [title, setTitle] = useState(transaction.title)
   const [amount, setAmount] = useState(transaction.amount)
   const [datetime, setDatetime] = useState(transaction.time)
