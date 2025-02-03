@@ -44,7 +44,7 @@ export class Client {
     })
 
     await fs.writeTextFile(this._DATA_FILE_PATH, dataString, {
-      baseDir: fs.BaseDirectory.Home,
+      baseDir: fs.BaseDirectory.AppConfig,
     })
   }
 
