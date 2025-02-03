@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router'
 import { List } from '@components/List'
 import { Text } from '@components/Text'
 import { Button } from '@components/Button'
-import { Card } from '@components/Card'
 import { Transaction } from '@client/Transaction'
 import { useClient } from '@client/ClientProvider'
+import { TransactionCard } from '@components/TransactionCard'
 
 export function TransactionsPage() {
   const navigate = useNavigate()
@@ -39,16 +39,10 @@ export function TransactionsPage() {
           paddingBlock: 4,
         }}
       >
-        <Card
-          style={{
-            justifyContent: 'space-between',
-            paddingInline: 30,
-          }}
+        <TransactionCard
+          transaction={transaction}
           onPress={() => onTransactionPress(transaction.id)}
-        >
-          <Text value={transaction.amount} category='h3' />
-          <Text value={transaction.title} category='h5' />
-        </Card>
+        />
       </div>
     )
   }
