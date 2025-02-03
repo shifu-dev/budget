@@ -1,3 +1,1 @@
-export function HomePage() {
-  return <>Home Page</>
-}
+export { TransactionsPage as HomePage } from '@pages/Transactions'
