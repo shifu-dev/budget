@@ -50,11 +50,27 @@ export class Client {
 
   deserializeData = (dataString: string): ClientData => {
     const object = JSON.parse(dataString)
+
+    const rawTransactions = (object.transactions ?? []) as {
+      [id: string]: string
+    }[]
+    const transactions = rawTransactions.map(transaction => {
+      return {
+        id: transaction.id,
+        title: transaction.title,
+        time: new Date(transaction.time),
+        amount: parseInt(transaction.amount),
+        category: transaction.categories,
+        tags: transaction.tags as any as string[],
+        notes: transaction.notes,
+      } as Transaction
+    })
+
     const data: ClientData = {
       username: object.username ?? '',
       categories: object.categories ?? [],
       tags: object.tags ?? [],
-      transactions: object.transactions ?? [],
+      transactions: transactions,
     }
 
     return data
@@ -71,6 +87,7 @@ export class Client {
 
   getTransaction = (args: { id: string }): Transaction | undefined => {
     const { id } = args
+
     return this._transactions.find(transaction => transaction.id === id)
   }
 
