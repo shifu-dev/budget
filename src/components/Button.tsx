@@ -25,24 +25,15 @@ export interface ButtonProps {
   radius?: ButtonRadius
   variant?: ButtonVariant
   color?: ButtonColor
-  onPress?: () => void
   disabled?: boolean
+  onPress?: () => void
 }
 
 export function Button(props: ButtonProps) {
   const style = _getStyle(props)
 
-  function onPress() {
-    if (props.disabled) return
-
-    props.onPress?.()
-  }
-
   return (
-    <Pressable
-      onPress={onPress}
-      style={style}
-    >
+    <Pressable onPress={props.onPress} disabled={props.disabled} style={style}>
       <Icon name={props.startIcon} size={props.size} color={style.color} />
       <Text value={props.label} category='h6' />
       <Icon name={props.endIcon} size={props.size} color={style.color} />

@@ -10,6 +10,7 @@ export interface PressableProps {
   onHoverStart?: () => void
   onHoverEnd?: () => void
   style?: CSSProperties
+  disabled?: boolean
   propagateEvents?: boolean
   animateOnHover?: boolean
   animateOnPress?: boolean
@@ -30,7 +31,7 @@ export function Pressable(props: PressableProps) {
       onClick={event => {
         if (!props.propagateEvents) event.stopPropagation()
 
-        props.onPress?.()
+        if (!props.disabled) props.onPress?.()
       }}
       onFocus={event => {
         if (!props.propagateEvents) event.stopPropagation()
