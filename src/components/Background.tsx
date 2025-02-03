@@ -1,8 +1,8 @@
-import { JSX } from 'react'
+import { ReactNode } from 'react'
 import { useTheme } from '@themes/index'
 
 export interface BackgroundProps {
-  children?: JSX.Element | JSX.Element[]
+  children?: ReactNode
 }
 
 export function Background(props: BackgroundProps) {

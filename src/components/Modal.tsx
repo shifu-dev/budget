@@ -1,4 +1,4 @@
-import { CSSProperties, JSX } from 'react'
+import { ReactNode, CSSProperties } from 'react'
 import { useTheme } from '@themes/index'
 import { Pressable } from './Pressable'
 
@@ -10,7 +10,7 @@ export interface ModalProps {
   closeOnOverlay?: boolean
   overlayStyle?: CSSProperties
   containerStyle?: CSSProperties
-  children?: JSX.Element | JSX.Element[]
+  children?: ReactNode
 }
 
 const defaults = {

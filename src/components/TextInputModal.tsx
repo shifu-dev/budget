@@ -1,4 +1,10 @@
-import { JSX, createContext, useContext, useEffect, useState } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { Modal, ModalProps } from '@components/Modal'
 import { Button } from '@components/Button'
 import { Card } from '@components/Card'
@@ -66,7 +72,7 @@ export function TextInputModal(props: TextInputModalProps) {
 }
 
 export interface TextInputModalProviderProps {
-  children?: JSX.Element | JSX.Element[]
+  children?: ReactNode
 }
 
 export interface TextInputHandle {

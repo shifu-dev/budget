@@ -1,6 +1,6 @@
-import { ColorValue, darken } from '@themes/Colors'
+import { ReactNode, CSSProperties } from 'react'
 import { motion } from 'motion/react'
-import { CSSProperties, JSX } from 'react'
+import { ColorValue, darken } from '@themes/Colors'
 
 export interface PressableProps {
   onPress?: () => void
@@ -13,7 +13,7 @@ export interface PressableProps {
   propagateEvents?: boolean
   animateOnHover?: boolean
   animateOnPress?: boolean
-  children?: JSX.Element | JSX.Element[]
+  children?: ReactNode
 }
 
 export function Pressable(props: PressableProps) {
