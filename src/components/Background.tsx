@@ -1,11 +1,7 @@
-import { ReactNode } from 'react'
 import { useTheme } from '@themes/index'
+import { Outlet } from 'react-router'
 
-export interface BackgroundProps {
-  children?: ReactNode
-}
-
-export function Background(props: BackgroundProps) {
+export function Background() {
   const theme = useTheme()
 
   return (
@@ -19,7 +15,7 @@ export function Background(props: BackgroundProps) {
         scrollbarWidth: 'none',
       }}
     >
-      {props.children}
+      <Outlet />
     </div>
   )
 }
