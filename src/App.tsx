@@ -9,31 +9,35 @@ import { Background } from '@components/Background'
 import { TextInputModalProvider } from '@components/TextInputModal'
 import { ClientProvider } from '@client/ClientProvider'
 import { NotFoundPage } from '@pages/NotFound'
+import { RootErrorBoundary } from '@components/RootErrorBoundary'
 
-function App() {
+export default function App() {
   return (
-    <ClientProvider>
-      <ThemeProvider>
-        <Background>
-          <TextInputModalProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path='/' element={<HomePage />} />
-                <Route path='/home' element={<HomePage />} />
-                <Route path='/transaction/:id' element={<TransactionPage />} />
-                <Route path='/transactions' element={<TransactionsPage />} />
-                <Route
-                  path='/transaction-edit/:id'
-                  element={<TransactionEditPage />}
-                />
-                <Route path='*' element={<NotFoundPage />} />
-              </Routes>
-            </BrowserRouter>
-          </TextInputModalProvider>
-        </Background>
-      </ThemeProvider>
-    </ClientProvider>
+    <RootErrorBoundary>
+      <ClientProvider>
+        <ThemeProvider>
+          <Background>
+            <TextInputModalProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route path='/' element={<HomePage />} />
+                  <Route path='/home' element={<HomePage />} />
+                  <Route
+                    path='/transaction/:id'
+                    element={<TransactionPage />}
+                  />
+                  <Route path='/transactions' element={<TransactionsPage />} />
+                  <Route
+                    path='/transaction-edit/:id'
+                    element={<TransactionEditPage />}
+                  />
+                  <Route path='*' element={<NotFoundPage />} />
+                </Routes>
+              </BrowserRouter>
+            </TextInputModalProvider>
+          </Background>
+        </ThemeProvider>
+      </ClientProvider>
+    </RootErrorBoundary>
   )
 }
-
-export default App
