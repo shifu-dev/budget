@@ -11,11 +11,20 @@ export function TransactionsPage() {
   const navigate = useNavigate()
   const client = useClient()
 
-  const [transactions] = useState<Transaction[]>(client.getTransactions())
+  const [transactions, setTransactions] = useState<Transaction[]>([])
 
-  function onBack() {}
   function onAdd() {
     navigate('/transaction-edit')
+  }
+
+  function onLoad() {
+    client.loadData()
+
+    setTransactions(client.getTransactions())
+  }
+
+  function onSave() {
+    client.saveData()
   }
 
   function onTransactionPress(id: string) {
@@ -54,8 +63,9 @@ export function TransactionsPage() {
           padding: 10,
         }}
       >
-        <Button startIcon='back' onPress={onBack} />
-        <Button startIcon='add' onPress={onAdd} />
+        <Button label='Load' onPress={onLoad} />
+        <Button label='Save' onPress={onSave} />
+        <Button label='Add' onPress={onAdd} />
       </div>
       <div
         id='title'

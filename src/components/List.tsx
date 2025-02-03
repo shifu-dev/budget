@@ -100,6 +100,7 @@ export function List<T>(props: ListProps<T>) {
         range={props.items}
         element={(_, index) => (
           <Pressable
+            key={index}
             onPress={() => onItemClick(index)}
             animateOnHover={false}
             animateOnPress={false}

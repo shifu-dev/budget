@@ -21,6 +21,7 @@
     "react": "npm:react@^19.0.0",
     "react-dom": "npm:react-dom@^19.0.0",
     "@tauri-apps/api": "npm:@tauri-apps/api@^2.2.0",
+    "@tauri-apps/plugin-fs": "npm:@tauri-apps/plugin-fs",
     "@tauri-apps/plugin-shell": "npm:@tauri-apps/plugin-shell@^2.2.0",
 
     // dev dependencies
@@ -30,6 +31,7 @@
     "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.3.4",
     "react-router": "npm:react-router@^7.1.1",
     "typescript": "npm:typescript@^5.2.2",
+    "uuid": "npm:uuid@^11.0.5",
     "vite": "npm:vite@^5.3.1",
     "@tauri-apps/cli": "npm:@tauri-apps/cli@^2.2.2"
   },
