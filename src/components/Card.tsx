@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react'
+import { ReactNode, CSSProperties } from 'react'
 import { useTheme } from '@themes/index'
 import { Icon, IconName } from '@components/Icon'
 import { Conditional } from '@components/Conditional'
@@ -7,7 +7,7 @@ import { Pressable } from '@components/Pressable'
 export type CardVariant = 'long-medium' | 'long-flex'
 
 export interface CardProps {
-  children?: any
+  children?: ReactNode
   onPress?: () => void
   onFocus?: () => void
   onFocusLost?: () => void

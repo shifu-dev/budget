@@ -1,8 +1,8 @@
-import { JSX } from 'react'
+import { ReactNode } from 'react'
 
 export interface IterateProps {
   range?: any[]
-  element: (value: any, index: number) => JSX.Element
+  element: (value: any, index: number) => ReactNode
 }
 
 export function Iterate(props: IterateProps) {

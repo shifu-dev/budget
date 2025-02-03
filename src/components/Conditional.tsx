@@ -1,8 +1,8 @@
-import { JSX } from 'react'
+import { ReactNode } from 'react'
 
 export interface ConditionalProps {
   value: any
-  children?: JSX.Element
+  children?: ReactNode
 }
 
 export function Conditional(props: ConditionalProps) {

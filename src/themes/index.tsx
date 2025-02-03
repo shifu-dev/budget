@@ -1,11 +1,11 @@
-import { createContext, useContext } from 'react'
+import { ReactNode, createContext, useContext } from 'react'
 import { Theme } from '@themes/Theme'
 import { lightTheme } from '@themes/LightTheme'
 import { darkTheme } from '@themes/DarkTheme'
 
 export interface ThemeProviderProps {
   theme?: Theme
-  children: any
+  children: ReactNode
 }
 
 export const ThemeProvider = (props: ThemeProviderProps) => {

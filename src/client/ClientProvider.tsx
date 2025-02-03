@@ -1,10 +1,10 @@
-import { createContext, JSX, useContext } from 'react'
+import { ReactNode, createContext, useContext } from 'react'
 import { Client } from '@client/Client'
 
 const ClientContext = createContext<Client | undefined>(undefined)
 
 export interface ClientProviderProps {
-  children?: JSX.Element | JSX.Element[]
+  children?: ReactNode
 }
 
 export function ClientProvider(props: ClientProviderProps) {

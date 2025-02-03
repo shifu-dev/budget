@@ -1,4 +1,4 @@
-import { CSSProperties, JSX, useRef } from 'react'
+import { ReactNode, CSSProperties, useRef } from 'react'
 import { Text, isTextValue } from '@components/Text'
 import { Iterate } from '@components/Iterate'
 import { Pressable } from './Pressable'
@@ -9,7 +9,7 @@ export type ListScrollBehavior = 'auto' | 'instant' | 'smooth'
 
 export interface ListProps<T> {
   items?: T[]
-  itemRenderer?: (item: T, index: number) => JSX.Element
+  itemRenderer?: (item: T, index: number) => ReactNode
   direction?: 'horizontal' | 'vertical'
   initSnapIndex?: number
   snapItems?: boolean
