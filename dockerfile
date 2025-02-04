@@ -1,3 +1,6 @@
+ARG ANDROID_BUILD_TOOLS_VERSION="33.0.2"
+ARG ANDROID_NDK_VERSION="25.2.9519653"
+
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-24.04 AS base
 
 RUN apt-get update
@@ -51,11 +54,16 @@ RUN apt-get install -y \
     wget \
     unzip
 
+ARG ANDROID_BUILD_TOOLS_VERSION
+ARG ANDROID_NDK_VERSION
+
 # Set environment variables
-ENV ANDROID_HOME=/opt/android-sdk
-ENV ANDROID_NDK_ROOT=$ANDROID_HOME/ndk
-ENV NDK_HOME=$ANDROID_NDK_ROOT/25.2.9519653
-ENV PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_NDK_ROOT:$PATH
+ENV ANDROID_HOME="/opt/android-sdk"
+ENV ANDROID_NDK_ROOT="$ANDROID_HOME/ndk"
+ENV NDK_HOME="$ANDROID_NDK_ROOT/$ANDROID_NDK_VERSION"
+ENV PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+ENV PATH="$ANDROID_HOME/platform-tools:$ANDROID_NDK_ROOT:$PATH"
+ENV PATH="$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS_VERSION:$PATH"
 
 # Download and install Android SDK Command-line tools
 RUN mkdir -p $ANDROID_HOME/cmdline-tools \
@@ -68,7 +76,11 @@ RUN mkdir -p $ANDROID_HOME/cmdline-tools \
 RUN yes | sdkmanager --licenses
 
 # Install necessary SDK packages
-RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
+RUN sdkmanager \
+    "platform-tools" \
+    "platforms;android-33" \
+    "build-tools;$ANDROID_BUILD_TOOLS_VERSION" \
+    "ndk;$ANDROID_NDK_VERSION"
 
 # ------------------------------------------------------------------------------------------------
 # Rust setup for android
