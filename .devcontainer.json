@@ -3,5 +3,8 @@
     "dockerfile": "dockerfile",
     "target": "devenv"
   },
-  "remoteUser": "root"
+  "remoteUser": "root",
+  "runArgs": [
+    "--device=/dev/kvm"
+  ]
 }

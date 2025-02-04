@@ -1,5 +1,7 @@
+ARG USER="root"
 ARG ANDROID_BUILD_TOOLS_VERSION="33.0.2"
 ARG ANDROID_NDK_VERSION="25.2.9519653"
+ARG ANDROID_EMULATOR_NAME="devenv_emulator"
 
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-24.04 AS base
 
@@ -40,9 +42,9 @@ ENV DENO_INSTALL=/root/.deno
 ENV PATH=$DENO_INSTALL/bin:$PATH
 
 # ------------------------------------------------------------------------------------------------
-# Android builder
+# Android base
 # ------------------------------------------------------------------------------------------------
-FROM base AS android-builder
+FROM base AS android-base
 
 # ------------------------------------------------------------------------------------------------
 # Install android sdk
@@ -93,6 +95,11 @@ RUN rustup target add \
     i686-linux-android \
     x86_64-linux-android
 
+# ------------------------------------------------------------------------------------------------
+# Android builder
+# ------------------------------------------------------------------------------------------------
+FROM android-base as android-builder
+
 # Build the app
 WORKDIR /app
 COPY . .
@@ -106,10 +113,51 @@ RUN mkdir /out && \
 # ------------------------------------------------------------------------------------------------
 # Development environment
 # ------------------------------------------------------------------------------------------------
-FROM base AS devenv
+FROM android-base as devenv
+
+ARG ANDROID_EMULATOR_NAME
+ARG USER
+
+# ------------------------------------------------------------------------------------------------
+# -- Install common tools
+# ------------------------------------------------------------------------------------------------
 
 RUN apt-get install -y \
     git \
     vim
 
 RUN git config --global core.editor vi
+
+# ------------------------------------------------------------------------------------------------
+# -- Install Android Emulator
+# ------------------------------------------------------------------------------------------------
+
+RUN sdkmanager "emulator"
+
+# Enable KVM (required for hardware acceleration)
+RUN apt-get install -y \
+    qemu-kvm \
+    libvirt-daemon-system \
+    libvirt-clients \
+    bridge-utils
+
+# Add current user to kvm group
+RUN adduser $USER kvm
+
+# ------------------------------------------------------------------------------------------------
+# -- Create and start an Android Emulator
+# ------------------------------------------------------------------------------------------------
+
+# Install a system image (e.g., Pixel 3a, API 33)
+RUN sdkmanager "system-images;android-33;google_apis;x86_64"
+
+# Create a new AVD
+RUN avdmanager create avd -n $ANDROID_EMULATOR_NAME \
+    -k "system-images;android-33;google_apis;x86_64" \
+    --device "pixel_7"
+
+# Ensure the emulator starts properly
+# RUN echo "hw.cpu.ncore=2" >> /root/.android/avd/$ANDROID_EMULATOR_NAME.avd/config.ini
+
+ENV ANDROID_EMULATOR_HOME="$ANDROID_HOME/emulator"
+ENV PATH="$ANDROID_EMULATOR_HOME:$PATH"
