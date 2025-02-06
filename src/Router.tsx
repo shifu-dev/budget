@@ -5,6 +5,7 @@ import { TransactionEditPage } from '@pages/TransactionEdit'
 import { TransactionsPage } from '@pages/Transactions'
 import { Background } from '@components/Background'
 import { NotFoundPage } from '@pages/NotFound'
+import { TransactionCreatePage } from '@pages/TransactionAdd'
 
 export function Router() {
   return (
@@ -16,13 +17,10 @@ export function Router() {
           <Route path='/transactions' element={<TransactionsPage />} />
           <Route path='/transaction/:id' element={<TransactionPage />} />
           <Route
-            path='/transaction/:id/edit'
+            path='/transaction/edit/:id'
             element={<TransactionEditPage />}
           />
-          <Route
-            path='/transaction/:id/create'
-            element={<TransactionEditPage />}
-          />
+          <Route path='/transaction/add' element={<TransactionCreatePage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
