@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { List } from '@components/List'
 import { Text } from '@components/Text'
@@ -13,24 +13,20 @@ export function TransactionsPage() {
 
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
-  function onAdd() {
-    navigate('/transaction-edit')
-  }
-
-  function onLoad() {
-    const transactions = client.getTransactions()
-    if (transactions.length !== 0) {
-      setTransactions(transactions)
-      return
+  useEffect(() => {
+    const newTransactions = client.getTransactions()
+    if (newTransactions.length !== 0) {
+      setTransactions(newTransactions)
+    } else {
+      client.loadData().then(() => {
+        const newTransactions = client.getTransactions()
+        setTransactions(newTransactions)
+      })
     }
+  }, [])
 
-    client.loadData().then(() => {
-      setTransactions(client.getTransactions())
-    })
-  }
-
-  function onSave() {
-    client.saveData()
+  function onAdd() {
+    navigate('/transaction/add')
   }
 
   function onTransactionPress(id: string) {
@@ -63,8 +59,6 @@ export function TransactionsPage() {
           padding: 10,
         }}
       >
-        <Button label='Load' onPress={onLoad} />
-        <Button label='Save' onPress={onSave} />
         <Button label='Add' onPress={onAdd} />
       </div>
       <div
