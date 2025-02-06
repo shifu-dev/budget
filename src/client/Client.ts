@@ -5,9 +5,16 @@ import { v4 as uuid4 } from 'uuid'
 
 interface ClientData {
   username: string
-  tags: string[]
   categories: string[]
+  tags: string[]
   transactions: Transaction[]
+}
+
+const initClientData: ClientData = {
+  username: '',
+  categories: [],
+  tags: [],
+  transactions: [],
 }
 
 type MakeRequired<T, K extends keyof T> = Partial<T> & Required<Pick<T, K>>
@@ -17,24 +24,46 @@ export type TransactionCreateInput = Omit<Transaction, 'id'>
 export type TransactionUpdateInput = MakeRequired<Transaction, 'id'>
 
 export class Client {
-  configPath = ''
-  _DATA_FILE_PATH = 'budget-data.json'
+  _configFilePath = ''
+  _configFileName = 'budget-data.json'
   _username: string = ''
-  _tags: string[] = []
   _categories: string[] = []
+  _tags: string[] = []
   _transactions: Transaction[] = []
+
+  init = async () => {
+    await this.loadData()
+  }
 
   loadData = async () => {
     const appConfigDir = await path.appConfigDir()
-    const configFilePath = `${appConfigDir}/${this._DATA_FILE_PATH}`
+    this._configFilePath = `${appConfigDir}/${this._configFileName}`
 
-    console.info(`Default config path set to '${configFilePath}'.`)
+    console.info(`Default config path set to '${this._configFilePath}'.`)
 
-    console.info(`Reading config file from '${configFilePath}'...`)
+    let dataString = ''
+    try {
+      console.info(`Reading config file from '${this._configFilePath}'...`)
 
-    const dataString = await fs.readTextFile(configFilePath)
+      dataString = await fs.readTextFile(this._configFilePath)
 
-    console.info(`Reading config file done.`)
+      console.info(`Reading config file done.`)
+    } catch (error) {
+      console.error(`Reading config file failed. Error: ${error}`)
+
+      try {
+        console.info(`Creating new config file...`)
+
+        dataString = this.serializeData(initClientData)
+        await fs.writeTextFile(this._configFilePath, dataString)
+
+        console.info(`Creating new config file done.`)
+      } catch (error) {
+        console.info(`Creating new config file failed. Error: ${error}`)
+        console.info(`Exiting...`)
+        return
+      }
+    }
 
     console.info('Deserializing data...')
 
@@ -56,9 +85,11 @@ export class Client {
       transactions: this._transactions,
     })
 
-    await fs.writeTextFile(this._DATA_FILE_PATH, dataString, {
-      baseDir: fs.BaseDirectory.AppConfig,
-    })
+    console.info(`Writing config file to '${this._configFilePath}'...`)
+
+    await fs.writeTextFile(this._configFilePath, dataString)
+
+    console.info(`Writing config done.`)
   }
 
   deserializeData = (dataString: string): ClientData => {
@@ -120,6 +151,8 @@ export class Client {
     }
 
     this._transactions[index] = newTransaction
+    this.saveData()
+
     return newTransaction
   }
 
@@ -130,6 +163,8 @@ export class Client {
     }
 
     this._transactions.push(transaction)
+    this.saveData()
+
     return transaction
   }
 
@@ -144,10 +179,10 @@ export class Client {
   }
 
   getCategories = (): string[] => {
-    return ['Category 1', 'Category 2', 'Category 3']
+    return this._categories
   }
 
   getTags = (): string[] => {
-    return ['Tag 1', 'Tag 2', 'Tag 3']
+    return this._tags
   }
 }
