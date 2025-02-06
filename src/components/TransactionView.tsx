@@ -34,7 +34,7 @@ export function TransactionView(props: TransactionViewProps) {
       </div>
 
       <CostCard key='amount' variant='long-medium' value={transaction.amount} />
-      <TimeCard key='datetime' variant='long-medium' value={transaction.time} />
+      <TimeCard key='datetime' variant='long-medium' value={transaction.datetime} />
       <TextCard
         key='category'
         variant='long-medium'
