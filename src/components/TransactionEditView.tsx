@@ -30,7 +30,7 @@ export function TransactionEditView(props: TransactionEditViewProps) {
 
   const selectedTagIndices = getTagsIndices(transaction.tags)
 
-  function getTagsIndices(tags: string[]): number[] {
+  function getTagsIndices(_: string[]): number[] {
     return []
   }
 
