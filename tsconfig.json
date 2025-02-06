@@ -29,6 +29,8 @@
       "@themes/*": ["./src/themes/*"],
       "@client/*": ["./src/client/*"],
       "@utils": ["./src/utils"],
+      "@provider": ["./src/Provider"],
+      "@router": ["./src/Router"]
     }
   },
   "include": ["src"],
