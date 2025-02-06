@@ -1,41 +1,94 @@
-import { useState } from 'react'
 import { TextInputCard } from '@components/TextInputCard'
 import { TextInput } from '@components/TextInput'
 import { DateTimeInputCard } from '@components/DateTimeInputCard'
 import { SelectListCard } from '@components/SelectListCard'
 import { CostInputCard } from '@components/CostInputCard'
 import { Transaction } from '@client/Transaction'
+import { useClient } from '@client/ClientProvider'
 
 export interface TransactionEditViewProps {
   transaction: Transaction
+  onChange?: (changes: Partial<Transaction>) => void
+  availableCategories?: string[]
+  availableTags?: string[]
 }
 
 export function TransactionEditView(props: TransactionEditViewProps) {
   const { transaction } = props
-  const [title, setTitle] = useState(transaction.title)
-  const [amount, setAmount] = useState(transaction.amount)
-  const [datetime, setDatetime] = useState(transaction.time)
-  const [notes, setNotes] = useState(transaction.notes)
-  const [categoryIndex, setCategoryIndex] = useState<number>(0)
-  const [selectedTagIndices, setSelectedTagIndices] = useState<number[]>([])
 
-  const categories = ['Category 1', 'Category 2', 'Category 3']
-  const tags = ['Tag 1', 'Tag 2', 'Tag 3']
+  const client = useClient()
+  const availableCategories =
+    props.availableCategories ?? client.getCategories()
+  const availableTags = props.availableTags ?? client.getTags()
 
-  function onCategorySelect(index: number) {
-    setCategoryIndex(index)
+  const selectedCategoryIndex = availableCategories.findIndex(
+    category => category === transaction.category,
+  )
+  const selectedCategoryIndices =
+    selectedCategoryIndex === -1 ? [] : [selectedCategoryIndex]
+
+  const selectedTagIndices = getTagsIndices(transaction.tags)
+
+  function getTagsIndices(tags: string[]): number[] {
+    return []
+  }
+
+  function onTitleChange(value: string) {
+    props.onChange?.({
+      title: value,
+    })
+  }
+
+  function onAmountChange(value: string) {
+    props.onChange?.({
+      amount: parseInt(value),
+    })
+  }
+
+  function onDateTimeChange(value: Date) {
+    props.onChange?.({
+      time: value,
+    })
+  }
+
+  function onCategoryChange(index: number) {
+    const category = availableCategories[index]
+
+    props.onChange?.({
+      category: category,
+    })
   }
 
   function onTagSelect(index: number) {
-    const newIndices = [...selectedTagIndices, index].sort()
-    setSelectedTagIndices(newIndices)
+    const newTag = availableTags[index]
+    const newTags = [...transaction.tags, newTag].sort()
+
+    props.onChange?.({
+      tags: newTags,
+    })
   }
 
   function onTagUnselect(index: number) {
-    const newIndices = selectedTagIndices.filter(
-      selectedTagIndex => selectedTagIndex !== index,
+    const tagToRemove = availableTags[index]
+    const newTags = transaction.tags.filter(
+      selectedTag => selectedTag === tagToRemove,
     )
-    setSelectedTagIndices(newIndices)
+
+    props.onChange?.({
+      tags: newTags,
+    })
+  }
+
+  function onNotesChange(value: string) {
+    props.onChange?.({
+      notes: value,
+    })
+  }
+
+  function onNotesClear() {
+    props.onChange?.({
+      notes: '',
+    })
   }
 
   return (
@@ -58,8 +111,8 @@ export function TransactionEditView(props: TransactionEditViewProps) {
         }}
       >
         <TextInput
-          value={title}
-          onChange={setTitle}
+          value={transaction.title}
+          onChange={onTitleChange}
           category='h1'
           align='center'
         />
@@ -69,16 +122,16 @@ export function TransactionEditView(props: TransactionEditViewProps) {
         key='amount'
         variant='long-medium'
         inputProps={{
-          value: amount.toString(),
-          onChange: value => setAmount(parseInt(value)),
+          value: transaction.amount.toString(),
+          onChange: onAmountChange,
         }}
       />
       <DateTimeInputCard
         key='datetime'
         variant='long-medium'
         inputProps={{
-          value: datetime,
-          onChange: setDatetime,
+          value: transaction.time,
+          onChange: onDateTimeChange,
         }}
       />
       <SelectListCard
@@ -86,9 +139,9 @@ export function TransactionEditView(props: TransactionEditViewProps) {
         variant='long-medium'
         leftIcon='category'
         listProps={{
-          items: categories,
-          selected: [categoryIndex],
-          onSelect: onCategorySelect,
+          items: availableCategories,
+          selected: selectedCategoryIndices,
+          onSelect: onCategoryChange,
         }}
       />
       <SelectListCard
@@ -96,7 +149,7 @@ export function TransactionEditView(props: TransactionEditViewProps) {
         variant='long-medium'
         leftIcon='tag'
         listProps={{
-          items: tags,
+          items: availableTags,
           selected: selectedTagIndices,
           onSelect: onTagSelect,
           onUnselect: onTagUnselect,
@@ -105,10 +158,10 @@ export function TransactionEditView(props: TransactionEditViewProps) {
       <TextInputCard
         key='notes'
         variant='long-flex'
-        onClear={() => setNotes('')}
+        onClear={onNotesClear}
         inputProps={{
-          value: notes,
-          onChange: setNotes,
+          value: transaction.notes,
+          onChange: onNotesChange,
           category: 'text',
         }}
       />

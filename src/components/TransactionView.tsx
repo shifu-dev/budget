@@ -17,7 +17,7 @@ export function TransactionView(props: TransactionViewProps) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 10,
+        gap: 5,
       }}
     >
       <div

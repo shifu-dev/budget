@@ -18,6 +18,12 @@ export function TransactionsPage() {
   }
 
   function onLoad() {
+    const transactions = client.getTransactions()
+    if (transactions.length !== 0) {
+      setTransactions(transactions)
+      return
+    }
+
     client.loadData().then(() => {
       setTransactions(client.getTransactions())
     })

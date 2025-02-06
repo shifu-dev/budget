@@ -1,4 +1,5 @@
 import { Transaction } from '@client/Transaction'
+import * as path from '@tauri-apps/api/path'
 import * as fs from '@tauri-apps/plugin-fs'
 import { v4 as uuid4 } from 'uuid'
 
@@ -16,6 +17,7 @@ export type TransactionCreateInput = Omit<Transaction, 'id'>
 export type TransactionUpdateInput = MakeRequired<Transaction, 'id'>
 
 export class Client {
+  configPath = ''
   _DATA_FILE_PATH = 'budget-data.json'
   _username: string = ''
   _tags: string[] = []
@@ -23,9 +25,18 @@ export class Client {
   _transactions: Transaction[] = []
 
   loadData = async () => {
-    const dataString = await fs.readTextFile(this._DATA_FILE_PATH, {
-      baseDir: fs.BaseDirectory.AppConfig,
-    })
+    const appConfigDir = await path.appConfigDir()
+    const configFilePath = `${appConfigDir}/${this._DATA_FILE_PATH}`
+
+    console.info(`Default config path set to '${configFilePath}'.`)
+
+    console.info(`Reading config file from '${configFilePath}'...`)
+
+    const dataString = await fs.readTextFile(configFilePath)
+
+    console.info(`Reading config file done.`)
+
+    console.info('Deserializing data...')
 
     const data = this.deserializeData(dataString)
 
@@ -33,6 +44,8 @@ export class Client {
     this._tags = data.tags
     this._categories = data.categories
     this._transactions = data.transactions
+
+    console.info('Deserializing data done.')
   }
 
   saveData = async () => {
@@ -128,5 +141,13 @@ export class Client {
 
     this._transactions.splice(index, 1)
     return true
+  }
+
+  getCategories = (): string[] => {
+    return ['Category 1', 'Category 2', 'Category 3']
+  }
+
+  getTags = (): string[] => {
+    return ['Tag 1', 'Tag 2', 'Tag 3']
   }
 }
