@@ -1,11 +1,8 @@
 import { useNavigate } from 'react-router'
 import { useParams } from 'react-router'
 import { Button } from '@components/Button'
-import { Text } from '@components/Text'
-import { CostCard } from '@components/CostCard'
-import { TimeCard } from '@components/TimeCard'
-import { TextCard } from '@components/TextCard'
 import { useClient } from '@client/ClientProvider'
+import { TransactionView } from '@components/TransactionView'
 
 export function TransactionPage() {
   const navigate = useNavigate()
@@ -17,7 +14,7 @@ export function TransactionPage() {
   const transaction = transactionResult
 
   function onBack() {
-    navigate('/transactions')
+    navigate(-1)
   }
 
   function onEdit() {
@@ -26,9 +23,9 @@ export function TransactionPage() {
 
   return (
     <div
-      id='root'
+      id='transaction-page'
       style={{
-        padding: 10,
+        padding: 15,
       }}
     >
       <div
@@ -39,55 +36,10 @@ export function TransactionPage() {
           height: 60,
         }}
       >
-        <Button startIcon='back' size='sm' onPress={onBack} />
-        <Button startIcon='edit' size='sm' onPress={onEdit} />
+        <Button label='Back' size='md' onPress={onBack} />
+        <Button label='Edit' size='md' onPress={onEdit} />
       </div>
-      <div
-        id='content'
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          padding: 5,
-          gap: 10,
-        }}
-      >
-        <div
-          id='title'
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: 250,
-          }}
-        >
-          <Text value={transaction.title} category='h1' align='center' />
-        </div>
-
-        <CostCard
-          key='amount'
-          variant='long-medium'
-          value={transaction.amount}
-        />
-        <TimeCard
-          key='datetime'
-          variant='long-medium'
-          value={transaction.time}
-        />
-        <TextCard
-          key='category'
-          variant='long-medium'
-          leftIcon='category'
-          value={transaction.category}
-        />
-        <TextCard
-          key='tags'
-          variant='long-medium'
-          leftIcon='tag'
-          value={transaction.tags}
-        />
-        <TextCard key='notes' variant='long-flex' value={transaction.notes} />
-      </div>
+      <TransactionView transaction={transaction} />
     </div>
   )
 }
