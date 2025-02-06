@@ -5,6 +5,7 @@ import { SelectListCard } from '@components/SelectListCard'
 import { CostInputCard } from '@components/CostInputCard'
 import { Transaction } from '@client/Transaction'
 import { useClient } from '@client/ClientProvider'
+import constants from '@constants'
 
 export interface TransactionEditViewProps {
   transaction: Transaction
@@ -97,7 +98,7 @@ export function TransactionEditView(props: TransactionEditViewProps) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 5,
+        gap: constants.transactionElementGap,
       }}
     >
       <div

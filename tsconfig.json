@@ -30,7 +30,8 @@
       "@client/*": ["./src/client/*"],
       "@utils": ["./src/utils"],
       "@provider": ["./src/Provider"],
-      "@router": ["./src/Router"]
+      "@router": ["./src/Router"],
+      "@constants": ["./src/Constants"],
     }
   },
   "include": ["src"],

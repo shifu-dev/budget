@@ -3,6 +3,7 @@ import { CostCard } from '@components/CostCard'
 import { TimeCard } from '@components/TimeCard'
 import { TextCard } from '@components/TextCard'
 import { Transaction } from '@client/Transaction'
+import constants from '@constants'
 
 export interface TransactionViewProps {
   transaction: Transaction
@@ -17,7 +18,7 @@ export function TransactionView(props: TransactionViewProps) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 5,
+        gap: constants.transactionElementGap,
       }}
     >
       <div
@@ -34,7 +35,11 @@ export function TransactionView(props: TransactionViewProps) {
       </div>
 
       <CostCard key='amount' variant='long-medium' value={transaction.amount} />
-      <TimeCard key='datetime' variant='long-medium' value={transaction.datetime} />
+      <TimeCard
+        key='datetime'
+        variant='long-medium'
+        value={transaction.datetime}
+      />
       <TextCard
         key='category'
         variant='long-medium'
