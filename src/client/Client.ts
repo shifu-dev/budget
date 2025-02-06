@@ -71,7 +71,7 @@ export class Client {
       return {
         id: transaction.id,
         title: transaction.title,
-        time: new Date(transaction.time),
+        datetime: new Date(transaction.time),
         amount: parseInt(transaction.amount),
         category: transaction.categories,
         tags: transaction.tags as any as string[],

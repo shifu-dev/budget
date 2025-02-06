@@ -47,7 +47,7 @@ export function TransactionEditView(props: TransactionEditViewProps) {
 
   function onDateTimeChange(value: Date) {
     props.onChange?.({
-      time: value,
+      datetime: value,
     })
   }
 
@@ -130,7 +130,7 @@ export function TransactionEditView(props: TransactionEditViewProps) {
         key='datetime'
         variant='long-medium'
         inputProps={{
-          value: transaction.time,
+          value: transaction.datetime,
           onChange: onDateTimeChange,
         }}
       />
