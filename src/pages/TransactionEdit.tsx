@@ -1,23 +1,36 @@
 import { Button } from '@components/Button'
 import { useClient } from '@client/ClientProvider'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { TransactionEditView } from '@components/TransactionEditView'
+import { Transaction } from '@client/Transaction'
+import { useState } from 'react'
 
 export function TransactionEditPage() {
+  const navigate = useNavigate()
   const client = useClient()
   const params = useParams()
 
   const transactionResult = client.getTransaction({ id: params.id as string })
   if (!transactionResult) throw 0
 
-  const transaction = transactionResult
+  const [transaction, setTransaction] = useState(transactionResult)
 
-  function onCancel() {}
-  function onAccept() {}
+  function onCancel() {
+    navigate(-1)
+  }
+
+  function onAccept() {
+    client.updateTransaction(transaction)
+    navigate(-1)
+  }
+
+  function onChange(changes: Partial<Transaction>) {
+    return setTransaction({ ...transaction, ...changes })
+  }
 
   return (
     <div
-      id='root'
+      id='transaction-edit-page'
       style={{
         padding: 15,
       }}
@@ -33,7 +46,7 @@ export function TransactionEditPage() {
         <Button label='Cancel' size='md' onPress={onCancel} />
         <Button label='Accept' size='md' onPress={onAccept} />
       </div>
-      <TransactionEditView transaction={transaction} />
+      <TransactionEditView transaction={transaction} onChange={onChange} />
     </div>
   )
 }
