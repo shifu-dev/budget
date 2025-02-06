@@ -18,9 +18,9 @@ export function TransactionsPage() {
   }
 
   function onLoad() {
-    client.loadData()
-
-    setTransactions(client.getTransactions())
+    client.loadData().then(() => {
+      setTransactions(client.getTransactions())
+    })
   }
 
   function onSave() {
