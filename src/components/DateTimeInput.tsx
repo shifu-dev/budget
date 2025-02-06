@@ -7,12 +7,12 @@ import {
 } from '@components/ConditionalSwitch'
 import { SelectList } from '@components/SelectList'
 
-export interface DateTimeInputProps {
+export interface DatetimeInputProps {
   value: Date
   onChange?: (value: Date) => void
 }
 
-export function DateTimeInput(props: DateTimeInputProps) {
+export function DatetimeInput(props: DatetimeInputProps) {
   const [inputMode, setInputMode] = useState<'date' | 'time'>('date')
 
   function onCalendarStateChange(args: {
