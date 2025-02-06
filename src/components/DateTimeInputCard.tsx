@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { Text } from '@components/Text'
 import { Card, CardProps } from '@components/Card'
-import { DateTimeInput, DateTimeInputProps } from '@components/DateTimeInput'
+import { DatetimeInput, DatetimeInputProps } from '@components/DatetimeInput'
 import { Conditional } from '@components/Conditional'
 
-export interface DateTimeInputCardProps extends CardProps {
-  inputProps: DateTimeInputProps
+export interface DatetimeInputCardProps extends CardProps {
+  inputProps: DatetimeInputProps
 }
 
-export function DateTimeInputCard(props: DateTimeInputCardProps) {
+export function DatetimeInputCard(props: DatetimeInputCardProps) {
   const [isInputMode, setIsInputMode] = useState(false)
   const [datetime, setDatetime] = useState(new Date())
   const timeString = datetime.toLocaleDateString()
@@ -45,7 +45,7 @@ export function DateTimeInputCard(props: DateTimeInputCardProps) {
         <Text value={timeString} category='h5' />
       </Card>
       <Conditional value={isInputMode}>
-        <DateTimeInput {...props.inputProps} onChange={onChange} />
+        <DatetimeInput {...props.inputProps} onChange={onChange} />
       </Conditional>
     </Card>
   )

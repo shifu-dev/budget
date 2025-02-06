@@ -1,6 +1,6 @@
 import { TextInputCard } from '@components/TextInputCard'
 import { TextInput } from '@components/TextInput'
-import { DateTimeInputCard } from '@components/DateTimeInputCard'
+import { DatetimeInputCard } from '@components/DatetimeInputCard'
 import { SelectListCard } from '@components/SelectListCard'
 import { CostInputCard } from '@components/CostInputCard'
 import { Transaction } from '@client/Transaction'
@@ -45,7 +45,7 @@ export function TransactionEditView(props: TransactionEditViewProps) {
     })
   }
 
-  function onDateTimeChange(value: Date) {
+  function onDatetimeChange(value: Date) {
     props.onChange?.({
       datetime: value,
     })
@@ -126,12 +126,12 @@ export function TransactionEditView(props: TransactionEditViewProps) {
           onChange: onAmountChange,
         }}
       />
-      <DateTimeInputCard
+      <DatetimeInputCard
         key='datetime'
         variant='long-medium'
         inputProps={{
           value: transaction.datetime,
-          onChange: onDateTimeChange,
+          onChange: onDatetimeChange,
         }}
       />
       <SelectListCard
