@@ -1,4 +1,3 @@
-import { NavButton } from '@components/NavButton'
 import { Text } from '@components/Text'
 
 export function HomePage() {
@@ -14,7 +13,6 @@ export function HomePage() {
       }}
     >
       <Text value='Hi this is the home page.' />
-      <NavButton label='Transactions' to='/transactions' />
     </div>
   )
 }

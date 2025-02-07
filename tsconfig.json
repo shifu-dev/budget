@@ -32,6 +32,7 @@
       "@provider": ["./src/Provider"],
       "@router": ["./src/Router"],
       "@constants": ["./src/Constants"],
+      "@layouts": ["./src/layouts/*"],
     }
   },
   "include": ["src"],
