@@ -20,6 +20,7 @@ export default {
       '@router': path.resolve(__dirname, 'src/Router'),
       '@provider': path.resolve(__dirname, 'src/Provider'),
       '@constants': path.resolve(__dirname, 'src/Constants'),
+      '@layouts': path.resolve(__dirname, 'src/layouts'),
     },
   },
 
