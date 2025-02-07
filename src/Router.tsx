@@ -6,13 +6,14 @@ import { TransactionsPage } from '@pages/Transactions'
 import { Background } from '@components/Background'
 import { NotFoundPage } from '@pages/NotFound'
 import { TransactionCreatePage } from '@pages/TransactionAdd'
+import { IndexPage } from '@pages/IndexPage'
 
 export function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Background />}>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<IndexPage />} />
           <Route path='/home' element={<HomePage />} />
           <Route path='/transactions' element={<TransactionsPage />} />
           <Route path='/transaction/:id' element={<TransactionPage />} />
