@@ -48,7 +48,7 @@ export function TextInputCard(props: TextInputCardProps) {
           <TextInput {...props.inputProps} />
         </div>
         <Conditional value={showClear}>
-          <Button startIcon='trash' onPress={props.onClear} size='sm' />
+          <Button icon='trash' onPress={props.onClear} size='sm' />
         </Conditional>
       </div>
     </Card>

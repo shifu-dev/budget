@@ -282,7 +282,7 @@ export function CalendarLayout(props: CalendarLayoutProps) {
         />
         <Conditional value={props.onPrevPagePress}>
           <Button
-            startIcon='prev'
+            icon='prev'
             size='sm'
             variant='light'
             onPress={props.onPrevPagePress}
@@ -290,7 +290,7 @@ export function CalendarLayout(props: CalendarLayoutProps) {
         </Conditional>
         <Conditional value={props.onPrevPagePress}>
           <Button
-            startIcon='next'
+            icon='next'
             size='sm'
             variant='light'
             onPress={props.onNextPagePress}

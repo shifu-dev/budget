@@ -19,7 +19,7 @@ export type ButtonVariant = 'solid' | 'light' | 'ghost'
 
 export interface ButtonProps {
   label?: TextValue
-  startIcon?: IconName
+  icon?: IconName
   endIcon?: IconName
   size?: ButtonSize
   radius?: ButtonRadius
@@ -34,7 +34,7 @@ export function Button(props: ButtonProps) {
 
   return (
     <Pressable onPress={props.onPress} disabled={props.disabled} style={style}>
-      <Icon name={props.startIcon} size={props.size} color={style.color} />
+      <Icon name={props.icon} size={props.size} color={style.color} />
       <Text value={props.label} category='h6' />
       <Icon name={props.endIcon} size={props.size} color={style.color} />
     </Pressable>
