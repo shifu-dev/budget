@@ -36,6 +36,7 @@ export type IconName =
   | 'tag-filled'
   | 'home'
   | 'home-filled'
+  | 'database-dollar'
 
 export interface IconProps {
   name?: IconName
@@ -102,8 +103,9 @@ const _tablerIconMap = {
   'category-filled': TablerIcons.IconCategoryFilled,
   tag: TablerIcons.IconTag,
   'tag-filled': TablerIcons.IconTagFilled,
-  'home': TablerIcons.IconHome,
+  home: TablerIcons.IconHome,
   'home-filled': TablerIcons.IconHomeFilled,
+  'database-dollar': TablerIcons.IconDatabaseDollar,
 }
 
 const _getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
