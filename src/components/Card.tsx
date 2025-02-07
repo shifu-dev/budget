@@ -35,7 +35,7 @@ export function Card(props: CardProps) {
         borderWidth: '0px',
         backgroundColor: color,
         padding: '10px',
-        minHeight: '70px',
+        minHeight: '50px',
         ...props.style,
       }}
     >
