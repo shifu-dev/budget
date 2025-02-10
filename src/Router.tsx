@@ -17,11 +17,11 @@ import { NotFoundPage } from '@pages/NotFound'
 import { TransactionCreatePage } from '@pages/TransactionAdd'
 import { IndexPage } from '@pages/IndexPage'
 import { TabLayout } from '@layouts/TabLayout'
+import { useTheme } from './themes'
+import constants from '@constants'
 
 function animatePage(page: ReactNode) {
-  const transitionZoomOutScale = 0.9
-  const transitionZoomInScale = 1.1
-
+  const theme = useTheme()
   const navigationType = useNavigationType()
   const isPushNavigation = navigationType === NavigationType.Push
 
@@ -35,8 +35,8 @@ function animatePage(page: ReactNode) {
         enter: {
           opacity: 0,
           scale: isPushNavigation
-            ? transitionZoomOutScale
-            : transitionZoomInScale,
+            ? 1 - constants.pageTransitionScaleFactor
+            : 1 + constants.pageTransitionScaleFactor,
         },
         idle: {
           opacity: 1,
@@ -46,15 +46,15 @@ function animatePage(page: ReactNode) {
           return {
             opacity: 0,
             scale: props.isPushNavigation
-              ? transitionZoomInScale
-              : transitionZoomOutScale,
+              ? 1 + constants.pageTransitionScaleFactor
+              : 1 - constants.pageTransitionScaleFactor,
           }
         },
       }}
       transition={{
-        duration: 0.1,
         type: 'tween',
-        ease: [0, 1, 1, 1],
+        ease: 'easeOut',
+        duration: constants.pageTransitionAnimDuration / theme.animSpeed,
       }}
       initial='enter'
       animate='idle'
