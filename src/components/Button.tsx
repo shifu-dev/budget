@@ -44,7 +44,7 @@ export function Button(props: ButtonProps) {
 
 function _getStyle(props: ButtonProps): CSSProperties {
   const theme = useTheme()
-  const color = props.disabled ? 'grey' : theme.colors.text
+  const color = props.disabled ? colors.matteBlack : theme.colors.text
 
   let style: CSSProperties = {
     display: 'flex',
