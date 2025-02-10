@@ -18,7 +18,7 @@ export function TransactionPage() {
   }
 
   function onEdit() {
-    navigate('/transaction-edit/' + transaction.id)
+    navigate('/transaction/edit/' + transaction.id)
   }
 
   return (
