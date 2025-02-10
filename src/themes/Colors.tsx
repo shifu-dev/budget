@@ -8,6 +8,7 @@ export const colors = {
   onyx: '#353935',
   black: '#000000',
   white: '#FFFFFF',
+  transparent: '#00000000',
 }
 
 export function darken(color: ColorValue, strength: number = 0.6): ColorValue {
