@@ -1,10 +1,13 @@
 import { Text } from '@components/Text'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 
 export function IndexPage() {
-
   const navigate = useNavigate()
-  navigate('/home')
+
+  useEffect(() => {
+    navigate('/home')
+  }, [])
 
   return (
     <div
