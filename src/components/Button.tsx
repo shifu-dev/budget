@@ -3,6 +3,7 @@ import { Text, TextValue } from '@components/Text'
 import { Icon, IconName } from '@components/Icon'
 import { useTheme } from '@themes/index'
 import { Pressable } from './Pressable'
+import { colors } from '@themes/Colors'
 
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
@@ -82,8 +83,8 @@ function _getStyle(props: ButtonProps): CSSProperties {
   // Variant
   switch (props.variant ?? 'solid') {
     case 'light':
-      style.borderColor = 'transparent'
-      style.backgroundColor = 'transparent'
+      style.borderColor = colors.transparent
+      style.backgroundColor = colors.transparent
       break
 
     case 'solid':
@@ -93,7 +94,7 @@ function _getStyle(props: ButtonProps): CSSProperties {
 
     case 'ghost':
       style.borderColor = color
-      style.backgroundColor = 'transparent'
+      style.backgroundColor = colors.transparent
       break
   }
 
