@@ -28,11 +28,11 @@
       "@components/*": ["./src/components/*"],
       "@themes/*": ["./src/themes/*"],
       "@client/*": ["./src/client/*"],
+      "@layouts/*": ["./src/layouts/*"],
       "@utils": ["./src/utils"],
       "@provider": ["./src/Provider"],
       "@router": ["./src/Router"],
       "@constants": ["./src/Constants"],
-      "@layouts": ["./src/layouts/*"],
     }
   },
   "include": ["src"],
