@@ -5,8 +5,6 @@ ARG ANDROID_EMULATOR_NAME="devenv_emulator"
 
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-24.04 AS base
 
-RUN apt-get update
-
 # ------------------------------------------------------------------------------------------------
 # Install cargo
 # ------------------------------------------------------------------------------------------------
@@ -17,7 +15,8 @@ ENV PATH="/root/.cargo/bin:$PATH"
 # Install tauri
 # ------------------------------------------------------------------------------------------------
 
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
     libwebkit2gtk-4.1-dev \
     build-essential \
     curl \
@@ -26,15 +25,14 @@ RUN apt-get install -y \
     libxdo-dev \
     libssl-dev \
     libayatana-appindicator3-dev \
-    librsvg2-dev
+    librsvg2-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN cargo install tauri-cli
 
 # ------------------------------------------------------------------------------------------------
 # Install deno
 # ------------------------------------------------------------------------------------------------
-RUN apt-get install -y \
-    unzip
 
 RUN curl -fsSL https://deno.land/install.sh | sh
 
@@ -51,10 +49,12 @@ FROM base AS android-base
 # ------------------------------------------------------------------------------------------------
 
 # Install dependencies
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
     openjdk-17-jdk \
     wget \
-    unzip
+    unzip && \
+    rm -rf /var/lib/apt/lists/*
 
 ARG ANDROID_BUILD_TOOLS_VERSION
 ARG ANDROID_NDK_VERSION
@@ -98,7 +98,7 @@ RUN rustup target add \
 # ------------------------------------------------------------------------------------------------
 # Android builder
 # ------------------------------------------------------------------------------------------------
-FROM android-base as android-builder
+FROM android-base AS android-builder
 
 # Build the app
 WORKDIR /app
@@ -113,7 +113,7 @@ RUN mkdir /out && \
 # ------------------------------------------------------------------------------------------------
 # Development environment
 # ------------------------------------------------------------------------------------------------
-FROM android-base as devenv
+FROM android-base AS devenv
 
 ARG ANDROID_EMULATOR_NAME
 ARG USER
@@ -122,9 +122,11 @@ ARG USER
 # -- Install common tools
 # ------------------------------------------------------------------------------------------------
 
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
     git \
-    vim
+    vim && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN git config --global core.editor vi
 
@@ -135,11 +137,13 @@ RUN git config --global core.editor vi
 RUN sdkmanager "emulator"
 
 # Enable KVM (required for hardware acceleration)
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
     qemu-kvm \
     libvirt-daemon-system \
     libvirt-clients \
-    bridge-utils
+    bridge-utils && \
+    rm -rf /var/lib/apt/lists/*
 
 # Add current user to kvm group
 RUN adduser $USER kvm
@@ -155,9 +159,6 @@ RUN sdkmanager "system-images;android-33;google_apis;x86_64"
 RUN avdmanager create avd -n $ANDROID_EMULATOR_NAME \
     -k "system-images;android-33;google_apis;x86_64" \
     --device "pixel_7"
-
-# Ensure the emulator starts properly
-# RUN echo "hw.cpu.ncore=2" >> /root/.android/avd/$ANDROID_EMULATOR_NAME.avd/config.ini
 
 ENV ANDROID_EMULATOR_HOME="$ANDROID_HOME/emulator"
 ENV PATH="$ANDROID_EMULATOR_HOME:$PATH"
